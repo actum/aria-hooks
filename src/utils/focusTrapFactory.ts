@@ -27,5 +27,5 @@ export class FocusTrapFactory {
     this.focusTrap.activate();
   };
 
-  destroy = () => this.focusTrap.deactivate();
+  destroy = () => this.focusTrap?.deactivate();
 }
