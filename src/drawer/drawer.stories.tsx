@@ -1,32 +1,35 @@
-import React from 'react'
-import {useAriaDrawer} from '.'
+import React from 'react';
+import { useAriaDrawer } from '.';
+
+import { Backdrop } from '../shared_styled_componets';
+import { StyledDrawer } from './StyledDrawer';
 
 export default {
-  title: 'Aria Component/Drawer'
-}
+  title: 'Aria Component/Drawer',
+};
 
 export const Drawer = () => {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);
-  const { drawerProps, closeButtonProps, contentProps} = useAriaDrawer({
+  const { drawerProps, closeButtonProps, contentProps } = useAriaDrawer({
     isOpen: isDrawerOpen,
     onDismiss: () => setDrawerOpen(false),
-    id: "drawer",
+    id: 'drawer',
   });
   return (
     <>
       <button className="App-link" onClick={() => setDrawerOpen(true)}>
         Open Drawer
       </button>
-      <div
+      <Backdrop
         className={`modal-backdrop ${
-          isDrawerOpen ? "" : "modal-backdrop--closed"
+          isDrawerOpen ? '' : 'modal-backdrop--closed'
         }`}
         {...drawerProps}
       >
-        <div className="drawer" {...contentProps}>
+        <StyledDrawer className="drawer" {...contentProps}>
           <button {...closeButtonProps}>Close</button>
-        </div>
-      </div>
+        </StyledDrawer>
+      </Backdrop>
     </>
   );
-}
+};
