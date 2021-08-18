@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useAriaModal } from '.'
+import * as React from 'react';
+import { useAriaModal } from '.';
 
 export default {
-  title: 'Aria Component/Modal'
-}
+  title: 'Aria Component/Modal',
+};
 
 export const Modal: React.FC = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
@@ -11,8 +11,8 @@ export const Modal: React.FC = () => {
   const { modalProps, closeButtonProps, descriptionSpanProps } = useAriaModal({
     isOpen: isModalOpen,
     onDismiss: () => setModalOpen(false),
-    description: "A cool modal",
-    id: 'modal-test-storybook'
+    description: 'A cool modal',
+    id: 'modal-test-storybook',
   });
 
   return (
@@ -23,7 +23,7 @@ export const Modal: React.FC = () => {
 
       <div
         className={`modal-backdrop ${
-          isModalOpen ? "" : "modal-backdrop--closed"
+          isModalOpen ? '' : 'modal-backdrop--closed'
         }`}
       >
         <div className="modal" {...modalProps}>
@@ -35,4 +35,4 @@ export const Modal: React.FC = () => {
       </div>
     </>
   );
-}
+};
