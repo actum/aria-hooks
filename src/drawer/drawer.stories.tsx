@@ -1,14 +1,12 @@
 import React from 'react';
 import { useAriaDrawer } from '.';
 
-import { Backdrop } from '../shared_styled_componets';
+import { Backdrop } from '../shared_styled_components';
 import { StyledDrawer } from './StyledDrawer';
 
-export default {
-  title: 'Aria Component/Drawer',
-};
+interface DrawerProps {}
 
-export const Drawer = () => {
+export const Drawer: React.FC<DrawerProps> = () => {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);
   const { drawerProps, closeButtonProps, contentProps } = useAriaDrawer({
     isOpen: isDrawerOpen,
@@ -21,15 +19,18 @@ export const Drawer = () => {
         Open Drawer
       </button>
       <Backdrop
-        className={`modal-backdrop ${
-          isDrawerOpen ? '' : 'modal-backdrop--closed'
-        }`}
+        className={`${isDrawerOpen ? '' : 'modal-backdrop--closed'}`}
         {...drawerProps}
       >
-        <StyledDrawer className="drawer" {...contentProps}>
+        <StyledDrawer {...contentProps}>
           <button {...closeButtonProps}>Close</button>
         </StyledDrawer>
       </Backdrop>
     </>
   );
+};
+
+export default {
+  title: 'Aria Component/Drawer',
+  component: Drawer,
 };

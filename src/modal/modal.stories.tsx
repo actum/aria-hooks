@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { useAriaModal } from '.';
 
-import { HiddenInfo, Backdrop } from '../shared_styled_componets';
+import { HiddenInfo, Backdrop } from '../shared_styled_components';
 import { StyledModal } from './StyledModal';
 
-export default {
-  title: 'Aria Component/Modal',
-};
+interface ModalProps {}
 
-export const Modal: React.FC = () => {
+export const Modal: React.FC<ModalProps> = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
 
   const { modalProps, closeButtonProps, descriptionSpanProps } = useAriaModal({
@@ -24,13 +22,9 @@ export const Modal: React.FC = () => {
         Open Modal
       </button>
 
-      <Backdrop
-        className={`modal-backdrop ${
-          isModalOpen ? '' : 'modal-backdrop--closed'
-        }`}
-      >
-        <StyledModal className="modal" {...modalProps}>
-          <HiddenInfo className="visually-hidden" {...descriptionSpanProps}>
+      <Backdrop className={` ${isModalOpen ? '' : 'modal-backdrop--closed'}`}>
+        <StyledModal {...modalProps}>
+          <HiddenInfo {...descriptionSpanProps}>
             The description of the modal
           </HiddenInfo>
           <button {...closeButtonProps}>Close</button>
@@ -38,4 +32,9 @@ export const Modal: React.FC = () => {
       </Backdrop>
     </>
   );
+};
+
+export default {
+  title: 'Aria Component/Modal',
+  component: Modal,
 };
