@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAriaNavigation } from '.';
 
 export const Menubar = () => {

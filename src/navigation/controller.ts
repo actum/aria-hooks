@@ -3,7 +3,7 @@ export class NavigationContoller {
   private index = 0;
   private id: string;
 
-  constructor(id: string) {
+  constructor(id?: string) {
     this.id = id;
   }
 
@@ -50,8 +50,8 @@ export class NavigationContoller {
         } else {
           this.index++;
         }
-        items[this.index].focus();
         items[this.index].tabIndex = 0;
+        items[this.index].focus();
         break;
       }
       case 'ArrowLeft': {
@@ -61,15 +61,15 @@ export class NavigationContoller {
         } else {
           this.index--;
         }
-        items[this.index].focus();
         items[this.index].tabIndex = 0;
+        items[this.index].focus();
         break;
       }
       case 'Home': {
         items[this.index].tabIndex = -1;
         this.index = 0;
-        items[this.index].focus();
         items[this.index].tabIndex = 0;
+        items[this.index].focus();
         break;
       }
       case 'End': {

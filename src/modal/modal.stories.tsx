@@ -1,9 +1,5 @@
-import * as React from 'react';
+import React from 'react';
 import { useAriaModal } from '.';
-
-export default {
-  title: 'Aria Component/Modal',
-};
 
 export const Modal: React.FC = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
@@ -35,4 +31,9 @@ export const Modal: React.FC = () => {
       </div>
     </>
   );
+};
+
+export default {
+  title: 'Aria Component/Modal',
+  component: Modal,
 };
