@@ -2,7 +2,16 @@ import React from 'react';
 import { useAriaDrawer, DrawerProps } from '.';
 
 import { Backdrop } from '../shared_styled_components';
-import { StyledDrawer } from './StyledDrawer';
+import styled from 'styled-components';
+
+const StyledDrawer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: white;
+  width: 400px;
+`;
 
 export const Drawer: React.FC<DrawerProps> = () => {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);
@@ -17,7 +26,9 @@ export const Drawer: React.FC<DrawerProps> = () => {
         Open Drawer
       </button>
       <Backdrop
-        className={`${isDrawerOpen ? '' : 'modal-backdrop--closed'}`}
+        className={`modal-backdrop ${
+          isDrawerOpen ? '' : 'modal-backdrop--closed'
+        }`}
         {...drawerProps}
       >
         <StyledDrawer {...contentProps}>
