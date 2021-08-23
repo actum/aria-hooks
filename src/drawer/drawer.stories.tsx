@@ -1,10 +1,8 @@
 import React from 'react';
-import { useAriaDrawer } from '.';
+import { useAriaDrawer, DrawerProps } from '.';
 
 import { Backdrop } from '../shared_styled_components';
 import { StyledDrawer } from './StyledDrawer';
-
-interface DrawerProps {}
 
 export const Drawer: React.FC<DrawerProps> = () => {
   const [isDrawerOpen, setDrawerOpen] = React.useState(false);

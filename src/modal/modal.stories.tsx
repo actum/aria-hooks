@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { useAriaModal } from '.';
+import { useAriaModal, ModalProps } from '.';
 
 import { HiddenInfo, Backdrop } from '../shared_styled_components';
 import { StyledModal } from './StyledModal';
-
-interface ModalProps {}
 
 export const Modal: React.FC<ModalProps> = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
