@@ -1,6 +1,5 @@
 export class NavigationContoller {
   private menuRef: HTMLElement;
-  private index = 0;
   private id: string;
 
   constructor(id?: string) {
@@ -48,46 +47,46 @@ export class NavigationContoller {
       : -1;
   };
 
-  handleKeyPress = (e: KeyboardEvent) => {
+  changeFocusToItem = (item: 'next' | 'prev' | 'first' | 'last') => {
+    let index = this.getFocusedIndex();
+
     const items = Array.from(
       this.menuRef.querySelectorAll('li>a')
     ) as HTMLAnchorElement[];
 
+    if (item === 'last') {
+      index = items.length - 1;
+    } else if (item === 'first') {
+      index = 0;
+    } else if (item === 'next') {
+      index = index === items.length - 1 ? 0 : index + 1;
+    } else {
+      index = index === 0 ? items.length - 1 : index - 1;
+    }
+
+    items.forEach((item, i) => {
+      item.tabIndex = index === i ? 0 : -1;
+    });
+
+    items[index]?.focus();
+  };
+
+  handleKeyPress = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowRight': {
-        items[this.index].tabIndex = -1;
-        if (this.index === items.length - 1) {
-          this.index = 0;
-        } else {
-          this.index++;
-        }
-        items[this.index].tabIndex = 0;
-        items[this.index].focus();
+        this.changeFocusToItem('next');
         break;
       }
       case 'ArrowLeft': {
-        items[this.index].tabIndex = -1;
-        if (this.index === 0) {
-          this.index = items.length - 1;
-        } else {
-          this.index--;
-        }
-        items[this.index].tabIndex = 0;
-        items[this.index].focus();
+        this.changeFocusToItem('prev');
         break;
       }
       case 'Home': {
-        items[this.index].tabIndex = -1;
-        this.index = 0;
-        items[this.index].tabIndex = 0;
-        items[this.index].focus();
+        this.changeFocusToItem('first');
         break;
       }
       case 'End': {
-        items[this.index].tabIndex = -1;
-        this.index = items.length - 1;
-        items[this.index].focus();
-        items[this.index].tabIndex = 0;
+        this.changeFocusToItem('last');
         break;
       }
       default:
