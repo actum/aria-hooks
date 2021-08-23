@@ -61,7 +61,7 @@ export class NavigationContoller {
     } else if (item === 'next') {
       index = index === items.length - 1 ? 0 : index + 1;
     } else {
-      index = index === 0 ? items.length - 1 : index - 1;
+      index = index <= 0 ? items.length - 1 : index - 1;
     }
 
     items.forEach((item, i) => {
