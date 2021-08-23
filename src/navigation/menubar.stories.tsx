@@ -7,7 +7,6 @@ export const Menubar = () => {
   const { menubarProps, menuItemProps, itemProps } = useAriaNavigation({
     menubarLabel: 'Main navigation menu',
     id: 'navigation',
-    menuItemsLength: items.length,
   });
 
   return (
@@ -15,7 +14,7 @@ export const Menubar = () => {
       <ul {...menubarProps}>
         {items.map((item, idx) => (
           <li key={item.title} {...itemProps}>
-            <a href="#" {...menuItemProps[idx]}>
+            <a href="#" {...menuItemProps(idx)}>
               {item.title}
             </a>
           </li>

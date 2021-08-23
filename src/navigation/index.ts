@@ -1,17 +1,12 @@
-import { useRef, useMemo, useEffect, useState } from 'react';
+import { useRef, useMemo, useEffect, useState, useCallback } from 'react';
 import { NavigationContoller } from './controller';
 
 interface NavigationProps {
   menubarLabel?: string;
-  id?: string;
-  menuItemsLength: number;
+  id: string;
 }
 
-export const useAriaNavigation = ({
-  menubarLabel,
-  id,
-  menuItemsLength,
-}: NavigationProps) => {
+export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
   const controller = useRef(new NavigationContoller(id));
   const [isActive, setIsActive] = useState(false);
 
@@ -44,24 +39,14 @@ export const useAriaNavigation = ({
     [menubarLabel, id]
   );
 
-  const menuItemProps = useMemo(() => {
-    let props = [];
-
-    for (let i = 0; i < menuItemsLength; i++) {
-      if (i === 0) {
-        props.push({
-          role: 'menuitem',
-          tabIndex: 0,
-        });
-      } else {
-        props.push({
-          role: 'menuitem',
-          tabIndex: -1,
-        });
-      }
-    }
-    return props;
-  }, [menuItemsLength]);
+  const menuItemProps = useCallback((i) => {
+    const focusedIndex = controller.current.getFocusedIndex();
+    return {
+      role: 'menuitem',
+      tabIndex:
+        focusedIndex === -1 && i === 0 ? 0 : focusedIndex === i ? 0 : -1,
+    };
+  }, []);
 
   const itemProps = useMemo(
     () => ({

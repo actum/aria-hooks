@@ -37,6 +37,17 @@ export class NavigationContoller {
     window.removeEventListener('keydown', this.handleKeyPress);
   };
 
+  getFocusedIndex = () => {
+    if (this.menuRef === undefined) return -1;
+    const items = Array.from(
+      this.menuRef.querySelectorAll('li>a')
+    ) as HTMLAnchorElement[];
+
+    return items
+      ? items.findIndex((item) => item.isSameNode(document.activeElement))
+      : -1;
+  };
+
   handleKeyPress = (e: KeyboardEvent) => {
     const items = Array.from(
       this.menuRef.querySelectorAll('li>a')
