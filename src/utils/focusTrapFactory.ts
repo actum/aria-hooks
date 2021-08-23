@@ -3,7 +3,7 @@
 
 import { createFocusTrap, FocusTrap as IFocusTrap } from "focus-trap";
 
-const focussableElements =
+export const focussableElements =
   'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export class FocusTrapFactory {
