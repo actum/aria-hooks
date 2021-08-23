@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef } from "react";
-import { ModalController } from "./controller";
+import { useEffect, useMemo, useRef } from 'react';
+import { ModalController } from './controller';
 
-interface ModalProps {
+export interface ModalProps {
   /**
    * Whether or not modal is open
    */
@@ -50,11 +50,11 @@ export const useAriaModal = ({
 
   const modalProps = useMemo(
     () => ({
-      "aria-modal": true,
-      role: "dialog",
-      "aria-label": dialogLabel,
-      "aria-hidden": !isOpen,
-      "aria-describedby": getDescriptionId(id),
+      'aria-modal': true,
+      role: 'dialog',
+      'aria-label': dialogLabel,
+      'aria-hidden': !isOpen,
+      'aria-describedby': getDescriptionId(id),
       id,
       ref: controller.current.setModalRef,
       tabIndex: -1,
@@ -64,7 +64,7 @@ export const useAriaModal = ({
 
   const closeButtonProps = useMemo(
     () => ({
-      "aria-label": closeLabel || "Close modal",
+      'aria-label': closeLabel || 'Close modal',
       onClick: () => controller.current.onClose(),
     }),
     [closeLabel]
