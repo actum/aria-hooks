@@ -4,7 +4,7 @@ import { Menubar } from './menubar.stories';
 
 describe('Tests for useAriaNavigation', () => {
   it('should render menu with items', () => {
-    const { getAllByRole, getByRole } = render(<Menubar />);
+    const { getAllByRole, getByRole } = render(<Menubar {...({} as any)} />);
 
     const menu = getByRole('menubar');
     const menuItems = getAllByRole('menuitem');
@@ -17,7 +17,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should exclude every menubar link from tab sequence, except first one', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -31,7 +31,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should move focus to next/first(if current focused element is last item) element when right arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -45,7 +45,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should move focus to first element when Home key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -60,7 +60,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should move focus to last element when End key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -74,7 +74,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should move focus to previous/last(if current focused element is first item) element when left arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -88,7 +88,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should change tabIndex of focused element to 0 and previous focused element to -1 when right arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -103,7 +103,7 @@ describe('Tests for useAriaNavigation', () => {
   });
 
   it('should change tabIndex of focused element to 0 and next focusable element to -1 when left arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -117,7 +117,7 @@ describe('Tests for useAriaNavigation', () => {
     expect(menuItems[menuItems.length - 1].tabIndex).toBe(0);
   });
   it('should change tabIndex of first focusable element to 0 and previous focused element to -1 when Home key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
@@ -132,7 +132,7 @@ describe('Tests for useAriaNavigation', () => {
     expect(menuItems[menuItems.length - 1].tabIndex).toBe(-1);
   });
   it('should change tabIndex of last focusable element to 0 and previous focused element to -1 when End key is pressed', () => {
-    const { getAllByRole } = render(<Menubar />);
+    const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
     const menuItems = getAllByRole('menuitem');
 
