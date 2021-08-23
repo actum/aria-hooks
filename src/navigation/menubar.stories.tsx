@@ -1,9 +1,7 @@
 import React from 'react';
-import { useAriaNavigation } from '.';
+import { useAriaNavigation, NavigationProps } from '.';
 
-interface menubarProps {}
-
-export const Menubar: React.FC<MenubarProps> = () => {
+export const Menubar: React.FC<NavigationProps> = () => {
   const items = [{ title: 'Home' }, { title: 'Contact' }, { title: 'About' }];
 
   const { menubarProps, menuItemProps, itemProps } = useAriaNavigation({
@@ -28,5 +26,5 @@ export const Menubar: React.FC<MenubarProps> = () => {
 
 export default {
   title: 'Aria Component/Menubar',
-  component: '',
+  component: Menubar,
 };

@@ -1,9 +1,15 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from 'react';
 import { NavigationContoller } from './controller';
 
-interface NavigationProps {
-  menubarLabel?: string;
+export interface NavigationProps {
+  /**
+   * Unique ID for the menu
+   */
   id: string;
+  /**
+   * Label for menu, which will be presented to screen readers
+   */
+  menubarLabel?: string;
 }
 
 export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
