@@ -1,13 +1,7 @@
 import React from 'react';
 import { useAriaNavigation, NavigationProps } from '.';
 
-<<<<<<< HEAD
 export const Menubar: React.FC<NavigationProps> = () => {
-=======
-interface menubarProps {}
-
-export const Menubar: React.FC<MenubarProps> = () => {
->>>>>>> ec84a7d (Refactor tabindex in menu items props)
   const items = [{ title: 'Home' }, { title: 'Contact' }, { title: 'About' }];
 
   const { menubarProps, menuItemProps, itemProps } = useAriaNavigation({
