@@ -4,12 +4,13 @@ import { useAriaToolTip, ToolTipProps } from '.';
 import styled from 'styled-components';
 
 const StyledTooltip = styled.div`
-  display: none;
+  display: initial;
+  visibility: hidden;
   margin-left: 10px;
   padding: 5px;
   border: 1px solid black;
   &.tooltip__visible {
-    display: initial;
+    visibility: visible;
   }
 `;
 
@@ -19,6 +20,7 @@ export const Tooltip: React.FC<ToolTipProps> = () => {
   const { buttonProps, toolTipProps } = useAriaToolTip({
     id: 'tooltip',
     isOpen,
+    onRelease: () => setIsOpen(true),
     onDismiss: () => setIsOpen(false),
   });
 
