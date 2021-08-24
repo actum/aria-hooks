@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent, act } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Tooltip } from './tooltip.stories';
 
 describe('Tests for useAriaNavigation', () => {
@@ -49,4 +49,3 @@ describe('Tests for useAriaNavigation', () => {
     expect(tooltip).not.toBeVisible();
   });
 });
-//

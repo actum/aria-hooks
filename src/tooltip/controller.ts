@@ -1,5 +1,3 @@
-import { dir } from 'console';
-
 export class ToolTipController {
   private btnId: string;
   private buttonRef: HTMLButtonElement;
