@@ -8,7 +8,7 @@ export interface ToolTipProps {
 }
 
 export const useAriaToolTip = ({ id, isOpen, onDismiss }: ToolTipProps) => {
-  const controller = useRef(new ToolTipController());
+  const controller = useRef(new ToolTipController(onDismiss));
 
   useEffect(() => {
     if (isOpen) {

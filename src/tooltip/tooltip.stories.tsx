@@ -3,7 +3,7 @@ import { useAriaToolTip, ToolTipProps } from '.';
 
 import styled from 'styled-components';
 
-const StyledToolTip = styled.div`
+const StyledTooltip = styled.div`
   display: none;
   margin-left: 10px;
   padding: 5px;
@@ -13,7 +13,7 @@ const StyledToolTip = styled.div`
   }
 `;
 
-export const ToolTip: React.FC<ToolTipProps> = () => {
+export const Tooltip: React.FC<ToolTipProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { buttonProps, toolTipProps } = useAriaToolTip({
@@ -35,17 +35,17 @@ export const ToolTip: React.FC<ToolTipProps> = () => {
       >
         See tooltip
       </button>
-      <StyledToolTip
+      <StyledTooltip
         {...toolTipProps}
         className={isOpen ? 'tooltip__visible' : ''}
       >
         {'I am the tool tip :)'}
-      </StyledToolTip>
+      </StyledTooltip>
     </>
   );
 };
 
 export default {
-  title: 'Aria Component/ToolTip',
-  component: ToolTip,
+  title: 'Aria Component/Tooltip',
+  component: Tooltip,
 };
