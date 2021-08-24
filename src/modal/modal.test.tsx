@@ -4,13 +4,13 @@ import { Modal } from './modal.stories';
 
 describe('Tests for useAriaModal', () => {
   it('should render a button to open modal', () => {
-    const { getByText } = render(<Modal />);
+    const { getByText } = render(<Modal {...({} as any)} />);
 
     expect(getByText('Open Modal')).toBeInTheDocument();
   });
 
   it('should open the modal', () => {
-    const { getByText, container } = render(<Modal />);
+    const { getByText, container } = render(<Modal {...({} as any)} />);
 
     const button = getByText('Open Modal');
 
@@ -24,7 +24,7 @@ describe('Tests for useAriaModal', () => {
   });
 
   it('should close the modal when pressing escape key', () => {
-    const { getByText, container } = render(<Modal />);
+    const { getByText, container } = render(<Modal {...({} as any)} />);
 
     const button = getByText('Open Modal');
 
@@ -35,7 +35,7 @@ describe('Tests for useAriaModal', () => {
   });
 
   it('should close the modal when clicking outside modal', () => {
-    const { getByText, container } = render(<Modal />);
+    const { getByText, container } = render(<Modal {...({} as any)} />);
 
     const button = getByText('Open Modal');
 

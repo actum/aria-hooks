@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef } from "react";
-import { DrawerController } from "./controller";
+import { useEffect, useMemo, useRef } from 'react';
+import { DrawerController } from './controller';
 
-interface DrawerProps {
+export interface DrawerProps {
   /**
    * Unique identifier to the drawer instance
    */
@@ -39,7 +39,7 @@ export const useAriaDrawer = ({
 
   const drawerProps = useMemo(
     () => ({
-      "aria-hidden": !isOpen,
+      'aria-hidden': !isOpen,
       ref: controller.current.setWrapperRef,
     }),
     [isOpen]
@@ -54,7 +54,7 @@ export const useAriaDrawer = ({
 
   const closeButtonProps = useMemo(
     () => ({
-      "aria-label": closeLabel || "Close drawer",
+      'aria-label': closeLabel || 'Close drawer',
       onClick: () => controller.current.onClose(),
     }),
     [closeLabel]
