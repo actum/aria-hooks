@@ -40,7 +40,6 @@ describe('Tests for useAriaNavigation', () => {
     });
 
     fireEvent.keyDown(window, { key: 'ArrowRight' });
-    console.log('next item', menuItems[1].innerText);
 
     expect(menuItems[1]).toEqual(document.activeElement);
   });
