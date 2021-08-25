@@ -1,19 +1,19 @@
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, useState, CSSProperties } from 'react';
 import { ToolTipController } from './controller';
 
 export interface ToolTipProps {
   /**
    * Unique ID for the Tooltip
    */
-  id?: string;
-  /**
-   * Whether or not Tooltip is open
-   */
-  isShowing?: boolean;
+  id: string;
   /**
    * Callback for closing tooltip
    */
   onDismiss?: () => void;
+  /**
+   * Whether or not Tooltip is visible
+   */
+  isShowing?: boolean;
   /**
    * Callback for opening tooltip
    */
@@ -22,46 +22,38 @@ export interface ToolTipProps {
 
 export const useAriaToolTip = ({
   id,
-  isShowing,
   onRelease,
   onDismiss,
+  isShowing,
 }: ToolTipProps) => {
   const getBtnId = (id: string) => (id ? `${id}_btn` : undefined);
-  const tooltipId = id ? id : 'tooltip';
 
-  const controller =
-    id !== undefined && onDismiss !== undefined && onRelease !== undefined
-      ? useRef(new ToolTipController(getBtnId(id), onDismiss, onRelease))
-      : undefined;
+  const controller = useRef(
+    new ToolTipController(getBtnId(id), onRelease, onDismiss)
+  );
 
   useEffect(() => {
-    if (isShowing) {
-      controller?.current.onOpen();
-    } else {
-      controller?.current.onClose();
-    }
-  }, [isShowing]);
-
-  useEffect(() => {
-    controller?.current.registerEvents();
+    controller.current.registerEvents();
   }, []);
 
   const buttonProps = useMemo(
     () => ({
       id: getBtnId(id),
-      ref: controller?.current.setBtnRef,
+      ref: controller.current.setBtnRef,
       role: 'button',
       tabIndex: 0,
-      'aria-expanded': isShowing,
-      'aria-describedby': tooltipId,
+      'aria-expanded': isShowing ? true : false,
+      'aria-describedby': id,
     }),
-    [isShowing, id]
+    [id]
   );
 
   const toolTipProps = useMemo(
     () => ({
-      id: tooltipId,
+      id: id,
+      ref: controller.current.setTooltipRef,
       role: 'tooltip',
+      style: { visibility: isShowing ? 'visible' : 'hidden' } as CSSProperties,
     }),
     [id]
   );

@@ -1,6 +1,7 @@
 export class ToolTipController {
   private btnId: string;
   private buttonRef: HTMLButtonElement;
+  private tooltipRef: HTMLElement;
   private onDismiss: () => void;
   private onRelease: () => void;
 
@@ -14,32 +15,45 @@ export class ToolTipController {
     this.buttonRef = buttonRef;
   };
 
-  onOpen = () => {
-    window.addEventListener('keydown', this.handleKeyDown);
-  };
-  onClose = () => {
-    window.removeEventListener('keydown', this.handleKeyDown);
-    this.onDismiss();
+  setTooltipRef = (tooltipRef: HTMLElement) => {
+    this.tooltipRef = tooltipRef;
   };
 
   registerEvents = () => {
     const button = this.buttonRef || document.getElementById(this.btnId);
 
-    button.addEventListener('focus', this.handleFocus);
-    button.addEventListener('blur', this.handleBlur);
+    button.addEventListener('focus', this.onOpen);
+    button.addEventListener('blur', this.onClose);
+    button.addEventListener('mouseenter', this.onOpen);
+    button.addEventListener('mouseleave', this.onClose);
+  };
+
+  onOpen = () => {
+    const button = this.buttonRef || document.getElementById(this.btnId);
+    const tooltip =
+      this.tooltipRef || document.querySelector('[role="tooltip"]');
+
+    button.setAttribute('aria-expanded', 'true');
+    tooltip.style.visibility = 'visible';
+
+    window.addEventListener('keydown', this.handleKeyDown);
+    this.onRelease?.();
+  };
+  onClose = () => {
+    const button = this.buttonRef || document.getElementById(this.btnId);
+    const tooltip =
+      this.tooltipRef || document.querySelector('[role="tooltip"]');
+
+    button.setAttribute('aria-expanded', 'false');
+    tooltip.style.visibility = 'hidden';
+
+    window.removeEventListener('keydown', this.handleKeyDown);
+    this.onDismiss?.();
   };
 
   handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       this.onClose();
     }
-  };
-
-  handleFocus = () => {
-    this.onRelease();
-  };
-
-  handleBlur = () => {
-    this.onDismiss();
   };
 }

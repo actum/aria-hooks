@@ -5,13 +5,9 @@ import styled from 'styled-components';
 
 const StyledTooltip = styled.div`
   display: initial;
-  visibility: hidden;
   margin-left: 10px;
   padding: 5px;
   border: 1px solid black;
-  &.tooltip__visible {
-    visibility: visible;
-  }
 `;
 
 export const Tooltip: React.FC<ToolTipProps> = () => {
@@ -26,23 +22,8 @@ export const Tooltip: React.FC<ToolTipProps> = () => {
 
   return (
     <>
-      <button
-        {...buttonProps}
-        onMouseEnter={() => {
-          setIsShowing(true);
-        }}
-        onMouseLeave={() => {
-          setIsShowing(false);
-        }}
-      >
-        See tooltip
-      </button>
-      <StyledTooltip
-        {...toolTipProps}
-        className={isShowing ? 'tooltip__visible' : ''}
-      >
-        {'I am the tool tip :)'}
-      </StyledTooltip>
+      <button {...buttonProps}>See tooltip</button>
+      <StyledTooltip {...toolTipProps}>{'I am the tool tip :)'}</StyledTooltip>
     </>
   );
 };
