@@ -8,7 +8,6 @@ describe('Tests for useAriaNavigation', () => {
 
     const button = getByRole('button');
     const tooltip = container.querySelector('#tooltip');
-    // const tooltip = getByRole('tooltip');
 
     expect(button).toBeInTheDocument();
     expect(tooltip).toBeInTheDocument();

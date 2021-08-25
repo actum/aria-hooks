@@ -5,65 +5,65 @@ export interface ToolTipProps {
   /**
    * Unique ID for the Tooltip
    */
-  id: string;
+  id?: string;
   /**
    * Whether or not Tooltip is open
    */
-  isOpen: boolean;
+  isShowing?: boolean;
   /**
    * Callback for closing tooltip
    */
-  onDismiss: () => void;
+  onDismiss?: () => void;
   /**
    * Callback for opening tooltip
    */
-  onRelease: () => void;
+  onRelease?: () => void;
 }
 
 export const useAriaToolTip = ({
   id,
-  isOpen,
+  isShowing,
   onRelease,
   onDismiss,
 }: ToolTipProps) => {
-  const getBtnId = (id: string) => {
-    return `${id}_btn`;
-  };
+  const getBtnId = (id: string) => (id ? `${id}_btn` : undefined);
+  const tooltipId = id ? id : 'tooltip';
 
-  const controller = useRef(
-    new ToolTipController(getBtnId(id), onDismiss, onRelease)
-  );
+  const controller =
+    id !== undefined && onDismiss !== undefined && onRelease !== undefined
+      ? useRef(new ToolTipController(getBtnId(id), onDismiss, onRelease))
+      : undefined;
 
   useEffect(() => {
-    if (isOpen) {
-      controller.current.onOpen();
+    if (isShowing) {
+      controller?.current.onOpen();
     } else {
-      controller.current.onClose();
+      controller?.current.onClose();
     }
-  }, [isOpen]);
+  }, [isShowing]);
 
   useEffect(() => {
-    controller.current.registerEvents();
+    controller?.current.registerEvents();
   }, []);
 
   const buttonProps = useMemo(
     () => ({
       id: getBtnId(id),
-      ref: controller.current.setBtnRef,
+      ref: controller?.current.setBtnRef,
       role: 'button',
       tabIndex: 0,
-      'aria-expanded': isOpen,
-      'aria-describedby': id,
+      'aria-expanded': isShowing,
+      'aria-describedby': tooltipId,
     }),
-    [isOpen]
+    [isShowing, id]
   );
 
   const toolTipProps = useMemo(
     () => ({
-      id: id,
+      id: tooltipId,
       role: 'tooltip',
     }),
-    [isOpen]
+    [id]
   );
 
   const props = useMemo(

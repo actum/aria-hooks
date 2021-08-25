@@ -15,13 +15,13 @@ const StyledTooltip = styled.div`
 `;
 
 export const Tooltip: React.FC<ToolTipProps> = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isShowing, setIsShowing] = useState(false);
 
   const { buttonProps, toolTipProps } = useAriaToolTip({
     id: 'tooltip',
-    isOpen,
-    onRelease: () => setIsOpen(true),
-    onDismiss: () => setIsOpen(false),
+    isShowing,
+    onRelease: () => setIsShowing(true),
+    onDismiss: () => setIsShowing(false),
   });
 
   return (
@@ -29,17 +29,17 @@ export const Tooltip: React.FC<ToolTipProps> = () => {
       <button
         {...buttonProps}
         onMouseEnter={() => {
-          setIsOpen(true);
+          setIsShowing(true);
         }}
         onMouseLeave={() => {
-          setIsOpen(false);
+          setIsShowing(false);
         }}
       >
         See tooltip
       </button>
       <StyledTooltip
         {...toolTipProps}
-        className={isOpen ? 'tooltip__visible' : ''}
+        className={isShowing ? 'tooltip__visible' : ''}
       >
         {'I am the tool tip :)'}
       </StyledTooltip>
