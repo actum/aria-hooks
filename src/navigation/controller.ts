@@ -1,5 +1,6 @@
 export class NavigationContoller {
   private menuRef: HTMLElement;
+  private selectedSubmenu: HTMLElement;
   private id: string;
 
   constructor(id?: string) {
@@ -48,10 +49,11 @@ export class NavigationContoller {
   };
 
   changeFocusToItem = (item: 'next' | 'prev' | 'first' | 'last') => {
+    const menu = this.selectedSubmenu || this.menuRef;
     let index = this.getFocusedIndex();
 
     const items = Array.from(
-      this.menuRef.querySelectorAll('li>a')
+      menu.querySelectorAll('li>a')
     ) as HTMLAnchorElement[];
 
     if (item === 'last') {
@@ -67,6 +69,12 @@ export class NavigationContoller {
     items.forEach((item, i) => {
       item.tabIndex = index === i ? 0 : -1;
     });
+
+    if (items[index].getAttribute('aria-haspopup') === 'true') {
+      this.selectedSubmenu = items[index].querySelector('[role="menu"]');
+    } else {
+      this.selectedSubmenu = undefined;
+    }
 
     items[index]?.focus();
   };

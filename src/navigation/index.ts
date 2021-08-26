@@ -45,12 +45,23 @@ export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
     [menubarLabel, id]
   );
 
-  const menuItemProps = useCallback((i) => {
+  const submenuProps = useCallback(
+    (label: string) => ({
+      role: 'menu',
+      'aria-label': label,
+    }),
+    []
+  );
+
+  const menuItemProps = useCallback((i: number, hasSubmenu?: boolean) => {
     const focusedIndex = controller.current.getFocusedIndex();
     return {
       role: 'menuitem',
       tabIndex:
         focusedIndex === -1 && i === 0 ? 0 : focusedIndex === i ? 0 : -1,
+      ...(hasSubmenu
+        ? { 'aria-haspopup': hasSubmenu, 'aria-expanded': false }
+        : {}),
     };
   }, []);
 
@@ -66,8 +77,9 @@ export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
       itemProps,
       menuItemProps,
       menubarProps,
+      submenuProps,
     }),
-    [itemProps, menuItemProps, menubarProps]
+    [itemProps, menuItemProps, menubarProps, submenuProps]
   );
 
   return props;
