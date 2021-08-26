@@ -59,14 +59,14 @@ export const useAriaListbox = ({ id, selectedValue, triggerLabel, isOpen, onSele
     'aria-hidden': "true" as HTMLProps<HTMLUListElement>['aria-hidden'],
     role: "listbox",
     'aria-activedescendant': selectedValue,
-
-  }),[selectedValue])
+    id,
+  }),[selectedValue, id])
 
   const entryItemProps = useCallback((id: string) => ({
     id, 
     role: "option", 
-    'aria-selected':id === selectedValue,
-    tabindex: 0,
+    'aria-selected': id === selectedValue,
+    tabIndex: 0,
     onClick: () => {
       onSelect?.(id)
       if (closeOnSelect) {

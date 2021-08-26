@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ARIA_EXPANDED, ARIA_HIDDEN } from '../constants'
+import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED, TAB_INDEX } from '../constants'
 import { FocusTrapFactory, focussableElements } from '../utils/focusTrapFactory'
 
 
@@ -13,7 +13,7 @@ const changeFocusToElement = function(element: 'next' | 'prev' | 'first' | 'last
     )
 
     let selectedElement
-
+    
     if (element === 'first') {
       selectedElement = focussable.shift() as HTMLElement
     } else if (element === 'last') {
@@ -51,12 +51,16 @@ export class ListboxController {
 
   getFocusTrap = () => {
     if (!this.focusTrap) {
-      this.focusTrap = new FocusTrapFactory(this.contentElement)
+      this.focusTrap = new FocusTrapFactory(this.contentElement || document.getElementById(this.id))
     }
     return this.focusTrap
   }
 
   open = () => {
+    Array.from(this.contentElement.querySelectorAll('[role="option"]')).forEach(button =>
+      button.setAttribute(TAB_INDEX, '0'),
+    )
+
     this.getFocusTrap().mount()
     this.registerListeners()
 
@@ -69,9 +73,13 @@ export class ListboxController {
     this.contentElement.setAttribute(ARIA_HIDDEN, 'false')
     this.triggerElement.setAttribute(ARIA_EXPANDED, 'true')
 
-    Array.from(this.contentElement.querySelectorAll('button')).forEach(button =>
-      button.removeAttribute('tab-index'),
-    )
+    const selected = this.contentElement.querySelector(`[${ARIA_SELECTED}="true"]`) || Array.from(this.contentElement.querySelectorAll('[role="option"]')).shift()
+
+    selected.setAttribute(TAB_INDEX, '0')
+    // @ts-ignore
+    selected?.focus()
+
+    // Array.from(this.contentElement.querySelectorAll('li')).shift().focus()
   }
 
   close = () => {
@@ -83,11 +91,9 @@ export class ListboxController {
     listboxElement.setAttribute(ARIA_HIDDEN, 'true')
     this.triggerElement.setAttribute(ARIA_EXPANDED, 'false')
 
-    Array.from(listboxElement.querySelectorAll('button')).forEach(button =>
-      button.setAttribute('tab-index', '-1'),
+    Array.from(listboxElement.querySelectorAll('[role="option"]')).forEach(button =>
+      button.setAttribute(TAB_INDEX, '-1'),
     )
-
-    listboxElement.addEventListener('animationend', this.closeCleanup)
   }
 
   getOpen = () => {
@@ -98,10 +104,6 @@ export class ListboxController {
     }
 
     return this.triggerElement.getAttribute(ARIA_EXPANDED) === 'true'
-  }
-
-  private closeCleanup = () => {
-    this.contentElement.removeEventListener('animationend', this.closeCleanup)
   }
 
   handleKeyDown = (onSelect?: () => void) => (ev: React.KeyboardEvent<HTMLLIElement>): void => {
@@ -119,15 +121,22 @@ export class ListboxController {
       case 'Home':
         ev.preventDefault()
         changeFocusToElement('first', this.contentElement)
+        break
       
       case 'End':
         ev.preventDefault()
         changeFocusToElement('last', this.contentElement)
+        break
 
       case 'Enter':
       case ' ':
         ev.preventDefault()
+        Array.from(this.contentElement.querySelectorAll('[role="option"]')).forEach(button =>
+          button.setAttribute(ARIA_SELECTED, 'false'),
+        )
+        ev.currentTarget.setAttribute(ARIA_SELECTED, "true")
         onSelect?.()
+        break
     }
   }
 

@@ -5,6 +5,7 @@ import { ListboxProps, useAriaListbox } from '.'
 
 const Wrapper = styled.div`
   position: relative;
+  height: 300px;
 
   .listbox {
     margin: 0;
@@ -13,9 +14,6 @@ const Wrapper = styled.div`
     padding: 4px;
     list-style: none;
 
-    &[aria-hidden='true'] {
-      display: none;
-    }
 
     position: absolute;
     top: calc(100% + 4px);
@@ -29,13 +27,41 @@ const Wrapper = styled.div`
       padding: 4px 0;
     }
   }
+
+  .listbox[aria-hidden='true'] {
+    display: none;
+  }
 `
 
 /**
  * Note that the `useAriaLisbox` hook works both with controlled and uncontrolled versions.
  * This means that the `isOpen` configuration is optional. When provided, the hook will consider it's value; 
  * when not provided, the hook will control whether or not the menu is open, and the component consuming it
- * won't be able to distinguish whether or not it's opened. 
+ * won't be able to distinguish whether or not it's opened.
+ * 
+ * Required CSS:
+ * 
+ * ```css
+.listbox {
+      margin: 0;
+      background-color: white;
+      border: 1px solid #eaebee;
+      padding: 4px;
+      list-style: none;
+
+      position: absolute;
+      top: calc(100% + 4px);
+
+      max-height: 100px;
+      overflow: auto;
+
+      width: 90px;
+}
+
+.listbox[aria-hidden='true'] {
+      display: none;
+}
+ * ```
  */
 export const Listbox: React.FC<ListboxProps> = () => {
   const [isOpen, setOpen] = React.useState(false)
@@ -71,15 +97,17 @@ export const Listbox: React.FC<ListboxProps> = () => {
 
   return (
     <Wrapper>
+      <div style={{ position: 'relative' }}>
       <button {...triggerProps}>{entries.find(e => e.id === selectedValue)?.label || 'Select option'}</button>
 
       <ul className="listbox" {...listboxProps}>
         {entries.map(entry => (
-          <li {...entryItemProps(entry.id)}>{entry.label}</li>
+          <li key={entry.id} {...entryItemProps(entry.id)}>{entry.label}</li>
         ))}
       </ul>
+      </div>
     </Wrapper>
   )
 }
 
-export default { title: 'Aria Component/Menu', component: Listbox }
+export default { title: 'Aria Component/Listbox', component: Listbox }

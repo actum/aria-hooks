@@ -1,6 +1,5 @@
-import { fireEvent, render } from '@testing-library/react'
+import { act, fireEvent, render } from '@testing-library/react'
 import * as React from 'react'
-import { useAriaListbox } from '.'
 import { ARIA_HIDDEN } from '../constants'
 import { Listbox } from './listbox.stories'
 
@@ -28,53 +27,62 @@ describe('Tests for useAriaListbox', () => {
     const { getByText, container } = render(<Listbox {...{} as any} />)
 
     const button = getByText('Select option')
-    fireEvent.click(button)
-    
 
+    fireEvent.click(button)
+
+    const entries = Array.from(container.querySelectorAll('li'))
+
+    // console.log(document.activeElement)
+    expect(document.activeElement).toBe(entries[0])
+
+
+    fireEvent.keyDown(window, { key: 'ArrowDown' })
+
+    // expect(document.activeElement).toEqual(entries[1])
   })
 
-  it('should focus the previous item when pressing up arrow', () => {
-    const { getByText, container } = render(<Listbox {...{} as any} />)
+  // it('should focus the previous item when pressing up arrow', () => {
+  //   const { getByText, container } = render(<Listbox {...{} as any} />)
 
-    const button = getByText('Select option')
-    fireEvent.click(button)
+  //   const button = getByText('Select option')
+  //   fireEvent.click(button)
     
 
-  })
+  // })
   
-  it('should focus the last item when pressing end', () => {
-    const { getByText, container } = render(<Listbox {...{} as any} />)
+  // it('should focus the last item when pressing end', () => {
+  //   const { getByText, container } = render(<Listbox {...{} as any} />)
 
-    const button = getByText('Select option')
-    fireEvent.click(button)
+  //   const button = getByText('Select option')
+  //   fireEvent.click(button)
     
 
-  })
+  // })
   
-  it('should focus the first item when pressing home', () => {
-    const { getByText, container } = render(<Listbox {...{} as any} />)
+  // it('should focus the first item when pressing home', () => {
+  //   const { getByText, container } = render(<Listbox {...{} as any} />)
 
-    const button = getByText('Select option')
-    fireEvent.click(button)
+  //   const button = getByText('Select option')
+  //   fireEvent.click(button)
     
 
-  })
+  // })
   
-  it('should select value when pressing return', () => {
-    const { getByText, container } = render(<Listbox {...{} as any} />)
+  // it('should select value when pressing return', () => {
+  //   const { getByText, container } = render(<Listbox {...{} as any} />)
 
-    const button = getByText('Select option')
-    fireEvent.click(button)
+  //   const button = getByText('Select option')
+  //   fireEvent.click(button)
     
 
-  })
+  // })
   
-  it('should select value clicking entry', () => {
-    const { getByText, container } = render(<Listbox {...{} as any} />)
+  // it('should select value clicking entry', () => {
+  //   const { getByText, container } = render(<Listbox {...{} as any} />)
 
-    const button = getByText('Select option')
-    fireEvent.click(button)
+  //   const button = getByText('Select option')
+  //   fireEvent.click(button)
     
 
-  })
+  // })
 })
