@@ -7,7 +7,7 @@ describe('Tests for useAriaNavigation', () => {
     const { getByRole, container } = render(<Tooltip {...({} as any)} />);
 
     const button = getByRole('button');
-    const tooltip = container.querySelector('#tooltip');
+    const tooltip = container.querySelector('#tooltip_tooltip');
 
     expect(button).toBeInTheDocument();
     expect(tooltip).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Tests for useAriaNavigation', () => {
   it('should open tooltip when button receives focus', () => {
     const { getByRole, container } = render(<Tooltip {...({} as any)} />);
     const button = getByRole('button');
-    const tooltip = container.querySelector('#tooltip');
+    const tooltip = container.querySelector('#tooltip_tooltip');
 
     expect(tooltip).not.toBeVisible();
 
@@ -29,7 +29,7 @@ describe('Tests for useAriaNavigation', () => {
   it('should close tooltip when button loses focus', () => {
     const { getByRole, container } = render(<Tooltip {...({} as any)} />);
     const button = getByRole('button');
-    const tooltip = container.querySelector('#tooltip');
+    const tooltip = container.querySelector('#tooltip_tooltip');
 
     fireEvent.focus(button);
     fireEvent.blur(button);
@@ -40,7 +40,7 @@ describe('Tests for useAriaNavigation', () => {
   it('should close tooltip when escape key is pressed', () => {
     const { getByRole, container } = render(<Tooltip {...({} as any)} />);
     const button = getByRole('button');
-    const tooltip = container.querySelector('#tooltip');
+    const tooltip = container.querySelector('#tooltip_tooltip');
 
     fireEvent.focus(button);
     fireEvent.keyDown(window, { key: 'Escape' });

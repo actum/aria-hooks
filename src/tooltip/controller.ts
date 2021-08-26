@@ -1,15 +1,19 @@
 export class ToolTipController {
-  private btnId: string;
+  private id: string;
   private buttonRef: HTMLButtonElement;
   private tooltipRef: HTMLElement;
   private onDismiss: () => void;
   private onRelease: () => void;
 
-  constructor(btnId: string, onDismiss: () => void, onRelease: () => void) {
-    this.btnId = btnId;
+  constructor(id: string, onDismiss?: () => void, onRelease?: () => void) {
+    this.id = id;
     this.onDismiss = onDismiss;
     this.onRelease = onRelease;
   }
+
+  getBtnId = () => `${this.id}_button`;
+
+  getTooltipId = () => `${this.id}_tooltip`;
 
   setBtnRef = (buttonRef: HTMLButtonElement) => {
     this.buttonRef = buttonRef;
@@ -20,7 +24,7 @@ export class ToolTipController {
   };
 
   registerEvents = () => {
-    const button = this.buttonRef || document.getElementById(this.btnId);
+    const button = this.buttonRef || document.getElementById(this.getBtnId());
 
     button.addEventListener('focus', this.onOpen);
     button.addEventListener('blur', this.onClose);
@@ -29,9 +33,9 @@ export class ToolTipController {
   };
 
   onOpen = () => {
-    const button = this.buttonRef || document.getElementById(this.btnId);
+    const button = this.buttonRef || document.getElementById(this.getBtnId());
     const tooltip =
-      this.tooltipRef || document.querySelector('[role="tooltip"]');
+      this.tooltipRef || document.getElementById(this.getTooltipId());
 
     button.setAttribute('aria-expanded', 'true');
     tooltip.style.visibility = 'visible';
@@ -40,9 +44,9 @@ export class ToolTipController {
     this.onRelease?.();
   };
   onClose = () => {
-    const button = this.buttonRef || document.getElementById(this.btnId);
+    const button = this.buttonRef || document.getElementById(this.getBtnId());
     const tooltip =
-      this.tooltipRef || document.querySelector('[role="tooltip"]');
+      this.tooltipRef || document.getElementById(this.getTooltipId());
 
     button.setAttribute('aria-expanded', 'false');
     tooltip.style.visibility = 'hidden';

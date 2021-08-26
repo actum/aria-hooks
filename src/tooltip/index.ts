@@ -26,11 +26,7 @@ export const useAriaToolTip = ({
   onDismiss,
   isShowing,
 }: ToolTipProps) => {
-  const getBtnId = (id: string) => (id ? `${id}_btn` : undefined);
-
-  const controller = useRef(
-    new ToolTipController(getBtnId(id), onRelease, onDismiss)
-  );
+  const controller = useRef(new ToolTipController(id, onRelease, onDismiss));
 
   useEffect(() => {
     controller.current.registerEvents();
@@ -38,19 +34,19 @@ export const useAriaToolTip = ({
 
   const buttonProps = useMemo(
     () => ({
-      id: getBtnId(id),
+      id: controller.current.getBtnId(),
       ref: controller.current.setBtnRef,
       role: 'button',
       tabIndex: 0,
       'aria-expanded': isShowing ? true : false,
-      'aria-describedby': id,
+      'aria-describedby': controller.current.getTooltipId(),
     }),
     [id]
   );
 
   const toolTipProps = useMemo(
     () => ({
-      id: id,
+      id: controller.current.getTooltipId(),
       ref: controller.current.setTooltipRef,
       role: 'tooltip',
       style: { visibility: isShowing ? 'visible' : 'hidden' } as CSSProperties,
