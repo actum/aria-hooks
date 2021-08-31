@@ -6,10 +6,8 @@ import {
   ARIA_SELECTED,
   TAB_INDEX,
 } from '../constants';
-import {
-  FocusTrapFactory,
-  focussableElements,
-} from '../utils/focusTrapFactory';
+
+const SELECTED_CLASS_NAME = 'selected';
 
 const changeFocusToElement = function (
   element: 'next' | 'prev' | 'first' | 'last',
@@ -18,7 +16,7 @@ const changeFocusToElement = function (
   if (!document.activeElement) return;
 
   const focussable = Array.from(
-    baseElement.querySelectorAll(focussableElements)
+    baseElement.querySelectorAll('[role="option"]')
   ).filter(
     (element: HTMLElement) =>
       element.offsetWidth > 0 ||
@@ -33,7 +31,8 @@ const changeFocusToElement = function (
   } else if (element === 'last') {
     selectedElement = focussable.pop() as HTMLElement;
   } else {
-    const index = focussable.indexOf(document.activeElement);
+    const el = baseElement.querySelector(`.${SELECTED_CLASS_NAME}`);
+    const index = focussable.findIndex((e) => el.isSameNode(e));
 
     if (index > -1) {
       selectedElement = focussable[
@@ -44,15 +43,16 @@ const changeFocusToElement = function (
 
   if (!selectedElement) return;
 
-  selectedElement.focus();
-  selectedElement.scrollIntoView({
-    behavior: 'auto',
-    block: 'center',
+  focussable.forEach((button) => {
+    button.classList.remove(SELECTED_CLASS_NAME);
   });
+
+  // selectedElement.focus();
+  selectedElement.classList.add(SELECTED_CLASS_NAME);
+  selectedElement.scrollIntoView();
 };
 
 export class ListboxController {
-  focusTrap: FocusTrapFactory;
   contentElement?: HTMLUListElement;
   triggerElement?: HTMLButtonElement;
 
@@ -65,21 +65,14 @@ export class ListboxController {
   setContentElement = (el: HTMLUListElement) => (this.contentElement = el);
   setTriggerElement = (el: HTMLButtonElement) => (this.triggerElement = el);
 
-  getFocusTrap = () => {
-    if (!this.focusTrap) {
-      this.focusTrap = new FocusTrapFactory(
-        this.contentElement || document.getElementById(this.id)
-      );
-    }
-    return this.focusTrap;
-  };
-
   open = () => {
-    Array.from(this.contentElement.querySelectorAll('[role="option"]')).forEach(
-      (button) => button.setAttribute(TAB_INDEX, '0')
+    const options = Array.from(
+      this.contentElement.querySelectorAll('[role="option"]')
     );
+    options.forEach((button) => {
+      button.classList.remove(SELECTED_CLASS_NAME);
+    });
 
-    this.getFocusTrap().mount();
     this.registerListeners();
 
     if (!this.triggerElement) {
@@ -89,6 +82,7 @@ export class ListboxController {
     }
 
     this.contentElement.setAttribute(ARIA_HIDDEN, 'false');
+    this.contentElement.focus();
     this.triggerElement.setAttribute(ARIA_EXPANDED, 'true');
 
     const selected =
@@ -97,15 +91,11 @@ export class ListboxController {
         this.contentElement.querySelectorAll('[role="option"]')
       ).shift();
 
-    console.log(selected);
-    setTimeout(() => {
-      // @ts-ignore
-      selected?.focus();
-    }, 0);
+    selected?.scrollIntoView();
+    selected?.classList.add(SELECTED_CLASS_NAME);
   };
 
   close = () => {
-    this.getFocusTrap().destroy();
     this.cleanupListeners();
 
     const listboxElement = this.contentElement;
@@ -116,6 +106,8 @@ export class ListboxController {
     Array.from(listboxElement.querySelectorAll('[role="option"]')).forEach(
       (button) => button.setAttribute(TAB_INDEX, '-1')
     );
+
+    this.triggerElement.focus();
   };
 
   getOpen = () => {
@@ -129,8 +121,8 @@ export class ListboxController {
   };
 
   handleKeyDown =
-    (onSelect?: () => void) =>
-    (ev: React.KeyboardEvent<HTMLLIElement>): void => {
+    (onSelect?: (id: string) => void) =>
+    (ev: React.KeyboardEvent<HTMLUListElement>): void => {
       switch (ev.key) {
         case 'ArrowDown':
           ev.preventDefault();
@@ -158,11 +150,24 @@ export class ListboxController {
           Array.from(
             this.contentElement.querySelectorAll('[role="option"]')
           ).forEach((button) => button.setAttribute(ARIA_SELECTED, 'false'));
-          ev.currentTarget.setAttribute(ARIA_SELECTED, 'true');
-          onSelect?.();
+
+          onSelect?.(
+            this.contentElement.querySelector(`.${SELECTED_CLASS_NAME}`)?.id
+          );
+
           break;
       }
     };
+
+  select = (id: string) => {
+    Array.from(this.contentElement.querySelectorAll('[role="option"]')).forEach(
+      (button) => button.setAttribute(ARIA_SELECTED, 'false')
+    );
+
+    this.contentElement
+      .querySelector(`#${id}`)
+      ?.setAttribute(ARIA_SELECTED, 'true');
+  };
 
   handleButtonKeyDown = (ev: KeyboardEvent) => {
     if (ev.key === 'Escape') {

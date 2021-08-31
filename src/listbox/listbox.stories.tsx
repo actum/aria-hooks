@@ -25,6 +25,10 @@ const Wrapper = styled.div`
     li {
       padding: 4px 0;
     }
+
+    .selected {
+      background: blue;
+    }
   }
 
   .listbox[aria-hidden='true'] {
@@ -59,6 +63,10 @@ const Wrapper = styled.div`
 
 .listbox[aria-hidden='true'] {
       display: none;
+}
+
+.selected {
+      background: blue;
 }
  * ```
  */
@@ -97,7 +105,13 @@ export const Listbox: React.FC<ListboxProps> = () => {
   return (
     <Wrapper>
       <div style={{ position: 'relative' }}>
-        <button {...triggerProps}>
+        <button
+          {...triggerProps}
+          onClick={(e) => {
+            e.stopPropagation();
+            triggerProps.onClick(e);
+          }}
+        >
           {entries.find((e) => e.id === selectedValue)?.label ||
             'Select option'}
         </button>

@@ -59,7 +59,6 @@ export const useAriaListbox = ({
         typeof isOpen === 'boolean' ? isOpen : controller.current.getOpen(),
       ref: controller.current.setTriggerElement,
       onClick: (e) => {
-        console.log(e.target);
         e.target.focus();
         controller.current.open();
         onToggle?.(true);
@@ -75,7 +74,16 @@ export const useAriaListbox = ({
       'aria-hidden': 'true' as HTMLProps<HTMLUListElement>['aria-hidden'],
       role: 'listbox',
       'aria-activedescendant': selectedValue,
+      tabIndex: -1,
       id,
+      onKeyDown: controller.current.handleKeyDown((id: string) => {
+        onSelect?.(id);
+        controller.current.select(id);
+        if (closeOnSelect) {
+          controller.current.close();
+          onToggle?.(false);
+        }
+      }),
     }),
     [selectedValue, id]
   );
@@ -85,21 +93,14 @@ export const useAriaListbox = ({
       id,
       role: 'option',
       'aria-selected': id === selectedValue,
-      tabIndex: 0,
       onClick: () => {
         onSelect?.(id);
+        controller.current.select(id);
         if (closeOnSelect) {
           controller.current.close();
-          onToggle(false);
+          onToggle?.(false);
         }
       },
-      onKeyDown: controller.current.handleKeyDown(() => {
-        onSelect?.(id);
-        if (closeOnSelect) {
-          controller.current.close();
-          onToggle(false);
-        }
-      }),
     }),
     []
   );
