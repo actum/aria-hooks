@@ -10,10 +10,18 @@ export interface NavigationProps {
    * Label for menu, which will be presented to screen readers
    */
   menubarLabel?: string;
+  /**
+   *  Whether or not top item with submenu is link
+   */
+  isSubmenuLink?: boolean;
 }
 
-export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
-  const controller = useRef(new NavigationContoller(id));
+export const useAriaNavigation = ({
+  menubarLabel,
+  id,
+  isSubmenuLink,
+}: NavigationProps) => {
+  const controller = useRef(new NavigationContoller(id, isSubmenuLink));
   const [isActive, setIsActive] = useState(false);
 
   const setActivity = () => {
@@ -49,6 +57,7 @@ export const useAriaNavigation = ({ menubarLabel, id }: NavigationProps) => {
     (label: string) => ({
       role: 'menu',
       'aria-label': label,
+      style: { display: 'none' },
     }),
     []
   );
