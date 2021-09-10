@@ -3,30 +3,45 @@ import { useAriaNavigation, NavigationProps } from '.';
 import styled from 'styled-components';
 
 const StyledNav = styled.nav`
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  justify-content: center;
+
+  [tabindex='0'] {
+    color: ${(props) => props.theme['red']};
   }
-  [role='menubar'] {
-    display: flex;
-    & > li {
-      padding: 10px;
-      position: relative;
-      ul {
-        padding: 2px;
-        border: 1px solid black;
-        position: absolute;
-        left: 0;
-        top: 100%;
-      }
-      *[aria-haspopup='true']::after {
-        content: '>';
-        padding-left: 5px;
-        background: transparent;
-      }
-    }
+
+  svg {
+    vertical-align: middle;
+    transform: rotate(90deg);
   }
+`;
+
+const StyledMenu = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  padding-block: 1rem;
+  position: relative;
+
+  li {
+    padding: 10px;
+  }
+  a,
+  span {
+    padding: 5px;
+    text-decoration: none;
+    color: #2e2d2c;
+  }
+`;
+
+const StyledSubmenu = styled(StyledMenu)`
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
 `;
 
 export const Menubar: React.FC<NavigationProps> = () => {
@@ -50,22 +65,31 @@ export const Menubar: React.FC<NavigationProps> = () => {
 
   return (
     <StyledNav>
-      <ul {...menubarProps}>
+      <StyledMenu {...menubarProps}>
         {items.map((item, idx) => (
           <li key={item.title} {...itemProps}>
             {item.items ? (
-              <span {...menuItemProps(idx, true)}>{item.title}</span>
+              <>
+                <span {...menuItemProps(idx, true)}>
+                  {item.title}
+                  <svg
+                    width="19px"
+                    height="19px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon btn__icon"
+                  >
+                    <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+                  </svg>
+                </span>
+              </>
             ) : (
               <a href="#" {...menuItemProps(idx, false)}>
                 {item.title}
               </a>
             )}
-
-            {/* <a href="#" {...menuItemProps(idx, item.items ? true : false)}>
-              {item.title}
-            </a> */}
             {item.items && (
-              <ul {...submenuProps('submenu')}>
+              <StyledSubmenu {...submenuProps('submenu')} className="submenu">
                 {item.items.map((childItem) => (
                   <li key={childItem.title} {...itemProps}>
                     <a href="#" {...menuItemProps(-1)}>
@@ -73,11 +97,11 @@ export const Menubar: React.FC<NavigationProps> = () => {
                     </a>
                   </li>
                 ))}
-              </ul>
+              </StyledSubmenu>
             )}
           </li>
         ))}
-      </ul>
+      </StyledMenu>
     </StyledNav>
   );
 };
