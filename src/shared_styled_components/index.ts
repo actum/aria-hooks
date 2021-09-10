@@ -53,8 +53,10 @@ export const Btn = styled.button`
   }
 
   .btn__icon {
+    vertical-align: middle;
     margin-left: 25px;
-    @include transition(transform);
+    transition: transform 0.2s
+      ${(props) => props.theme['transition-timing-function']};
   }
 
   &--disabled {
