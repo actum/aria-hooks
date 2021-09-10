@@ -3,11 +3,34 @@ import { useAriaToolTip, ToolTipProps } from '.';
 
 import styled from 'styled-components';
 
+import Button from '../components/Button';
+
 const StyledTooltip = styled.div`
   display: initial;
-  margin-left: 10px;
-  padding: 5px;
-  border: 1px solid black;
+  width: max-content;
+  padding: 11px 15px;
+  border-radius: 6px;
+  background: black;
+  color: white;
+  position: absolute;
+  left: 110%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+    border-right-color: black;
+  }
+`;
+
+const TooltipContainer = styled.div`
+  width: max-content;
+  position: relative;
 `;
 
 export const Tooltip: React.FC<ToolTipProps> = () => {
@@ -21,10 +44,12 @@ export const Tooltip: React.FC<ToolTipProps> = () => {
   });
 
   return (
-    <>
-      <button {...buttonProps}>See tooltip</button>
-      <StyledTooltip {...toolTipProps}>{'I am the tool tip :)'}</StyledTooltip>
-    </>
+    <TooltipContainer>
+      <Button variation="primary" {...buttonProps}>
+        See tooltip
+      </Button>
+      <StyledTooltip {...toolTipProps}>I am the tool tip </StyledTooltip>
+    </TooltipContainer>
   );
 };
 
