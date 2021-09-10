@@ -3,9 +3,7 @@ import { useAriaDrawer, DrawerProps } from '.';
 import Button from '../components/Button';
 
 import { Backdrop } from '../shared_styled_components';
-import { theme } from '../shared_styled_components/theme';
 import styled from 'styled-components';
-import { ThemeProvider } from 'styled-components';
 
 const StyledDrawer = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -55,7 +53,7 @@ export const Drawer: React.FC<DrawerProps> = () => {
     id: 'drawer',
   });
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Button variation="primary" onClick={() => setDrawerOpen(true)}>
         Open Drawer
       </Button>
@@ -78,7 +76,7 @@ export const Drawer: React.FC<DrawerProps> = () => {
           </div>
         </StyledDrawer>
       </Backdrop>
-    </ThemeProvider>
+    </>
   );
 };
 

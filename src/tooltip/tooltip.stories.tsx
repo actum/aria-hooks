@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useAriaToolTip, ToolTipProps } from '.';
 
 import styled from 'styled-components';
-import { theme } from '../shared_styled_components/theme';
-import { ThemeProvider } from 'styled-components';
 
 import Button from '../components/Button';
 
@@ -46,14 +44,12 @@ export const Tooltip: React.FC<ToolTipProps> = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
-      <TooltipContainer>
-        <Button variation="primary" {...buttonProps}>
-          See tooltip
-        </Button>
-        <StyledTooltip {...toolTipProps}>I am the tool tip </StyledTooltip>
-      </TooltipContainer>
-    </ThemeProvider>
+    <TooltipContainer>
+      <Button variation="primary" {...buttonProps}>
+        See tooltip
+      </Button>
+      <StyledTooltip {...toolTipProps}>I am the tool tip </StyledTooltip>
+    </TooltipContainer>
   );
 };
 

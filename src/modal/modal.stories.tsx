@@ -3,8 +3,6 @@ import { useAriaModal, ModalProps } from '.';
 
 import { HiddenInfo, Backdrop } from '../shared_styled_components';
 import styled from 'styled-components';
-import { theme } from '../shared_styled_components/theme';
-import { ThemeProvider } from 'styled-components';
 
 import Button from '../components/Button';
 
@@ -51,7 +49,7 @@ export const Modal: React.FC<ModalProps> = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Button
         variation="primary"
         className="App-link"
@@ -80,7 +78,7 @@ export const Modal: React.FC<ModalProps> = () => {
           <span className="ghost_text">Modal</span>
         </StyledModal>
       </Backdrop>
-    </ThemeProvider>
+    </>
   );
 };
 
