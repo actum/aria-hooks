@@ -1,19 +1,20 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 import { ARIA_HIDDEN } from '../constants';
+import { SELECTED_CLASS_NAME } from './controller';
 import { Listbox } from './listbox.stories';
 
 describe('Tests for useAriaListbox', () => {
   it('should render a triggering button for the listbox', () => {
-    const { getByText } = render(<Listbox {...({} as any)} />);
+    const { container } = render(<Listbox {...({} as any)} />);
 
-    expect(getByText('Select option')).toBeInTheDocument();
+    expect(container.querySelector('button')).toBeInTheDocument();
   });
 
   it('should open the listbox when trigger is clicked', () => {
     const { getByText, container } = render(<Listbox {...({} as any)} />);
 
-    const button = getByText('Select option');
+    const button = container.querySelector('button');
     const listbox = container.querySelector('.listbox');
 
     expect(listbox.attributes[ARIA_HIDDEN]?.value).toBe('true');
@@ -21,32 +22,51 @@ describe('Tests for useAriaListbox', () => {
     fireEvent.click(button);
 
     expect(listbox.attributes[ARIA_HIDDEN]?.value).toBe('false');
+
+    let entries = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+    // default focus on first entry.
+    expect(entries[0].classList.contains(SELECTED_CLASS_NAME)).toBeTruthy();
   });
 
-  it('should focus the next item when pressing down arrow', () => {
-    const { getByText, container } = render(<Listbox {...({} as any)} />);
+  // it('should focus the next item when pressing down arrow', () => {
+  //   const { getByText, container } = render(<Listbox {...({} as any)} />);
 
-    const button = getByText('Select option');
-    button.focus();
-    fireEvent.keyDown(button, { key: 'Enter' });
+  //   const button = getByText('Select option');
+  //   const listbox = container.querySelector('.listbox');
 
-    const entries = Array.from(container.querySelectorAll('[role="option"]'));
-    expect(entries[0]).toEqual(document.activeElement);
+  //   fireEvent.click(button);
 
-    fireEvent.keyDown(window, { key: 'ArrowDown' });
-    // console.log(entries);
-    console.log(document.activeElement.innerHTML);
+  //   fireEvent.keyDown(listbox, {
+  //     key: 'ArrowDown',
+  //   });
 
-    // expect(document.activeElement).toEqual(entries[1]);
-  });
+  //   const entries = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+  //   expect(entries[1].classList.contains(SELECTED_CLASS_NAME)).toBeTruthy();
+  // });
 
   // it('should focus the previous item when pressing up arrow', () => {
-  //   const { getByText, container } = render(<Listbox {...{} as any} />)
+  //   const { getByText, container } = render(<Listbox {...({} as any)} />);
 
-  //   const button = getByText('Select option')
-  //   fireEvent.click(button)
+  //   const button = getByText('Select option');
+  //   const listbox = container.querySelector('.listbox');
 
-  // })
+  //   fireEvent.click(button);
+
+  //   let entries = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+  //   entries[0].classList.remove(SELECTED_CLASS_NAME);
+  //   entries[2].classList.add(SELECTED_CLASS_NAME);
+
+  //   fireEvent.keyDown(listbox, {
+  //     key: 'ArrowUp',
+  //   });
+
+  //   entries = Array.from(listbox.querySelectorAll('[role="option"]'));
+
+  //   expect(entries[1].classList.contains(SELECTED_CLASS_NAME)).toBeTruthy();
+  // });
 
   // it('should focus the last item when pressing end', () => {
   //   const { getByText, container } = render(<Listbox {...{} as any} />)

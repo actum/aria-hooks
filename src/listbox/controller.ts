@@ -1,13 +1,7 @@
 import React from 'react';
+import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../constants';
 
-import {
-  ARIA_EXPANDED,
-  ARIA_HIDDEN,
-  ARIA_SELECTED,
-  TAB_INDEX,
-} from '../constants';
-
-const SELECTED_CLASS_NAME = 'selected';
+export const SELECTED_CLASS_NAME = 'selected';
 
 const changeFocusToElement = function (
   element: 'next' | 'prev' | 'first' | 'last',
@@ -47,9 +41,8 @@ const changeFocusToElement = function (
     button.classList.remove(SELECTED_CLASS_NAME);
   });
 
-  // selectedElement.focus();
   selectedElement.classList.add(SELECTED_CLASS_NAME);
-  selectedElement.scrollIntoView();
+  selectedElement.scrollIntoView?.();
 };
 
 export class ListboxController {
@@ -87,11 +80,9 @@ export class ListboxController {
 
     const selected =
       this.contentElement.querySelector(`[${ARIA_SELECTED}="true"]`) ||
-      Array.from(
-        this.contentElement.querySelectorAll('[role="option"]')
-      ).shift();
+      this.contentElement.querySelector('[role="option"]');
 
-    selected?.scrollIntoView();
+    selected?.scrollIntoView?.();
     selected?.classList.add(SELECTED_CLASS_NAME);
   };
 
@@ -104,7 +95,7 @@ export class ListboxController {
     this.triggerElement.setAttribute(ARIA_EXPANDED, 'false');
 
     Array.from(listboxElement.querySelectorAll('[role="option"]')).forEach(
-      (button) => button.setAttribute(TAB_INDEX, '-1')
+      (button) => button.classList.remove(SELECTED_CLASS_NAME)
     );
 
     this.triggerElement.focus();

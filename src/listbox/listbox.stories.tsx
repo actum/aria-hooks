@@ -2,32 +2,75 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { ListboxProps, useAriaListbox } from '.';
+import { SELECTED_CLASS_NAME } from './controller';
 
 const Wrapper = styled.div`
   position: relative;
-  height: 300px;
+  height: 400px;
+  color: #2e2d2c;
+
+  button {
+    cursor: pointer;
+    &:focus,
+    &:hover {
+      color: #d93c31;
+    }
+
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    padding: 12px;
+    background-color: #fff;
+
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    outline: 0;
+    border: 1px solid transparent;
+
+    transition-property: color, border, background-color, box-shadow;
+    transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition-duration: 0.2s;
+  }
 
   .listbox {
     margin: 0;
+    padding: 0;
+    min-width: 0;
+    border: 1px solid #2e2d2c;
+    border-radius: 0;
     background-color: white;
-    border: 1px solid #eaebee;
-    padding: 4px;
     list-style: none;
+    box-sizing: border-box;
 
     position: absolute;
     top: calc(100% + 4px);
 
-    max-height: 100px;
-    overflow: auto;
-
-    width: 90px;
-
     li {
       padding: 4px 0;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      margin: -1px;
+      position: relative;
+      width: calc(100% + 2px);
+      box-sizing: border-box;
+      padding: 14px 12px;
+
+      text-align: center;
+      z-index: 1;
+
+      &:hover,
+      &.${SELECTED_CLASS_NAME} {
+        text-decoration: none;
+        border-color: #d93c31;
+        background-color: #f5f5f5;
+      }
     }
 
-    .selected {
-      background: blue;
+    &:focus {
+      outline: none;
     }
   }
 
@@ -71,7 +114,7 @@ const Wrapper = styled.div`
  * ```
  */
 export const Listbox: React.FC<ListboxProps> = () => {
-  const [selectedValue, setSelectedValue] = React.useState<string>();
+  const [selectedValue, setSelectedValue] = React.useState<string>('entry-1');
 
   const entries = React.useMemo(
     () => [
@@ -80,16 +123,6 @@ export const Listbox: React.FC<ListboxProps> = () => {
       { id: 'entry-3', label: 'Entry 3' },
       { id: 'entry-4', label: 'Entry 4' },
       { id: 'entry-5', label: 'Entry 5' },
-      { id: 'entry-6', label: 'Entry 6' },
-      { id: 'entry-7', label: 'Entry 7' },
-      { id: 'entry-8', label: 'Entry 8' },
-      { id: 'entry-9', label: 'Entry 9' },
-      { id: 'entry-10', label: 'Entry 10' },
-      { id: 'entry-11', label: 'Entry 11' },
-      { id: 'entry-12', label: 'Entry 12' },
-      { id: 'entry-13', label: 'Entry 13' },
-      { id: 'entry-14', label: 'Entry 14' },
-      { id: 'entry-15', label: 'Entry 15' },
     ],
     []
   );
