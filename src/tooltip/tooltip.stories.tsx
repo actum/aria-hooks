@@ -1,37 +1,8 @@
 import React, { useState } from 'react';
 import { useAriaToolTip, ToolTipProps } from '.';
 
-import styled from 'styled-components';
-
 import Button from '../components/Button';
-
-const StyledTooltip = styled.div`
-  display: initial;
-  width: max-content;
-  padding: 11px 15px;
-  border-radius: 6px;
-  background: black;
-  color: white;
-  position: absolute;
-  left: 110%;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    transform: translateY(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent;
-    border-right-color: black;
-  }
-`;
-
-const TooltipContainer = styled.div`
-  width: max-content;
-  position: relative;
-`;
+import { StyledTooltip, TooltipContainer } from './tooltip.styles';
 
 export const Tooltip: React.FC<ToolTipProps> = () => {
   const [isShowing, setIsShowing] = useState(false);
