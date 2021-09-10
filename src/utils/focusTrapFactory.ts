@@ -1,25 +1,25 @@
 // https://github.com/focus-trap/focus-trap
 // useful for modals, drawers, dialogs, etc.
 
-import { createFocusTrap, FocusTrap as IFocusTrap } from "focus-trap";
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 
-const focussableElements =
+export const focussableElements =
   'button:not([disabled]), [href]:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export class FocusTrapFactory {
   private container: HTMLElement;
-  private focusTrap: IFocusTrap;
+  private focusTrap: FocusTrap;
 
   constructor(container: HTMLElement) {
     this.container = container;
   }
 
-  mount = () => {
-    const firstFocusableEl = this.container.querySelector(
+  mount = (container = this.container) => {
+    const firstFocusableEl = container.querySelector(
       focussableElements
     ) as HTMLElement;
 
-    this.focusTrap = createFocusTrap(this.container, {
+    this.focusTrap = createFocusTrap(container, {
       preventScroll: true,
       fallbackFocus: firstFocusableEl,
     });
