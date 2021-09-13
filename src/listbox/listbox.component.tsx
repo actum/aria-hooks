@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ListboxProps, useAriaListbox } from '.';
+import { ListboxProps, ListboxReturnProps, useAriaListbox } from '.';
 
 import { Wrapper } from './listbox.styles';
 
@@ -86,4 +86,16 @@ export const Listbox: React.FC<ListboxProps> = () => {
   );
 };
 
-export default { title: 'Aria Component/Listbox', component: Listbox };
+export const ListboxHookProps: React.FC<ListboxProps> = () => null;
+
+export const ListboxTriggerHookReturnProps: React.FC<
+  ListboxReturnProps['triggerProps']
+> = () => null;
+
+export const ListboxBoxHookReturnProps: React.FC<
+  ListboxReturnProps['listboxProps']
+> = () => null;
+
+export const ListboxEntryHookReturnProps: React.FC<
+  ReturnType<ListboxReturnProps['entryItemProps']>
+> = () => null;

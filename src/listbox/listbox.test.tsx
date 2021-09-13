@@ -2,7 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 import { ARIA_HIDDEN } from '../constants';
 import { SELECTED_CLASS_NAME } from './controller';
-import { Listbox } from './listbox.stories';
+import { Listbox } from './listbox.component';
 
 describe('Tests for useAriaListbox', () => {
   it('should render a triggering button for the listbox', () => {
