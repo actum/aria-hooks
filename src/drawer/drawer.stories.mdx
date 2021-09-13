@@ -1,6 +1,9 @@
-import { useAriaDrawer, useAriaDrawerReturn } from '.';
-import { Props, Meta, Story, Canvas } from '@storybook/addon-docs';
-import { Drawer } from './drawer.component';
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import {
+  Drawer,
+  DrawerHookProps,
+  DrawerHookReturnProps,
+} from './drawer.component';
 
 <Meta title="Aria Component/Drawer" />
 
@@ -14,11 +17,11 @@ import { Drawer } from './drawer.component';
 
 The `useAriaDrawer` hook expects the following parameters:
 
-<Props of={useAriaDrawer} sort="requiredFirst" />
+<ArgsTable of={DrawerHookProps} sort="requiredFirst" />
 
 The hook returns an object with the following values:
 
-<Props of={useAriaDrawerReturn} />
+<ArgsTable of={DrawerHookReturnProps} />
 
 ## Component
 
@@ -48,9 +51,6 @@ const Drawer = () => {
   );
 };
 ```
-
-This makes it extremely simple to include all required accessibility attributes to your HTML elements.
-However, there's still one part of the equation missing:
 
 ## Styles
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAriaDrawer, DrawerProps } from '.';
+import { useAriaDrawer, DrawerProps, DrawerReturnProps } from '.';
 import Button from '../components/Button';
 
 import { Backdrop } from '../shared_styled_components';
@@ -48,7 +48,5 @@ export const Drawer: React.FC<DrawerProps> = () => {
   );
 };
 
-export default {
-  title: 'Aria Component/Drawer',
-  component: Drawer,
-};
+export const DrawerHookProps: React.FC<DrawerProps> = () => null;
+export const DrawerHookReturnProps: React.FC<DrawerReturnProps> = () => null;

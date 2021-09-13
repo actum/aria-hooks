@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAriaModal, ModalProps } from '.';
+import { useAriaModal, ModalProps, ModalReturnProps } from '.';
 
 import { HiddenInfo, Backdrop } from '../shared_styled_components';
 import Button from '../components/Button';
@@ -11,7 +11,6 @@ export const Modal: React.FC<ModalProps> = () => {
   const { modalProps, closeButtonProps, descriptionSpanProps } = useAriaModal({
     isOpen: isModalOpen,
     onDismiss: () => setModalOpen(false),
-    description: 'A cool modal',
     id: 'modal-test-storybook',
   });
 
@@ -27,9 +26,7 @@ export const Modal: React.FC<ModalProps> = () => {
 
       <Backdrop hidden={!isModalOpen ? true : false}>
         <StyledModal {...modalProps}>
-          <HiddenInfo {...descriptionSpanProps}>
-            The description of the modal
-          </HiddenInfo>
+          <HiddenInfo {...descriptionSpanProps}>A cool modal.</HiddenInfo>
           <StyledContainer>
             <button {...closeButtonProps} className="icon_btn">
               <svg
@@ -49,7 +46,5 @@ export const Modal: React.FC<ModalProps> = () => {
   );
 };
 
-export default {
-  title: 'Aria Component/Modal',
-  component: Modal,
-};
+export const ModalHookProps: React.FC<ModalProps> = () => null;
+export const ModalHookReturnProps: React.FC<ModalReturnProps> = () => null;

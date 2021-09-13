@@ -1,0 +1,81 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Modal, ModalHookProps, ModalHookReturnProps } from './modal.component';
+
+<Meta title="Aria Component/Modal" />
+
+## Example
+
+<Canvas>
+  <Modal />
+</Canvas>
+
+## Setup
+
+The `useAriaModal` hook expects the following parameters:
+
+<ArgsTable of={ModalHookProps} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+<ArgsTable of={ModalHookReturnProps} />
+
+## Component
+
+In order to create a fully accessible implementation of a modal, your component should look like the following:
+
+```jsx
+import { useAriaModal } from '@actum/aria-hooks';
+
+const Modal = () => {
+  const [isOpen, setOpen] = React.useState(false);
+
+  const { modalProps, closeButtonProps, descriptionSpanProps } = useAriaModal({
+    isOpen,
+    onDismiss: () => setModalOpen(false),
+    description: 'A cool modal',
+    id: 'modal-test-storybook',
+  });
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Modal</button>
+
+      <div className={`backdrop ${isOpen ? '' : 'backdrop--hidden'}`}>
+        <div className="modal" {...modalProps}>
+          <h1 {...descriptionSpanProps}>Modal Title</h1>
+          <button {...closeButtonProps}>Close</button>
+        </div>
+      </div>
+    </>
+  );
+};
+```
+
+## Styles
+
+```css
+.backdrop {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0007;
+}
+
+.backdrop--hidden {
+  display: none;
+}
+
+.modal {
+  width: 50%;
+  heigth: 50%;
+
+  background: white;
+}
+```
