@@ -12,13 +12,15 @@
     "outDir": "./dist",
     "jsx": "react"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/drawer/drawer.component.tsx"],
   "exclude": [    
     "node_modules",
     "src/**/*.test.ts", 
     "src/**/*.test.tsx", 
     "src/**/*.stories.tsx",
     "src/shared_styled_components",
-     "src/**/*.styles.ts"
+    "src/**/*.styles.ts",
+    "src/**/*.component.tsx",
+    "src/components"
   ]
 }

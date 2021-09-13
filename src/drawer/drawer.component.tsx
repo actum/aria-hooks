@@ -13,13 +13,19 @@ export const Drawer: React.FC<DrawerProps> = () => {
       setDrawerOpen(false);
     },
     id: 'drawer',
+    closeLabel: 'Close',
   });
   return (
     <>
       <Button variation="primary" onClick={() => setDrawerOpen(true)}>
         Open Drawer
       </Button>
-      <Backdrop hidden={!isDrawerOpen ? true : false} {...drawerProps}>
+
+      <Backdrop
+        hidden={!isDrawerOpen ? true : false}
+        className="backdrop"
+        {...drawerProps}
+      >
         <StyledDrawer {...contentProps}>
           <div className="wrapper">
             <StyledContainer>

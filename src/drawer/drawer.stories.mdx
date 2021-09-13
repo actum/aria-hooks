@@ -1,0 +1,86 @@
+import { useAriaDrawer, useAriaDrawerReturn } from '.';
+import { Props, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Drawer } from './drawer.component';
+
+<Meta title="Aria Component/Drawer" />
+
+## Example
+
+<Canvas>
+  <Drawer />
+</Canvas>
+
+## Setup
+
+The `useAriaDrawer` hook expects the following parameters:
+
+<Props of={useAriaDrawer} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+<Props of={useAriaDrawerReturn} />
+
+## Component
+
+In order to create a fully accessible implementation of a drawer, your component should look like the following:
+
+```jsx
+import { useAriaDrawer } from '@actum/aria-hooks';
+
+const Drawer = () => {
+  const [isOpen, setOpen] = React.useState(false);
+  const { drawerProps, contentProps, closeButtonProps } = useAriaDrawer({
+    onDismiss: () => setOpen(false),
+    isOpen,
+    closeLabel: 'Close drawer',
+  });
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open Drawer</button>
+
+      <div className="drawer-backdrop" {...drawerProps}>
+        <div className="drawer" {...contentProps}>
+          <button {...closeButtonProps}>Close</button>
+        </div>
+      </div>
+    </>
+  );
+};
+```
+
+This makes it extremely simple to include all required accessibility attributes to your HTML elements.
+However, there's still one part of the equation missing:
+
+## Styles
+
+```css
+.drawer-backdrop {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0007;
+}
+
+.drawer-backdrop[aria-hidden='true'] {
+  display: none;
+}
+
+.drawer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  background: white;
+
+  width: 400px;
+}
+```

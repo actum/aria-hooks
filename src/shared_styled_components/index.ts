@@ -22,6 +22,11 @@ export const Backdrop = styled.div`
   align-items: center;
   justify-content: center;
   background: #0007;
+  z-index: 1000;
+
+  &[aria-hidden='true'] {
+    display: none;
+  }
 `;
 
 export const Btn = styled.button`
