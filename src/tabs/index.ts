@@ -3,13 +3,19 @@ import { TabsController } from './controller';
 
 export interface TabsProps {
   tablistLabel?: string;
-  id?: string;
+  tabsId?: string;
 }
 
-export const useAriaTabs = ({ tablistLabel, id }: TabsProps) => {
-  const getId = (prefix: 'tab' | 'tabpanel', id: string) => `${prefix}_${id}`;
+export const useAriaTabs = ({ tablistLabel, tabsId }: TabsProps) => {
+  const getId = (prefix: 'tab' | 'tabpanel' | 'tabs', id: string) => {
+    if (prefix === 'tabs') {
+      return id ? id : 'tabs_container';
+    } else {
+      return `${prefix}_${id}`;
+    }
+  };
 
-  const controller = useRef(new TabsController());
+  const controller = useRef(new TabsController(getId('tabs', tabsId)));
 
   const [isActive, setIsActive] = useState(false);
 
@@ -40,7 +46,7 @@ export const useAriaTabs = ({ tablistLabel, id }: TabsProps) => {
   const tabsProps = useMemo(
     () => ({
       ref: controller.current.setTabListRef,
-      id: id ? id : 'tabs',
+      id: getId('tabs', tabsId),
     }),
     []
   );

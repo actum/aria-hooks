@@ -1,7 +1,10 @@
 export class TabsController {
   private tabsRef: HTMLElement;
+  private tabsId: string;
 
-  constructor() {}
+  constructor(id: string) {
+    this.tabsId = id;
+  }
 
   setActivity = (
     isActive: boolean,
@@ -30,7 +33,7 @@ export class TabsController {
   };
 
   setTabListRef = (tabList: HTMLElement) => {
-    this.tabsRef = tabList;
+    this.tabsRef = tabList || document.querySelector(this.tabsId);
   };
 
   setStates = () => {
