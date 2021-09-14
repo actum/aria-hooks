@@ -13,10 +13,12 @@
     "jsx": "react"
   },
   "include": ["src/**/*.ts"],
-  "exclude": [
+  "exclude": [    
     "node_modules",
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx",
-    "src/**/*.styles.ts"
+    "src/**/*.test.ts", 
+    "src/**/*.test.tsx", 
+    "src/**/*.stories.tsx",
+    "src/shared_styled_components",
+     "src/**/*.styles.ts"
   ]
 }
