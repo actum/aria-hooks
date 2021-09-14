@@ -27,7 +27,7 @@ describe('Tests for useAriaDrawer', () => {
     const { getByText, container } = render(<Drawer {...({} as any)} />);
 
     const openButton = getByText('Open Drawer');
-    const closeButton = getByText('Close');
+    const closeButton = container.querySelector('.close_btn');
 
     fireEvent.click(openButton);
     fireEvent.click(closeButton);

@@ -19,11 +19,15 @@ export const Drawer: React.FC<DrawerProps> = () => {
       <Button variation="primary" onClick={() => setDrawerOpen(true)}>
         Open Drawer
       </Button>
-      <Backdrop hidden={!isDrawerOpen ? true : false} {...drawerProps}>
+      <Backdrop
+        hidden={!isDrawerOpen ? true : false}
+        {...drawerProps}
+        className="modal-backdrop"
+      >
         <StyledDrawer {...contentProps}>
           <div className="wrapper">
             <StyledContainer>
-              <button {...closeButtonProps} className="icon_btn">
+              <button {...closeButtonProps} className="icon_btn close_btn">
                 <svg
                   width="24px"
                   height="24px"
