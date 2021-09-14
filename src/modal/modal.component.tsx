@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalProps> = () => {
         Open Modal
       </Button>
 
-      <Backdrop hidden={!isModalOpen ? true : false}>
+      <Backdrop hidden={!isModalOpen ? true : false} className="modal-backdrop">
         <StyledModal {...modalProps}>
           <HiddenInfo {...descriptionSpanProps}>A cool modal.</HiddenInfo>
           <StyledContainer>

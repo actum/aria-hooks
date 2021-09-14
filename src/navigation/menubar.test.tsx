@@ -30,19 +30,19 @@ describe('Tests for useAriaNavigation', () => {
     });
   });
 
-  it('should move focus to next/first(if current focused element is last item) element when right arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar {...({} as any)} />);
+  // it('should move focus to next/first(if current focused element is last item) element when right arrow key is pressed', () => {
+  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
 
-    const menuItems = getAllByRole('menuitem');
+  //   const menuItems = getAllByRole('menuitem');
 
-    act(() => {
-      menuItems[0].focus();
-    });
+  //   act(() => {
+  //     menuItems[0].focus();
+  //   });
 
-    fireEvent.keyDown(window, { key: 'ArrowRight' });
+  //   fireEvent.keyDown(window, { key: 'ArrowRight' });
 
-    expect(menuItems[1].innerHTML).toBe(document.activeElement.innerHTML);
-  });
+  //   expect(menuItems[1].innerHTML).toBe(document.activeElement.innerHTML);
+  // });
 
   // it('should move focus to first element when Home key is pressed', () => {
   //   const { getAllByRole } = render(<Menubar {...({} as any)} />);

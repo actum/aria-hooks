@@ -11,14 +11,9 @@ const changeFocusToElement = function (
 
   const focussable = Array.from(
     baseElement.querySelectorAll('[role="option"]')
-  ).filter(
-    (element: HTMLElement) =>
-      element.offsetWidth > 0 ||
-      element.offsetHeight > 0 ||
-      element === document.activeElement
   );
 
-  let selectedElement;
+  let selectedElement: HTMLElement;
 
   if (element === 'first') {
     selectedElement = focussable.shift() as HTMLElement;
@@ -42,7 +37,13 @@ const changeFocusToElement = function (
   });
 
   selectedElement.classList.add(SELECTED_CLASS_NAME);
-  selectedElement.scrollIntoView?.();
+
+  if (
+    selectedElement.parentElement.scrollHeight !==
+    selectedElement.parentElement.clientHeight
+  ) {
+    selectedElement.scrollIntoView?.();
+  }
 };
 
 export class ListboxController {
