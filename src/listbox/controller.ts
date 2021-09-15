@@ -39,8 +39,10 @@ const changeFocusToElement = function (
   selectedElement.classList.add(SELECTED_CLASS_NAME);
 
   if (
-    selectedElement.parentElement.scrollHeight !==
-    selectedElement.parentElement.clientHeight
+    Math.abs(
+      selectedElement.parentElement.scrollHeight -
+        selectedElement.parentElement.clientHeight
+    ) > 5
   ) {
     selectedElement.scrollIntoView?.();
   }
@@ -83,7 +85,14 @@ export class ListboxController {
       this.contentElement.querySelector(`[${ARIA_SELECTED}="true"]`) ||
       this.contentElement.querySelector('[role="option"]');
 
-    selected?.scrollIntoView?.();
+    if (
+      Math.abs(
+        selected?.parentElement.scrollHeight -
+          selected?.parentElement.clientHeight
+      ) > 5
+    ) {
+      selected?.scrollIntoView?.();
+    }
     selected?.classList.add(SELECTED_CLASS_NAME);
   };
 

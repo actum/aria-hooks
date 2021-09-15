@@ -132,7 +132,7 @@ describe('Tests for useAriaListbox', () => {
   });
 
   it('should select value clicking entry', () => {
-    const { container } = render(<Listbox {...({} as any)} />);
+    const { container } = renderListbox();
 
     openListbox(container);
 

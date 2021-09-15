@@ -17,11 +17,37 @@ export interface NavigationProps {
   isSubmenuLink?: boolean;
 }
 
+export interface NavigationReturnProps {
+  itemProps: {
+    role: 'none';
+  };
+  menuItemProps: (
+    i: number,
+    hasSubmenu?: boolean
+  ) => {
+    role: 'menuitem';
+    tabIndex: number;
+    'aria-haspopup'?: boolean;
+    'aria-expanded'?: boolean;
+  };
+  menubarProps: {
+    id: string;
+    role: 'menubar';
+    'aria-label': string;
+    ref: (element: HTMLElement) => void;
+  };
+  submenuProps: (label: string) => {
+    role: 'menu';
+    'aria-label': string;
+    style: { display: 'none' };
+  };
+}
+
 export const useAriaNavigation = ({
   menubarLabel,
   id,
   isSubmenuLink,
-}: NavigationProps) => {
+}: NavigationProps): NavigationReturnProps => {
   const controller = useRef(new NavigationContoller(id, isSubmenuLink));
   const [isActive, setIsActive] = useState(false);
 
@@ -45,21 +71,23 @@ export const useAriaNavigation = ({
   }, [isActive]);
 
   const menubarProps = useMemo(
-    () => ({
-      id,
-      role: 'menubar',
-      'aria-label': menubarLabel || 'Main menubar',
-      ref: controller.current.setMenuRef,
-    }),
+    () =>
+      ({
+        id,
+        role: 'menubar',
+        'aria-label': menubarLabel || 'Main menubar',
+        ref: controller.current.setMenuRef,
+      } as NavigationReturnProps['menubarProps']),
     [menubarLabel, id]
   );
 
   const submenuProps = useCallback(
-    (label: string) => ({
-      role: 'menu',
-      'aria-label': label,
-      style: { display: 'none' },
-    }),
+    (label: string) =>
+      ({
+        role: 'menu',
+        'aria-label': label,
+        style: { display: 'none' },
+      } as ReturnType<NavigationReturnProps['submenuProps']>),
     []
   );
 
@@ -72,13 +100,14 @@ export const useAriaNavigation = ({
       ...(hasSubmenu
         ? { 'aria-haspopup': hasSubmenu, [ARIA_EXPANDED]: false }
         : {}),
-    };
+    } as ReturnType<NavigationReturnProps['menuItemProps']>;
   }, []);
 
   const itemProps = useMemo(
-    () => ({
-      role: 'none',
-    }),
+    () =>
+      ({
+        role: 'none',
+      } as NavigationReturnProps['itemProps']),
     []
   );
 

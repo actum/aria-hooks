@@ -1,5 +1,3 @@
-import { KeyboardEvent } from 'react';
-
 export class NavigationContoller {
   private menuRef: HTMLElement;
   private id: string;
@@ -31,14 +29,6 @@ export class NavigationContoller {
     } else {
       setIsActive(false);
     }
-  };
-
-  onActive = () => {
-    window.addEventListener('keydown', this.handleKeyPress as any);
-  };
-
-  onInactive = () => {
-    window.removeEventListener('keydown', this.handleKeyPress as any);
   };
 
   setMainMenuIndex = (idx: number) => {
@@ -117,7 +107,11 @@ export class NavigationContoller {
     });
   };
 
-  getSubmenuStates = (currentElement: HTMLElement) => {
+  getSubmenuStates = (
+    el: HTMLElement = document.activeElement as HTMLElement
+  ) => {
+    const currentElement = 'innerHTML' in el ? el : document.activeElement;
+
     const parentLi = currentElement.parentElement as HTMLElement;
     const parentMenu = parentLi.parentElement as HTMLElement;
 
@@ -147,23 +141,26 @@ export class NavigationContoller {
     };
   };
 
-  handleKeyPress = (e: KeyboardEvent) => {
+  handleKeyDown = (e: KeyboardEvent) => {
     const { hasSubmenu, isSubmenu, submenu, items, isSubmenuVisible } =
       this.getSubmenuStates(e.target as HTMLElement);
 
     switch (e.key) {
       case 'ArrowRight': {
+        e.preventDefault();
         this.changeFocusToItem('next');
         this.hideSubmenus();
 
         break;
       }
       case 'ArrowLeft': {
+        e.preventDefault();
         this.changeFocusToItem('prev');
         this.hideSubmenus();
         break;
       }
       case 'Home': {
+        e.preventDefault();
         if (isSubmenu) {
           this.changeFocusToItem('first', items);
         } else {
@@ -173,6 +170,7 @@ export class NavigationContoller {
         break;
       }
       case 'End': {
+        e.preventDefault();
         if (isSubmenu) {
           this.changeFocusToItem('last', items);
         } else {
@@ -183,6 +181,7 @@ export class NavigationContoller {
         break;
       }
       case 'ArrowDown': {
+        e.preventDefault();
         if (hasSubmenu || isSubmenu) {
           if (isSubmenuVisible) {
             this.changeFocusToItem('next', items);
@@ -195,6 +194,7 @@ export class NavigationContoller {
         break;
       }
       case 'ArrowUp': {
+        e.preventDefault();
         if (isSubmenu) {
           if (isSubmenuVisible) {
             this.changeFocusToItem('next', items);
@@ -207,6 +207,7 @@ export class NavigationContoller {
         break;
       }
       case 'Escape': {
+        e.preventDefault();
         this.changeFocusToItem();
         this.hideSubmenus();
 
@@ -226,5 +227,13 @@ export class NavigationContoller {
         break;
       }
     }
+  };
+
+  onActive = () => {
+    window.addEventListener('keydown', this.handleKeyDown);
+  };
+
+  onInactive = () => {
+    window.addEventListener('keydown', this.handleKeyDown);
   };
 }
