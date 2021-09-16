@@ -20,7 +20,7 @@ export interface ModalProps {
   /**
    * Callback for closing
    */
-  onDismiss: () => void;
+  onClose: () => void;
 }
 
 export interface ModalReturnProps {
@@ -38,7 +38,7 @@ export interface ModalReturnProps {
     'aria-label': string;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   };
-  descriptionSpanProps: {
+  descriptionTextProps: {
     id: string;
   };
 }

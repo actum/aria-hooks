@@ -55,7 +55,7 @@ export const useAriaDrawer = ({
 
   const closeButtonProps = useMemo(
     () => ({
-      'aria-label': closeLabel || 'Close drawer',
+      'aria-label': closeLabel,
       onClick: () => controller.current.onClose(),
     }),
     [closeLabel]

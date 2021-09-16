@@ -4,7 +4,6 @@ import { PrimaryBtn, SecondaryBtn, UniqueBtn } from '../sharedComponents';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variation: 'primary' | 'secondary' | 'unique';
-  // children?: string;
 }
 
 const Button: React.FC<Props> = ({ variation, children, ...rest }) => {
