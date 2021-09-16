@@ -1,25 +1,7 @@
 import { useRef, useMemo, useEffect, useState, CSSProperties } from 'react';
 import { ARIA_DESCRIBEDBY, ARIA_EXPANDED } from '../constants';
 import { ToolTipController } from './controller';
-
-export interface ToolTipProps {
-  /**
-   * Unique ID for the Tooltip
-   */
-  id: string;
-  /**
-   * Callback for closing tooltip
-   */
-  onDismiss?: () => void;
-  /**
-   * Whether or not Tooltip is visible
-   */
-  isShowing?: boolean;
-  /**
-   * Callback for opening tooltip
-   */
-  onRelease?: () => void;
-}
+import { ToolTipProps } from './types';
 
 export const useAriaToolTip = ({
   id,

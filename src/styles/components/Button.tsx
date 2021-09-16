@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  PrimaryBtn,
-  SecondaryBtn,
-  UniqueBtn,
-} from '../shared_styled_components';
+import { PrimaryBtn, SecondaryBtn, UniqueBtn } from '../sharedComponents';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variation: 'primary' | 'secondary' | 'unique';

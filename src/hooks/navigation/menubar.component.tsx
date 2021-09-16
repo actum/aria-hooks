@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAriaNavigation, NavigationProps, NavigationReturnProps } from '.';
-
+import { useAriaNavigation } from '.';
+import { NavigationProps, NavigationReturnProps } from './types';
 import { StyledMenu, StyledNav, StyledSubmenu } from './menubar.styles';
 
 export const Menubar: React.FC = () => {

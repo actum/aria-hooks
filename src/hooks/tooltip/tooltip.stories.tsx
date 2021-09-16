@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useAriaToolTip, ToolTipProps } from '.';
-
-import Button from '../components/Button';
+import { useAriaToolTip } from '.';
+import { ToolTipProps } from './types';
+import Button from '../../styles/components/Button';
 import { StyledTooltip, TooltipContainer } from './tooltip.styles';
 
 export const Tooltip: React.FC<ToolTipProps> = () => {

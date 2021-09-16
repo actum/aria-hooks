@@ -1,5 +1,5 @@
 import React from 'react';
-import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../constants';
+import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../../constants';
 
 export const SELECTED_CLASS_NAME = 'selected';
 

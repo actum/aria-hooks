@@ -1,7 +1,6 @@
 import * as React from 'react';
-
-import { ListboxProps, ListboxReturnProps, useAriaListbox } from '.';
-
+import { useAriaListbox } from '.';
+import { ListboxProps, ListboxReturnProps } from './types';
 import { Wrapper } from './listbox.styles';
 
 export const Listbox: React.FC = () => {

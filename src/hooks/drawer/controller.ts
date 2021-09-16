@@ -1,4 +1,4 @@
-import { FocusTrapFactory } from "../utils/focusTrapFactory";
+import { FocusTrapFactory } from '../../utils/focusTrapFactory';
 
 export class DrawerController {
   id: string;
@@ -25,9 +25,9 @@ export class DrawerController {
 
     this.focusTrap.mount();
 
-    window.addEventListener("keydown", this.handleKeyDown);
-    window.addEventListener("touchstart", this.handleClick);
-    window.addEventListener("mousedown", this.handleClick);
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('touchstart', this.handleClick);
+    window.addEventListener('mousedown', this.handleClick);
 
     this.isOpen = true;
   };
@@ -39,9 +39,9 @@ export class DrawerController {
 
     this.focusTrap.destroy();
 
-    window.removeEventListener("keydown", this.handleKeyDown);
-    window.removeEventListener("touchstart", this.handleClick);
-    window.removeEventListener("mousedown", this.handleClick);
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('touchstart', this.handleClick);
+    window.removeEventListener('mousedown', this.handleClick);
 
     this.isOpen = false;
 
@@ -49,7 +49,7 @@ export class DrawerController {
   };
 
   handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       this.onClose();
     }
   };

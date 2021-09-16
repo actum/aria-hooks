@@ -1,4 +1,4 @@
-import { FocusTrapFactory } from "../utils/focusTrapFactory";
+import { FocusTrapFactory } from '../../utils/focusTrapFactory';
 
 export class ModalController {
   private focusTrap: FocusTrapFactory;
@@ -26,9 +26,9 @@ export class ModalController {
       this.focusTrap.mount();
     }
 
-    window.addEventListener("keydown", this.handleKeyPress);
-    window.addEventListener("touchstart", this.handleClick);
-    window.addEventListener("mousedown", this.handleClick);
+    window.addEventListener('keydown', this.handleKeyPress);
+    window.addEventListener('touchstart', this.handleClick);
+    window.addEventListener('mousedown', this.handleClick);
 
     this.isOpen = true;
   };
@@ -40,9 +40,9 @@ export class ModalController {
 
     this.focusTrap?.destroy();
 
-    window.removeEventListener("keydown", this.handleKeyPress);
-    window.removeEventListener("touchstart", this.handleClick);
-    window.removeEventListener("mousedown", this.handleClick);
+    window.removeEventListener('keydown', this.handleKeyPress);
+    window.removeEventListener('touchstart', this.handleClick);
+    window.removeEventListener('mousedown', this.handleClick);
 
     this.onDismiss?.();
 
@@ -50,7 +50,7 @@ export class ModalController {
   };
 
   handleKeyPress = (ev: KeyboardEvent) => {
-    if (ev.key === "Escape") {
+    if (ev.key === 'Escape') {
       ev.stopPropagation();
       this.onClose();
     }

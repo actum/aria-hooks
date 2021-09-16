@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useAriaModal, ModalProps, ModalReturnProps } from '.';
-
-import { HiddenInfo, Backdrop } from '../shared_styled_components';
-import Button from '../components/Button';
+import { useAriaModal } from '.';
+import { ModalProps, ModalReturnProps } from './types';
+import { HiddenInfo, Backdrop } from '../../styles/sharedComponents';
+import Button from '../../styles/components/Button';
 import { StyledContainer, StyledModal } from './modal.styles';
 
 export const Modal: React.FC<ModalProps> = () => {

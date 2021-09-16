@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAriaDrawer, DrawerProps, DrawerReturnProps } from '.';
-import Button from '../components/Button';
-
-import { Backdrop } from '../shared_styled_components';
+import { useAriaDrawer } from '.';
+import { DrawerProps, DrawerReturnProps } from './types';
+import Button from '../../styles/components/Button';
+import { Backdrop } from '../../styles/sharedComponents';
 import { StyledContainer, StyledDrawer } from './drawer.styles';
 
 export const Drawer: React.FC<DrawerProps> = () => {
