@@ -1,162 +1,69 @@
 import * as React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
-import { Menubar } from './menubar.stories';
+import { Accordion } from './accordion.stories';
 
-describe('Tests for useAriaNavigation', () => {
-  it('should render menu with items', () => {
-    const { getAllByRole, getByRole } = render(<Menubar {...({} as any)} />);
+describe('Tests for useAriaAccordion', () => {
+  it('should render Accordion with items', () => {
+    const { container } = render(<Accordion {...({} as any)} />);
 
-    const menu = getByRole('menubar');
-    const menuItems = getAllByRole('menuitem');
+    const panels = container.querySelectorAll('.acc_panel');
+    const buttons = container.querySelectorAll('.acc_btn');
 
-    expect(menu).toBeInTheDocument();
-
-    menuItems.forEach((item) => {
+    panels.forEach((item) => {
+      expect(item).toBeInTheDocument();
+    });
+    buttons.forEach((item) => {
       expect(item).toBeInTheDocument();
     });
   });
 
-  it('should exclude every menubar link from tab sequence, except first one', () => {
-    const { getAllByRole } = render(<Menubar {...({} as any)} />);
+  it('should toggle panel visibility when associated button is clicked', () => {
+    const { container } = render(<Accordion {...({} as any)} />);
 
-    const menuItems = getAllByRole('menuitem');
+    const panel = container.querySelectorAll('.acc_panel')[0] as HTMLDivElement;
+    const panelButton = container.querySelector(
+      `#${panel.getAttribute('aria-labelledby')}`
+    );
 
-    menuItems.forEach((link, idx) => {
-      if (idx === 0) {
-        expect(link.tabIndex).toBe(0);
-      } else {
-        expect(link.tabIndex).toBe(-1);
-      }
-    });
+    const display = panel.style.display;
+
+    if (display === 'none') {
+      fireEvent.click(panelButton);
+      expect(display).not.toBe('none');
+    } else {
+      fireEvent.click(panelButton);
+      expect(display).toBe('none');
+    }
   });
 
-  it('should move focus to next/first(if current focused element is last item) element when right arrow key is pressed', () => {
-    const { getAllByRole } = render(<Menubar {...({} as any)} />);
+  it('should move focus to next/first(if current focused element is last item) element when down arrow key is pressed ', () => {
+    const { container } = render(<Accordion {...({} as any)} />);
 
-    const menuItems = getAllByRole('menuitem');
+    const panelButtons = Array.from(
+      container.querySelectorAll('.acc_btn')
+    ) as HTMLButtonElement[];
 
     act(() => {
-      menuItems[0].focus();
+      panelButtons[0].focus();
     });
 
-    fireEvent.keyDown(window, { key: 'ArrowRight' });
+    fireEvent.keyDown(window, { key: 'ArrowDown' });
 
-    expect(menuItems[1].innerHTML).toBe(document.activeElement.innerHTML);
+    expect(panelButtons[1]).toBe(document.activeElement);
   });
+  it('should move focus to previous/last(if current focused element is first item) element when up arrow key is pressed ', () => {
+    const { container } = render(<Accordion {...({} as any)} />);
 
-  // it('should move focus to first element when Home key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
+    const panelButtons = Array.from(
+      container.querySelectorAll('.acc_btn')
+    ) as HTMLButtonElement[];
 
-  //   const menuItems = getAllByRole('menuitem');
+    act(() => {
+      panelButtons[0].focus();
+    });
 
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
+    fireEvent.keyDown(window, { key: 'ArrowUp' });
 
-  //   fireEvent.keyDown(window, { key: 'ArrowLeft' });
-  //   fireEvent.keyDown(window, { key: 'Home' });
-
-  //   expect(menuItems[0]).toEqual(document.activeElement);
-  // });
-
-  // it('should move focus to last element when End key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'End' });
-
-  //   expect(menuItems[menuItems.length - 1]).toEqual(document.activeElement);
-  // });
-
-  // it('should move focus to previous/last(if current focused element is first item) element when left arrow key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'ArrowLeft' });
-
-  //   expect(menuItems[menuItems.length - 1]).toEqual(document.activeElement);
-  // });
-
-  // it('should change tabIndex of focused element to 0 and previous focused element to -1 when right arrow key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'ArrowRight' });
-
-  //   expect(menuItems[0].tabIndex).toBe(-1);
-  //   expect(menuItems[1].tabIndex).toBe(0);
-  // });
-
-  // it('should change tabIndex of focused element to 0 and next focusable element to -1 when left arrow key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'ArrowLeft' });
-
-  //   expect(menuItems[0].tabIndex).toBe(-1);
-  //   expect(menuItems[menuItems.length - 1].tabIndex).toBe(0);
-  // });
-  // it('should change tabIndex of first focusable element to 0 and previous focused element to -1 when Home key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'ArrowLeft' });
-  //   fireEvent.keyDown(window, { key: 'Home' });
-
-  //   expect(menuItems[0].tabIndex).toBe(0);
-  //   expect(menuItems[menuItems.length - 1].tabIndex).toBe(-1);
-  // });
-  // it('should change tabIndex of last focusable element to 0 and previous focused element to -1 when End key is pressed', () => {
-  //   const { getAllByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const menuItems = getAllByRole('menuitem');
-
-  //   act(() => {
-  //     menuItems[0].focus();
-  //   });
-
-  //   fireEvent.keyDown(window, { key: 'End' });
-
-  //   expect(menuItems[menuItems.length - 1].tabIndex).toBe(0);
-  //   expect(menuItems[1].tabIndex).toBe(-1);
-  // });
-  // it('should open submenu when down arrow key is pressed', () => {
-  //   const { getByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const submenu = getByRole('menu');
-
-  //   expect(submenu.style.display).toBe('none');
-  // });
-  // it('should open submenu when down arrow key is pressed', () => {
-  //   const { getByRole } = render(<Menubar {...({} as any)} />);
-
-  //   const submenu = getByRole('menu');
-
-  //   // expect(submenu);
-  // });
+    expect(panelButtons[panelButtons.length - 1]).toBe(document.activeElement);
+  });
 });

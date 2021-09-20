@@ -1,4 +1,4 @@
-export class NavigationContoller {
+export class AccordionController {
   private accordionRef: HTMLElement;
   private id: string;
 
@@ -6,12 +6,39 @@ export class NavigationContoller {
     this.id = id;
   }
 
+  setActivity = (
+    isActive: boolean,
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    const accordion = this.accordionRef || document.querySelector(this.id);
+    const items = Array.from(
+      accordion.querySelectorAll('.acc_btn')
+    ) as HTMLElement[];
+
+    if (
+      items.includes(document.activeElement as HTMLAnchorElement) &&
+      !isActive
+    ) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  };
+
+  onActive = () => {
+    window.addEventListener('keydown', this.handleKeyPress as any);
+  };
+
+  onInactive = () => {
+    window.removeEventListener('keydown', this.handleKeyPress as any);
+  };
+
   setAccRef = (accordion: HTMLElement) => {
     this.accordionRef = accordion;
   };
 
   getFocusedIndex = () => {
-    if (this.accordionRef === undefined) return -1;
+    if (!this.accordionRef) return -1;
 
     const items = Array.from(
       this.accordionRef.querySelectorAll('.acc_btn')
@@ -23,8 +50,9 @@ export class NavigationContoller {
   };
 
   changeFocusToItem = (item?: 'next' | 'prev' | 'first' | 'last') => {
+    const accordion = this.accordionRef || document.querySelector(this.id);
     const items = Array.from(
-      this.accordionRef.querySelectorAll('.acc_btn')
+      accordion.querySelectorAll('.acc_btn')
     ) as HTMLElement[];
 
     let index = this.getFocusedIndex();
@@ -43,9 +71,10 @@ export class NavigationContoller {
   };
 
   handleVisibilityChange = (e: MouseEvent) => {
+    const accordion = this.accordionRef || document.querySelector(this.id);
     const accBtn = e.target as HTMLElement;
     const accBtns = Array.from(
-      this.accordionRef.querySelectorAll('.acc_btn')
+      accordion.querySelectorAll('.acc_btn')
     ) as HTMLElement[];
 
     if (accBtns.includes(accBtn)) {
@@ -64,7 +93,7 @@ export class NavigationContoller {
     }
   };
 
-  handleKeyDown = (e: KeyboardEvent) => {
+  handleKeyPress = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowDown': {
         this.changeFocusToItem('next');

@@ -13,7 +13,10 @@ export const Accordion: React.FC<AccordionProps> = () => {
     <Container {...accordionProps}>
       {items.map((item, idx) => (
         <React.Fragment key={item.id}>
-          <StyledBtn {...buttonProps(item.id, item.isOpen)}>
+          <StyledBtn
+            className="acc_button"
+            {...buttonProps(item.id, item.isOpen)}
+          >
             {item.title}
             <svg
               width="20px"
