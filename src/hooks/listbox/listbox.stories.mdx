@@ -1,0 +1,122 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import {
+  Listbox,
+  ListboxHookProps,
+  ListboxTriggerHookReturnProps,
+  ListboxBoxHookReturnProps,
+  ListboxEntryHookReturnProps,
+} from './listbox.component';
+
+<Meta title="Aria Component/Listbox" />
+
+## Example
+
+<Canvas>
+  <Listbox />
+</Canvas>
+
+## Setup
+
+The `useAriaListbox` hook expects the following parameters:
+
+<ArgsTable of={ListboxHookProps} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+### triggerProps
+
+<ArgsTable of={ListboxTriggerHookReturnProps} />
+
+### listboxProps
+
+<ArgsTable of={ListboxBoxHookReturnProps} />
+
+### entryItemProps
+
+The `entryItemProps` value is a function that expects a unique ID as a parameter. The function, then, returns an object with the following values:
+
+<ArgsTable of={ListboxEntryHookReturnProps} />
+
+## Component
+
+In order to create a fully accessible implementation of a drawer, your component should look like the following:
+
+```jsx
+import { useAriaListbox } from '@actum/aria-hooks';
+
+const Listbox: React.FC<ListboxProps> = () => {
+  const [selectedValue, setSelectedValue] = React.useState < string > 'entry-1';
+
+  const entries = React.useMemo(
+    () => [
+      { id: 'entry-1', label: 'Entry 1' },
+      { id: 'entry-2', label: 'Entry 2' },
+      { id: 'entry-3', label: 'Entry 3' },
+      { id: 'entry-4', label: 'Entry 4' },
+      { id: 'entry-5', label: 'Entry 5' },
+    ],
+    []
+  );
+
+  const { triggerProps, listboxProps, entryItemProps } = useAriaListbox({
+    id: 'listbox-component',
+    selectedValue,
+    triggerLabel: 'Open listbox',
+    closeOnSelect: true,
+    onSelect: setSelectedValue,
+  });
+
+  return (
+    <div>
+      <div style={{ position: 'relative' }}>
+        <button
+          {...triggerProps}
+          onClick={(e) => {
+            e.stopPropagation();
+            triggerProps.onClick(e);
+          }}
+        >
+          {entries.find((e) => e.id === selectedValue)?.label ||
+            'Select option'}
+        </button>
+
+        <ul className="listbox" {...listboxProps}>
+          {entries.map((entry) => (
+            <li key={entry.id} {...entryItemProps(entry.id)}>
+              {entry.label}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+```
+
+## Styles
+
+```css
+.listbox {
+  margin: 0;
+  background-color: white;
+  border: 1px solid #eaebee;
+  padding: 4px;
+  list-style: none;
+
+  position: absolute;
+  top: calc(100% + 4px);
+
+  max-height: 100px;
+  overflow: auto;
+
+  width: 90px;
+}
+
+.listbox[aria-hidden='true'] {
+  display: none;
+}
+
+.selected {
+  background: blue;
+}
+```
