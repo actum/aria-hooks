@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { ARIA_HIDDEN } from '../constants';
+import { ARIA_HIDDEN } from '../../constants';
 import { DrawerController } from './controller';
 
 export interface DrawerProps {

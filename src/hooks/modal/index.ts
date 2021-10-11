@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { ARIA_HIDDEN } from '../constants';
+import { ARIA_HIDDEN } from '../../constants';
 import { ModalController } from './controller';
 
 export interface ModalProps {

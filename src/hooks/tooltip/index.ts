@@ -1,5 +1,5 @@
-import { useRef, useMemo, useEffect, useState, CSSProperties } from 'react';
-import { ARIA_DESCRIBEDBY, ARIA_EXPANDED } from '../constants';
+import { useRef, useMemo, useEffect, CSSProperties } from 'react';
+import { ARIA_DESCRIBEDBY, ARIA_EXPANDED } from '../../constants';
 import { ToolTipController } from './controller';
 import { ToolTipProps } from './types';
 

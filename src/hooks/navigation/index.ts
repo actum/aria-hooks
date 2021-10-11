@@ -1,5 +1,5 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from 'react';
-import { ARIA_EXPANDED } from '../constants';
+import { ARIA_EXPANDED } from '../../constants';
 import { NavigationContoller } from './controller';
 import { NavigationProps, NavigationReturnProps } from './types';
 

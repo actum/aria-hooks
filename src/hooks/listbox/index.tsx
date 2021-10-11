@@ -1,5 +1,5 @@
 import { HTMLProps, useCallback, useMemo, useRef } from 'react';
-import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../constants';
+import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../../constants';
 import { ListboxController } from './controller';
 
 export interface ListboxProps {

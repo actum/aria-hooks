@@ -1,4 +1,4 @@
-import { ARIA_EXPANDED } from '../constants';
+import { ARIA_EXPANDED } from '../../constants';
 
 export class ToolTipController {
   private id: string;
