@@ -1,4 +1,5 @@
 import { useRef, useMemo, useEffect, useState, CSSProperties } from 'react';
+import { ARIA_DESCRIBEDBY, ARIA_EXPANDED } from '../constants';
 import { ToolTipController } from './controller';
 
 export interface ToolTipProps {
@@ -38,8 +39,8 @@ export const useAriaToolTip = ({
       ref: controller.current.setBtnRef,
       role: 'button',
       tabIndex: 0,
-      'aria-expanded': isShowing ? true : false,
-      'aria-describedby': controller.current.getTooltipId(),
+      [ARIA_EXPANDED]: isShowing ? true : false,
+      [ARIA_DESCRIBEDBY]: controller.current.getTooltipId(),
     }),
     [id]
   );

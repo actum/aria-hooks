@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
+import { ARIA_HIDDEN } from '../constants';
 import { DrawerController } from './controller';
 
 export interface DrawerProps {
@@ -39,7 +40,7 @@ export const useAriaDrawer = ({
 
   const drawerProps = useMemo(
     () => ({
-      'aria-hidden': !isOpen,
+      [ARIA_HIDDEN]: !isOpen,
       ref: controller.current.setWrapperRef,
     }),
     [isOpen]

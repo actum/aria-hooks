@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Drawer } from './drawer.stories';
+import { ARIA_HIDDEN } from '../constants';
 
 describe('Tests for useAriaDrawer', () => {
   it('should render a button to open drawer', () => {
@@ -14,12 +15,14 @@ describe('Tests for useAriaDrawer', () => {
 
     const button = getByText('Open Drawer');
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
 
     fireEvent.click(button);
 
     expect(
-      container.querySelector('[aria-hidden="false"]')
+      container.querySelector(`[${ARIA_HIDDEN}="false"]`)
     ).toBeInTheDocument();
   });
 
@@ -32,7 +35,9 @@ describe('Tests for useAriaDrawer', () => {
     fireEvent.click(openButton);
     fireEvent.click(closeButton);
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
   });
 
   it('should close the drawer when clicking outside it', () => {
@@ -45,7 +50,9 @@ describe('Tests for useAriaDrawer', () => {
     // click outside drawer
     fireEvent.click(container.querySelector('.modal-backdrop'));
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
   });
 
   it('should close the drawer when pressing escape key', () => {
@@ -56,6 +63,8 @@ describe('Tests for useAriaDrawer', () => {
     fireEvent.click(openButton);
     fireEvent.keyDown(window, { key: 'Escape' });
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
   });
 });

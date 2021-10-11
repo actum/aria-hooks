@@ -1,4 +1,5 @@
 import { HTMLProps, useCallback, useMemo, useRef } from 'react';
+import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../constants';
 import { ListboxController } from './controller';
 
 export interface ListboxProps {
@@ -55,7 +56,7 @@ export const useAriaListbox = ({
       'aria-label': triggerLabel,
       'aria-haspopup':
         'listbox' as HTMLProps<HTMLButtonElement>['aria-haspopup'],
-      'aria-expanded':
+      [ARIA_EXPANDED]:
         typeof isOpen === 'boolean' ? isOpen : controller.current.getOpen(),
       ref: controller.current.setTriggerElement,
       onClick: (e) => {
@@ -71,7 +72,7 @@ export const useAriaListbox = ({
     () => ({
       ref: controller.current.setContentElement,
       onClick: (e) => e.stopPropagation(),
-      'aria-hidden': 'true' as HTMLProps<HTMLUListElement>['aria-hidden'],
+      [ARIA_HIDDEN]: 'true' as HTMLProps<HTMLUListElement>['aria-hidden'],
       role: 'listbox',
       'aria-activedescendant': selectedValue,
       tabIndex: -1,
@@ -92,7 +93,7 @@ export const useAriaListbox = ({
     (id: string) => ({
       id,
       role: 'option',
-      'aria-selected': id === selectedValue,
+      [ARIA_SELECTED]: id === selectedValue,
       onClick: () => {
         onSelect?.(id);
         controller.current.select(id);

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Modal } from './modal.stories';
+import { ARIA_HIDDEN } from '../constants';
 
 describe('Tests for useAriaModal', () => {
   it('should render a button to open modal', () => {
@@ -14,12 +15,14 @@ describe('Tests for useAriaModal', () => {
 
     const button = getByText('Open Modal');
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
 
     fireEvent.click(button);
 
     expect(
-      container.querySelector('[aria-hidden="false"]')
+      container.querySelector(`[${ARIA_HIDDEN}="false"]`)
     ).toBeInTheDocument();
   });
 
@@ -31,7 +34,9 @@ describe('Tests for useAriaModal', () => {
     fireEvent.click(button);
     fireEvent.keyDown(window, { key: 'Escape' });
 
-    expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(
+      container.querySelector(`[${ARIA_HIDDEN}="true"]`)
+    ).toBeInTheDocument();
   });
 
   it('should close the modal when clicking outside modal', () => {
@@ -45,7 +50,7 @@ describe('Tests for useAriaModal', () => {
     fireEvent.click(container.querySelector('.modal-backdrop'));
 
     expect(
-      container.querySelector('[aria-hidden="false"]')
+      container.querySelector(`[${ARIA_HIDDEN}="false"]`)
     ).toBeInTheDocument();
   });
 });

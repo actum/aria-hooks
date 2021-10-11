@@ -1,4 +1,5 @@
 import { useRef, useMemo, useEffect, useState, useCallback } from 'react';
+import { ARIA_EXPANDED } from '../constants';
 import { NavigationContoller } from './controller';
 
 export interface NavigationProps {
@@ -69,7 +70,7 @@ export const useAriaNavigation = ({
       tabIndex:
         focusedIndex === -1 && i === 0 ? 0 : focusedIndex === i ? 0 : -1,
       ...(hasSubmenu
-        ? { 'aria-haspopup': hasSubmenu, 'aria-expanded': false }
+        ? { 'aria-haspopup': hasSubmenu, [ARIA_EXPANDED]: false }
         : {}),
     };
   }, []);

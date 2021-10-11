@@ -1,3 +1,5 @@
+import { ARIA_EXPANDED } from '../constants';
+
 export class ToolTipController {
   private id: string;
   private buttonRef: HTMLButtonElement;
@@ -37,7 +39,7 @@ export class ToolTipController {
     const tooltip =
       this.tooltipRef || document.getElementById(this.getTooltipId());
 
-    button.setAttribute('aria-expanded', 'true');
+    button.setAttribute(ARIA_EXPANDED, 'true');
     tooltip.style.visibility = 'visible';
 
     window.addEventListener('keydown', this.handleKeyDown);
@@ -48,7 +50,7 @@ export class ToolTipController {
     const tooltip =
       this.tooltipRef || document.getElementById(this.getTooltipId());
 
-    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute(ARIA_EXPANDED, 'false');
     tooltip.style.visibility = 'hidden';
 
     window.removeEventListener('keydown', this.handleKeyDown);
