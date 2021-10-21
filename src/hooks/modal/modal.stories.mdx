@@ -24,14 +24,14 @@ The hook returns an object with the following values:
 In order to create a fully accessible implementation of a modal using `@actum/aria-hooks`, your component should look like the following:
 
 ```jsx
-import { useAriaModal } from '@actum/aria-hooks';
+import { useAriaModal } from '@actum-digital/aria-hooks';
 
 const Modal = () => {
   const [isOpen, setOpen] = React.useState(false);
 
   const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
     isOpen,
-    onClose: () => setModalOpen(false),
+    onClose: () => setOpen(false),
     description: 'A cool modal',
     id: 'modal-test-storybook',
   });
@@ -74,7 +74,7 @@ const Modal = () => {
 
 .modal {
   width: 50%;
-  heigth: 50%;
+  height: 50%;
 
   background: white;
 }
