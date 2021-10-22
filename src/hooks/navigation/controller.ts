@@ -229,6 +229,39 @@ export class NavigationContoller {
     }
   };
 
+  regiterMouseListeners = () => {
+    const topItemsWithSubmenu = Array.from(
+      document.querySelectorAll('ul[role="menubar"]>li')
+    ).filter((item) => item.querySelector('[role="menu"]')) as HTMLElement[];
+
+    const submenus = Array.from(
+      document.querySelectorAll('[role="menu"]')
+    ) as HTMLElement[];
+
+    topItemsWithSubmenu.forEach((item) => {
+      item.addEventListener('mouseover', () => {
+        const submenuOfItem: HTMLElement = item.querySelector('[role="menu"]');
+        if (submenuOfItem.style.display !== 'block') {
+          submenuOfItem.style.display = 'block';
+        }
+      });
+      item.addEventListener('mouseleave', () => {
+        const submenu: HTMLElement = item.querySelector('[role="menu"]');
+
+        submenu.style.display = 'none';
+      });
+    });
+
+    submenus.forEach((submenu) => {
+      submenu.addEventListener('mouseenter', () => {
+        submenu.style.display = 'block';
+      });
+      submenu.addEventListener('mouseleave', () => {
+        submenu.style.display = 'none';
+      });
+    });
+  };
+
   onActive = () => {
     window.addEventListener('keydown', this.handleKeyDown);
   };

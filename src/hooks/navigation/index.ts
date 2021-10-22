@@ -16,6 +16,7 @@ export const useAriaNavigation = ({
   };
 
   useEffect(() => {
+    controller.current.regiterMouseListeners();
     document.addEventListener('focusin', setActivity);
     return () => {
       document.removeEventListener('focusin', setActivity);
@@ -37,6 +38,7 @@ export const useAriaNavigation = ({
         role: 'menubar',
         'aria-label': menubarLabel || 'Main menubar',
         ref: controller.current.setMenuRef,
+        style: { padding: '0' },
       } as NavigationReturnProps['menubarProps']),
     [menubarLabel, id]
   );

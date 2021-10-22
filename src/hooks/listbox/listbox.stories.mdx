@@ -42,10 +42,10 @@ The `entryItemProps` value is a function that expects a unique ID as a parameter
 In order to create a fully accessible implementation of a drawer, your component should look like the following:
 
 ```jsx
-import { useAriaListbox } from '@actum/aria-hooks';
+import { useAriaListbox } from '@actum-digital/aria-hooks';
 
-const Listbox: React.FC<ListboxProps> = () => {
-  const [selectedValue, setSelectedValue] = React.useState < string > 'entry-1';
+const Listbox = () => {
+  const [selectedValue, setSelectedValue] = React.useState('entry-1');
 
   const entries = React.useMemo(
     () => [
