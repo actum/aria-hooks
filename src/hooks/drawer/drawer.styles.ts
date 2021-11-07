@@ -15,9 +15,8 @@ export const StyledDrawer = styled.div`
     height: 100%;
     position: relative;
   }
-  .ghost_text {
+  .sample_text {
     font-size: 32px;
-    opacity: 0.2;
     position: absolute;
     top: 50%;
     left: 50%;

@@ -40,9 +40,11 @@ export const Btn = styled.button`
   display: inline-block;
   text-decoration: none;
   transition-property: color, border, background-color, box-shadow;
-  transition-timing-function: ${(props) =>
-    props.theme['transition-timing-function']};
-  transition-duration: ${(props) => props.theme['transition-duration-default']};
+  transition-timing-function: cubic-bezier(.39,.575,.565,1);
+  transition-duration: .2s;
+  // TODO make the props to work
+  // transition-timing-function: ${(props) => props.theme['transition-timing-function']};
+  // transition-duration: ${(props) => props.theme['transition-duration-default']};
 
   &:hover {
     cursor: pointer;
@@ -89,17 +91,24 @@ export const UniqueBtn = styled(Btn)`
 `;
 
 export const PrimaryBtn = styled(Btn)`
-  color: red;
-  background-color: ${(props) => props.theme['primary']};
-  color: ${(props) => props.theme['white']};
+  color: #fff;
+  background-color: #2e2d2c;
+  // TODO make the props to work
+  // color: ${(props) => props.theme['white']};
+  // background-color: ${(props) => props.theme['black']};
 
   svg {
-    fill: ${(props) => props.theme['white']};
+    fill: #fff;
+    // TODO make the props to work
+    // fill: ${(props) => props.theme['white']};
   }
 
   &:hover {
-    background-color: ${(props) => props.theme['unique']};
-    color: ${(props) => props.theme['white']};
+    color: #fff;
+    background-color: #d93c31;
+    // TODO make the props to work
+    // background-color: ${(props) => props.theme['unique']};
+    // color: ${(props) => props.theme['white']};
   }
 `;
 

@@ -9,7 +9,7 @@ export const StyledModal = styled.div`
   max-width: 70vw;
   padding: 20px;
   position: relative;
-  .ghost_text {
+  .sample_text {
     font-size: 32px;
     opacity: 0.2;
     position: absolute;

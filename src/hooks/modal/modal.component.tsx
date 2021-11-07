@@ -39,7 +39,7 @@ export const Modal: React.FC<ModalProps> = () => {
               </svg>
             </button>
           </StyledContainer>
-          <span className="ghost_text">Modal</span>
+          <span className="sample_text">Modal</span>
         </StyledModal>
       </Backdrop>
     </>
