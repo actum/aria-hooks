@@ -98,11 +98,16 @@
   #storybook-explorer-menu .search-result-item--label,
   #storybook-explorer-menu span {
     font-size: 1rem;
+    line-height: 1.5;
   }
 
   #storybook-explorer-menu svg {
     width: 16px;
     height: 16px;
+  }
+
+  #storybook-explorer-menu .sidebar-subheading-action {
+    display: none;
   }
 
   #storybook-explorer-tree .sidebar-item {
@@ -131,6 +136,12 @@
 
   #root .os-content {
     background: #fff;
+  }
+
+  #root ~ * {
+    filter: none;
+    -webkit-filter: none;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 30%);
   }</style><style>#root[hidden],
       #docs-root[hidden] {
         display: none !important;
