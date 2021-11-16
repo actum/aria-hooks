@@ -1,68 +1,106 @@
 import { SELECTED_CLASS_NAME } from './controller';
 import styled from 'styled-components';
 
+import {
+  borders,
+  colors,
+  fontSizes,
+  fontWeights,
+  spacers,
+  transitions,
+} from '../../styles/variables';
+
+const listboxStyleVariables = {
+  wrapperHeight: '400px',
+  wrapperWidth: 'max-content',
+  textTransform: 'capitalize',
+  hoverItemBackgroundColor: colors.black + '77',
+  focusItemBackgroundColor: colors.red,
+};
+
 export const Wrapper = styled.div`
   position: relative;
-  height: 400px;
-  color: #2e2d2c;
+
+  height: ${listboxStyleVariables.wrapperHeight};
+  width: ${listboxStyleVariables.wrapperWidth};
+
+  color: ${colors.black};
 
   button {
-    cursor: pointer;
-    &:focus,
-    &:hover {
-      color: #d93c31;
-    }
-
     display: flex;
     align-items: center;
-    border-radius: 0;
-    padding: 12px;
-    background-color: #fff;
+    padding: ${spacers.defaultButtonPadding};
 
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    outline: 0;
-    border: 1px solid transparent;
+    background-color: ${colors.white};
+    font-weight: ${fontWeights.bold};
+    font-size: ${fontSizes.m};
+    text-transform: ${listboxStyleVariables.textTransform};
+    outline: none;
+    cursor: pointer;
+    border: ${borders.defaultWidth} solid ${colors.black};
 
-    transition-property: color, border, background-color, box-shadow;
-    transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
-    transition-duration: 0.2s;
+    transition-property: ${transitions.buttonProperties};
+    transition-timing-function: ${transitions.timingFunction};
+    transition-duration: ${transitions.defaultDuration};
+
+    &:hover {
+      color: ${colors.red};
+      border-color: ${colors.red};
+    }
+
+    &:focus {
+      box-shadow: ${borders.focusOutline};
+    }
+
+    .btn__icon {
+      vertical-align: middle;
+      margin-left: ${spacers['spacer-6']};
+
+      fill: ${colors.red};
+      transform: rotate(90deg);
+    }
   }
 
   .listbox {
-    margin: 0;
-    padding: 0;
-    min-width: 0;
-    border: 1px solid #2e2d2c;
-    border-radius: 0;
-    background-color: white;
-    list-style: none;
-    box-sizing: border-box;
-
     position: absolute;
     top: calc(100% + 4px);
 
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+
+    list-style: none;
+    background-color: ${colors.white};
+    border: ${borders.defaultWidth} solid ${colors.black};
+    border-radius: 0;
+
     li {
-      padding: 4px 0;
-      font-size: 1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      margin: -1px;
       position: relative;
-      width: calc(100% + 2px);
+
       box-sizing: border-box;
-      padding: 14px 12px;
+      width: calc(100% + 2px);
+      padding: ${spacers['spacer-3']};
+      margin: -1px;
 
       text-align: center;
-      z-index: 1;
+      font-size: ${fontSizes.m};
+      font-weight: ${fontWeights.bold};
+      text-transform: ${listboxStyleVariables.textTransform};
+      cursor: pointer;
+
+      &:hover:not(.${SELECTED_CLASS_NAME}) {
+        background-color: ${listboxStyleVariables.hoverItemBackgroundColor};
+      }
+
+      &.${SELECTED_CLASS_NAME} {
+        background-color: ${listboxStyleVariables.focusItemBackgroundColor};
+      }
 
       &:hover,
       &.${SELECTED_CLASS_NAME} {
-        text-decoration: none;
-        border-color: #d93c31;
-        background-color: #f5f5f5;
+        color: ${colors.white};
       }
     }
 

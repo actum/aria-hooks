@@ -1,33 +1,45 @@
 import styled from 'styled-components';
+import { borders, colors, fontSizes, spacers } from '../../styles/variables';
+
+const modalStyleVariables = {
+  width: '500px',
+  height: '500px',
+  maxWidth: '70vw',
+  maxHeight: '70vh',
+};
 
 export const StyledModal = styled.div`
-  font-family: 'Roboto', sans-serif;
-  background: white;
-  width: 500px;
-  height: 500px;
-  max-height: 70vh;
-  max-width: 70vw;
-  padding: 20px;
   position: relative;
+
+  width: ${modalStyleVariables.width};
+  height: ${modalStyleVariables.height};
+  max-height: ${modalStyleVariables.maxHeight};
+  max-width: ${modalStyleVariables.maxWidth};
+  padding: ${spacers['spacer-5']};
+
+  background: ${colors.white};
+
   .sample_text {
-    font-size: 32px;
-    opacity: 0.2;
     position: absolute;
     top: 50%;
     left: 50%;
+
+    font-size: ${fontSizes.xxl};
     transform: translate(-50%, -50%);
   }
 `;
 
-export const StyledContainer = styled.div`
+export const ModalPanel = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #dbdbdb;
-  .icon_btn {
-    cursor: pointer;
+  padding-bottom: ${spacers['spacer-2']};
+
+  border-bottom: ${borders.lightBorder};
+
+  .modal__close-btn {
     background-color: transparent;
+    cursor: pointer;
     border: none;
   }
 `;

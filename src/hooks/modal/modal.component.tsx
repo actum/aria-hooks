@@ -3,7 +3,7 @@ import { useAriaModal } from '.';
 import { ModalProps, ModalReturnProps } from './types';
 import { HiddenInfo, Backdrop } from '../../styles/sharedComponents';
 import Button from '../../styles/components/Button';
-import { StyledContainer, StyledModal } from './modal.styles';
+import { ModalPanel, StyledModal } from './modal.styles';
 
 export const Modal: React.FC<ModalProps> = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
@@ -17,7 +17,7 @@ export const Modal: React.FC<ModalProps> = () => {
   return (
     <>
       <Button
-        variation="primary"
+        variation="unique"
         className="App-link"
         onClick={() => setModalOpen(true)}
       >
@@ -27,8 +27,8 @@ export const Modal: React.FC<ModalProps> = () => {
       <Backdrop hidden={!isModalOpen ? true : false} className="modal-backdrop">
         <StyledModal {...modalProps}>
           <HiddenInfo {...descriptionSpanProps}>A cool modal.</HiddenInfo>
-          <StyledContainer>
-            <button {...closeButtonProps} className="icon_btn">
+          <ModalPanel>
+            <button {...closeButtonProps} className="modal__close-btn">
               <svg
                 width="24px"
                 height="24px"
@@ -38,7 +38,7 @@ export const Modal: React.FC<ModalProps> = () => {
                 <polygon points="12 10.586 16.95 5.636 18.364 7.05 13.414 12 18.364 16.95 16.95 18.364 12 13.414 7.05 18.364 5.636 16.95 10.586 12 5.636 7.05 7.05 5.636"></polygon>
               </svg>
             </button>
-          </StyledContainer>
+          </ModalPanel>
           <span className="sample_text">Modal</span>
         </StyledModal>
       </Backdrop>

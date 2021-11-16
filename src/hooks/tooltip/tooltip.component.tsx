@@ -16,7 +16,7 @@ export const Tooltip = () => {
 
   return (
     <TooltipContainer>
-      <Button variation="primary" {...buttonProps}>
+      <Button variation="secondary" {...buttonProps}>
         See tooltip
       </Button>
       <StyledTooltip {...toolTipProps}>I am the tool tip </StyledTooltip>

@@ -1,29 +1,43 @@
 import styled from 'styled-components';
+import {
+  borders,
+  colors,
+  fontSizes,
+  fontWeights,
+  spacers,
+  transitions,
+} from '../../styles/variables';
+
+const tooltipStyleVariables = {
+  arrowSize: spacers['spacer-2'],
+  backgroundColor: colors.gray,
+  color: colors.black,
+};
 
 export const StyledTooltip = styled.div`
-  display: initial;
-  width: max-content;
-  padding: 11px 15px;
-  border-radius: 6px;
-  background: black;
-  color: white;
   position: absolute;
   left: 110%;
+
+  display: initial;
+  width: max-content;
+  padding: ${spacers['spacer-3']} ${spacers['spacer-4']};
+
+  background: ${tooltipStyleVariables.backgroundColor};
+  color: ${tooltipStyleVariables.color};
 
   &::after {
     content: '';
     position: absolute;
     top: 50%;
     right: 100%;
+
+    border: ${tooltipStyleVariables.arrowSize} solid transparent;
+    border-right-color: ${tooltipStyleVariables.backgroundColor};
     transform: translateY(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent;
-    border-right-color: black;
   }
 `;
 
 export const TooltipContainer = styled.div`
-  width: max-content;
   position: relative;
+  width: max-content;
 `;

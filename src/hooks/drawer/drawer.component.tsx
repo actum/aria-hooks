@@ -17,9 +17,7 @@ export const Drawer: React.FC<DrawerProps> = () => {
   });
   return (
     <>
-      <Button variation="primary" onClick={() => setDrawerOpen(true)}>
-        Open Drawer
-      </Button>
+      <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
 
       <Backdrop
         hidden={!isDrawerOpen ? true : false}

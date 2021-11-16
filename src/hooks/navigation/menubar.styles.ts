@@ -1,43 +1,55 @@
 import styled from 'styled-components';
+import { borders, colors, spacers } from '../../styles/variables';
 
 export const StyledNav = styled.nav`
   display: flex;
   justify-content: center;
 
   [tabindex='0'] {
-    color: ${(props) => props.theme['red']};
+    color: ${colors.red};
   }
 
-  svg {
+  .dropdown__icon {
     vertical-align: middle;
     transform: rotate(90deg);
   }
 `;
 
 export const StyledMenu = styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  padding-block: 1rem;
   position: relative;
+  display: flex;
+  padding: ${spacers['spacer-4']} 0;
+  margin: 0;
+  list-style-type: none;
 
   li {
-    padding: 10px;
+    padding: ${spacers['spacer-2']};
   }
-  a,
-  span {
-    padding: 5px;
+
+  [role='menuitem'] {
+    padding: ${spacers['spacer-1']};
+    color: ${colors.black};
     text-decoration: none;
-    color: #2e2d2c;
+    outline: none;
+    cursor: pointer;
+
+    &:focus {
+      box-shadow: ${borders.focusOutline};
+    }
+
+    /* &:focus, */
+    &:hover {
+      color: ${colors.red};
+    }
   }
 `;
 
 export const StyledSubmenu = styled(StyledMenu)`
   position: absolute;
-  left: 0;
   top: 100%;
+  left: 0;
   width: 100%;
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
+
+  border-top: ${borders.lightBorder};
+  border-bottom: ${borders.lightBorder};
 `;
