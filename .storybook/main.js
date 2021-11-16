@@ -2,8 +2,17 @@ module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
     '@storybook/addon-docs',
+
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false,
+        viewport: false,
+        measure: false,
+        outline: false,
+      },
+    },
   ],
   typescript: {
     check: false,
