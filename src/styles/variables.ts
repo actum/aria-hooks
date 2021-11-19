@@ -50,13 +50,3 @@ export let spacers = {
 for (let i = 0; i < 17; i++) {
   spacers = { ...spacers, [`spacer-${i}`]: `${i * 4}px` };
 }
-
-// Second option for creating spacers object
-
-// let keyPaireSpacers: [string, string][] = [['defaultButtonPadding', '11px 15px 11px 30px']];
-
-// for (let i = 0; i < 17; i++) {
-//   keyPaireSpacers.push([`spacer-${i}`, `${4 * i}px`]);
-// }
-
-// export const spacers = Object.fromEntries(keyPaireSpacers);

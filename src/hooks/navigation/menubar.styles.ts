@@ -37,7 +37,6 @@ export const StyledMenu = styled.ul`
       box-shadow: ${borders.focusOutline};
     }
 
-    /* &:focus, */
     &:hover {
       color: ${colors.red};
     }
