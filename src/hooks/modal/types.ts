@@ -20,7 +20,7 @@ export interface ModalProps {
   /**
    * Callback for closing
    */
-  onClose: () => void;
+  onDismiss: () => void;
 }
 
 export interface ModalReturnProps {
