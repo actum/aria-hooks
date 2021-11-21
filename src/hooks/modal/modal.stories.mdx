@@ -31,7 +31,7 @@ const Modal = () => {
 
   const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
     isOpen,
-    onClose: () => setOpen(false),
+    onDismiss: () => setOpen(false),
     description: 'A cool modal',
     id: 'modal-test-storybook',
   });
