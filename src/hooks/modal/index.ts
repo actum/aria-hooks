@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { ARIA_HIDDEN } from '../../constants';
+import { ARIA_DESCRIBEDBY, ARIA_HIDDEN } from '../../constants';
 import { ModalController } from './controller';
 
 export interface ModalProps {
@@ -55,7 +55,7 @@ export const useAriaModal = ({
       role: 'dialog',
       'aria-label': dialogLabel,
       [ARIA_HIDDEN]: !isOpen,
-      ARIA_DESCRIBEDBY: getDescriptionId(id),
+      [ARIA_DESCRIBEDBY]: getDescriptionId(id),
       id,
       ref: controller.current.setModalRef,
       tabIndex: -1,
