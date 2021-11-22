@@ -16,10 +16,6 @@ export interface ModalProps {
    */
   dialogLabel?: string;
   /**
-   * Description of the content
-   */
-  description?: string;
-  /**
    * Close modal label
    */
   closeLabel?: string;
@@ -37,7 +33,6 @@ export const useAriaModal = ({
   dialogLabel,
   closeLabel,
   id,
-  description,
 }: ModalProps) => {
   const controller = useRef(new ModalController(onDismiss, id));
 
@@ -71,7 +66,7 @@ export const useAriaModal = ({
     [closeLabel]
   );
 
-  const descriptionSpanProps = useMemo(
+  const descriptionTextProps = useMemo(
     () => ({
       id: getDescriptionId(id),
     }),
@@ -82,9 +77,9 @@ export const useAriaModal = ({
     () => ({
       modalProps,
       closeButtonProps,
-      descriptionSpanProps,
+      descriptionSpanProps: descriptionTextProps,
     }),
-    [modalProps, closeButtonProps, descriptionSpanProps]
+    [modalProps, closeButtonProps, descriptionTextProps]
   );
 
   return props;
