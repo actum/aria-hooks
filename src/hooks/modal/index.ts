@@ -77,7 +77,7 @@ export const useAriaModal = ({
     () => ({
       modalProps,
       closeButtonProps,
-      descriptionSpanProps: descriptionTextProps,
+      descriptionTextProps,
     }),
     [modalProps, closeButtonProps, descriptionTextProps]
   );
