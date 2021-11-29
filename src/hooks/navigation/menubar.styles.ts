@@ -28,7 +28,7 @@ export const StyledMenu = styled.ul`
 
   [role='menuitem'] {
     padding: ${spacers['spacer-1']};
-    color: ${colors.black};
+    color: ${(props) => props.theme.textColor};
     text-decoration: none;
     outline: none;
     cursor: pointer;

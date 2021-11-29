@@ -2,6 +2,9 @@ import React from 'react';
 import { useAriaNavigation } from '.';
 import { NavigationProps, NavigationReturnProps } from './types';
 import { StyledMenu, StyledNav, StyledSubmenu } from './menubar.styles';
+import { ThemeProvider } from 'styled-components';
+import { useDarkMode } from 'storybook-dark-mode';
+import { darkTheme, lightTheme } from './themes';
 
 export const Menubar: React.FC = () => {
   const items = [
@@ -23,47 +26,53 @@ export const Menubar: React.FC = () => {
     });
 
   return (
-    <div style={{ height: 170 }}>
-      <StyledNav>
-        <StyledMenu {...menubarProps}>
-          {items.map((item, idx) => (
-            <li key={item.title} {...itemProps}>
-              {item.items ? (
-                <>
-                  <span {...menuItemProps(idx, true)}>
+    <ThemeProvider theme={useDarkMode() ? darkTheme : lightTheme}>
+      <div style={{ height: 170 }}>
+        <StyledNav>
+          <StyledMenu {...menubarProps}>
+            {items.map((item, idx) => (
+              <li key={item.title} {...itemProps}>
+                {item.items ? (
+                  <>
+                    <span {...menuItemProps(idx, true)}>
+                      {item.title}
+                      <svg
+                        fill="currentColor"
+                        width="19px"
+                        height="19px"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="dropdown__icon"
+                      >
+                        <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+                      </svg>
+                    </span>
+                  </>
+                ) : (
+                  <a href="#" {...menuItemProps(idx, false)}>
                     {item.title}
-                    <svg
-                      width="19px"
-                      height="19px"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="dropdown__icon"
-                    >
-                      <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
-                    </svg>
-                  </span>
-                </>
-              ) : (
-                <a href="#" {...menuItemProps(idx, false)}>
-                  {item.title}
-                </a>
-              )}
-              {item.items && (
-                <StyledSubmenu {...submenuProps('submenu')} className="submenu">
-                  {item.items.map((childItem) => (
-                    <li key={childItem.title} {...itemProps}>
-                      <a href="#" {...menuItemProps(-1)}>
-                        {childItem.title}
-                      </a>
-                    </li>
-                  ))}
-                </StyledSubmenu>
-              )}
-            </li>
-          ))}
-        </StyledMenu>
-      </StyledNav>
-    </div>
+                  </a>
+                )}
+                {item.items && (
+                  <StyledSubmenu
+                    {...submenuProps('submenu')}
+                    className="submenu"
+                  >
+                    {item.items.map((childItem) => (
+                      <li key={childItem.title} {...itemProps}>
+                        <a href="#" {...menuItemProps(-1)}>
+                          {childItem.title}
+                        </a>
+                      </li>
+                    ))}
+                  </StyledSubmenu>
+                )}
+              </li>
+            ))}
+          </StyledMenu>
+        </StyledNav>
+      </div>
+    </ThemeProvider>
   );
 };
 
