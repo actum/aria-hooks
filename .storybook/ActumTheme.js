@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import LogoActum from './.public/logo-actum.svg'
+import LogoActumBlack from './.public/logo-actum-black.svg';
 
 export default create({
   base: 'light',
@@ -34,5 +34,5 @@ export default create({
 
   brandTitle: 'aria-hooks | ACTUM Digital',
   brandUrl: 'https://www.actumdigital.com/',
-  brandImage: LogoActum,
+  brandImage: LogoActumBlack,
 });

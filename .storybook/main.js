@@ -3,7 +3,7 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-docs',
-
+    'storybook-dark-mode',
     {
       name: '@storybook/addon-essentials',
       options: {
