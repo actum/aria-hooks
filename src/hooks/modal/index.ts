@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { ARIA_HIDDEN } from '../../constants';
+import { ARIA_DESCRIBEDBY, ARIA_HIDDEN } from '../../constants';
 import { ModalController } from './controller';
 
 export interface ModalProps {
@@ -15,10 +15,6 @@ export interface ModalProps {
    * Dialog's label
    */
   dialogLabel?: string;
-  /**
-   * Description of the content
-   */
-  description?: string;
   /**
    * Close modal label
    */
@@ -37,7 +33,6 @@ export const useAriaModal = ({
   dialogLabel,
   closeLabel,
   id,
-  description,
 }: ModalProps) => {
   const controller = useRef(new ModalController(onDismiss, id));
 
@@ -55,7 +50,7 @@ export const useAriaModal = ({
       role: 'dialog',
       'aria-label': dialogLabel,
       [ARIA_HIDDEN]: !isOpen,
-      ARIA_DESCRIBEDBY: getDescriptionId(id),
+      [ARIA_DESCRIBEDBY]: getDescriptionId(id),
       id,
       ref: controller.current.setModalRef,
       tabIndex: -1,
@@ -71,7 +66,7 @@ export const useAriaModal = ({
     [closeLabel]
   );
 
-  const descriptionSpanProps = useMemo(
+  const descriptionTextProps = useMemo(
     () => ({
       id: getDescriptionId(id),
     }),
@@ -82,9 +77,9 @@ export const useAriaModal = ({
     () => ({
       modalProps,
       closeButtonProps,
-      descriptionSpanProps,
+      descriptionTextProps,
     }),
-    [modalProps, closeButtonProps, descriptionSpanProps]
+    [modalProps, closeButtonProps, descriptionTextProps]
   );
 
   return props;

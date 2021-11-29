@@ -8,7 +8,7 @@ import { ModalPanel, StyledModal } from './modal.styles';
 export const Modal: React.FC<ModalProps> = () => {
   const [isModalOpen, setModalOpen] = React.useState(false);
 
-  const { modalProps, closeButtonProps, descriptionSpanProps } = useAriaModal({
+  const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
     isOpen: isModalOpen,
     onDismiss: () => setModalOpen(false),
     id: 'modal-test-storybook',
@@ -26,9 +26,9 @@ export const Modal: React.FC<ModalProps> = () => {
 
       <Backdrop hidden={!isModalOpen ? true : false} className="modal-backdrop">
         <StyledModal {...modalProps}>
-          <HiddenInfo {...descriptionSpanProps}>A cool modal.</HiddenInfo>
+          <HiddenInfo {...descriptionTextProps}>A cool modal.</HiddenInfo>
           <ModalPanel>
-            <button {...closeButtonProps} className="modal__close-btn">
+            <button {...closeButtonProps} className="icon_btn">
               <svg
                 width="24px"
                 height="24px"

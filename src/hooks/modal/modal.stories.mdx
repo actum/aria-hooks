@@ -37,8 +37,7 @@ const Modal = () => {
 
   const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
     isOpen,
-    onClose: () => setOpen(false),
-    description: 'A cool modal',
+    onDismiss: () => setOpen(false),
     id: 'modal-test-storybook',
   });
 
@@ -49,7 +48,7 @@ const Modal = () => {
       <div className={`backdrop ${isOpen ? '' : 'backdrop--hidden'}`}>
         <div className="modal" {...modalProps}>
           <h1 {...descriptionTextProps}>Modal Title</h1>
-          <button {...closeButtonProps}>Close</button>
+          <button {...closeButtonProps}>Close Modal</button>
         </div>
       </div>
     </>
