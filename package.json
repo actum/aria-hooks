@@ -1,11 +1,13 @@
 {
-  "name": "aria-hooks",
-  "version": "0.1.0",
+  "name": "@actum-digital/aria-hooks",
+  "version": "0.0.8",
   "description": "Collection of hooks with props to assist with creation of accessible components",
   "main": "dist/index.js",
   "author": "Nic Reichert",
   "license": "MIT",
   "private": false,
+  "repository": "https://github.com/actum/aria-hooks",
+  "homepage": "https://actum.github.io/aria-hooks/",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "tsc -w",
