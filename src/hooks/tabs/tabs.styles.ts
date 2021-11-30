@@ -7,7 +7,7 @@ export const StyledTabs = styled.div`
     margin-bottom: -1px;
 
     button {
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 1rem;
       font-weight: 700;
       overflow: visible;
