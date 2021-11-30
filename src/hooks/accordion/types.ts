@@ -16,7 +16,7 @@ export interface AccordionReturnProps {
     /**
      * Whether or not button is expanded(panel opened) by default.
      */
-    expanded?: boolean
+    expandedByDefault?: boolean
   ) => {
     id: string;
     className: string;
@@ -25,7 +25,7 @@ export interface AccordionReturnProps {
   };
   panelProps: (
     id: string,
-    isOpen: boolean
+    isOpenByDefault: boolean
   ) => {
     id: string;
     className: string;

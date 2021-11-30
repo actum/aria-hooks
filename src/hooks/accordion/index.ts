@@ -39,8 +39,8 @@ export const useAriaAccordion = ({ id }: AccordionProps) => {
     []
   );
   const buttonProps = useCallback(
-    (id: string, expanded: boolean = false) => ({
-      [ARIA_EXPANDED]: expanded,
+    (id: string, expandedByDefault: boolean = false) => ({
+      [ARIA_EXPANDED]: expandedByDefault,
       [ARIA_CONTROLS]: getId('acc_panel', id),
       id: getId('acc_btn', id),
       className: 'acc_btn',
@@ -48,10 +48,10 @@ export const useAriaAccordion = ({ id }: AccordionProps) => {
     []
   );
   const panelProps = useCallback(
-    (id: string, isOpen: boolean) => ({
+    (id: string, isOpenByDefault: boolean) => ({
       [ARIA_LABELLEDBY]: getId('acc_btn', id),
       id: getId('acc_panel', id),
-      style: { display: isOpen ? 'block' : 'none' },
+      style: { display: isOpenByDefault ? 'block' : 'none' },
       className: 'acc_panel',
     }),
     []

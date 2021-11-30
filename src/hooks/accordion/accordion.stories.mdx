@@ -7,6 +7,12 @@ import {
 
 <Meta title="Aria Component/Accordion" />
 
+# Accordion
+
+An accordion is a vertical stack of interactive headings used to toggle the display of further information.
+
+Each item can be 'collapsed' with just a short label visible or 'expanded' to show the full content.
+
 ## Example
 
 <Canvas>
@@ -60,16 +66,12 @@ export const Accordion = () => {
   });
 
   return (
-    <div className="accordion" {...accordionProps}>
+    <div className="accordion__container" {...accordionProps}>
       {items.map((item) => (
-        <React.Fragment key={item.id}>
-          <button className="acc_button" {...buttonProps(item.id, item.isOpen)}>
-            {item.title}
-          </button>
-          <div className="acc_panel" {...panelProps(item.id, item.isOpen)}>
-            {item.content}
-          </div>
-        </React.Fragment>
+        <div key={item.id}>
+          <button {...buttonProps(item.id, item.isOpen)}>{item.title}</button>
+          <div {...panelProps(item.id, item.isOpen)}>{item.content}</div>
+        </div>
       ))}
     </div>
   );
@@ -79,7 +81,7 @@ export const Accordion = () => {
 ## Styles
 
 ```css
-.accordion {
+.accordion__container {
   display: flex;
   flex-direction: column;
 }
