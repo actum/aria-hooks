@@ -1,0 +1,86 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import {
+  Accordion,
+  AccordionHookProps,
+  AccordionHookReturnProps,
+} from './accordion.component';
+
+<Meta title="Aria Component/Accordion" />
+
+## Example
+
+<Canvas>
+  <Accordion />
+</Canvas>
+
+## Setup
+
+The `useAriaAccordion` hook expects the following parameters:
+
+<ArgsTable of={AccordionHookProps} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+<ArgsTable of={AccordionHookReturnProps} />
+
+## Component
+
+In order to create a fully accessible implementation of a accordion, your component should look like the following:
+
+```jsx
+import { useAriaAccordion } from '@actum-digital/aria-hooks';
+
+const items = [
+  {
+    title: 'Accordion 1',
+    id: '1',
+    content:
+      'Lorem ipsum dolorlit. Ducimus facere possimus necessitatibus voluptates voluptas assumenda!',
+    isOpen: true,
+  },
+  {
+    title: 'Accordion 2',
+    id: '2',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. facere possimus necessitatibus. Ducimus facere possimus necessitatibus voluptates voluptas assumenda!',
+    isOpen: false,
+  },
+  {
+    title: 'Accordion 3',
+    id: '3',
+    content:
+      'Lorem ipsum dolor. facere possimus necessitatibus voluptates voluptas assumenda!',
+    isOpen: false,
+  },
+];
+
+export const Accordion = () => {
+  const { accordionProps, buttonProps, panelProps } = useAriaAccordion({
+    id: 'Accordion1',
+  });
+
+  return (
+    <div className="accordion" {...accordionProps}>
+      {items.map((item) => (
+        <React.Fragment key={item.id}>
+          <button className="acc_button" {...buttonProps(item.id, item.isOpen)}>
+            {item.title}
+          </button>
+          <div className="acc_panel" {...panelProps(item.id, item.isOpen)}>
+            {item.content}
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+```
+
+## Styles
+
+```css
+.accordion {
+  display: flex;
+  flex-direction: column;
+}
+```

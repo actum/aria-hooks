@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface DrawerProps {
   /**
    * Unique identifier to the drawer instance

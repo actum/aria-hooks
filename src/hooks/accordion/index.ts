@@ -1,11 +1,9 @@
 import { useCallback, useMemo, useRef, useEffect, useState } from 'react';
+import { ARIA_CONTROLS, ARIA_EXPANDED, ARIA_LABELLEDBY } from '../../constants';
 import { AccordionController } from './controller';
+import { AccordionProps } from './types';
 
-export interface AccordionProps {
-  id: string;
-}
-
-export const useAriaNavigation = ({ id }: AccordionProps) => {
+export const useAriaAccordion = ({ id }: AccordionProps) => {
   const getId = (prefix: 'acc_btn' | 'acc_panel', id: string) =>
     `${prefix}_${id}`;
 
@@ -42,8 +40,8 @@ export const useAriaNavigation = ({ id }: AccordionProps) => {
   );
   const buttonProps = useCallback(
     (id: string, expanded: boolean = false) => ({
-      'aria-expanded': expanded,
-      'aria-controls': getId('acc_panel', id),
+      [ARIA_EXPANDED]: expanded,
+      [ARIA_CONTROLS]: getId('acc_panel', id),
       id: getId('acc_btn', id),
       className: 'acc_btn',
     }),
@@ -51,7 +49,7 @@ export const useAriaNavigation = ({ id }: AccordionProps) => {
   );
   const panelProps = useCallback(
     (id: string, isOpen: boolean) => ({
-      'aria-labelledby': getId('acc_btn', id),
+      [ARIA_LABELLEDBY]: getId('acc_btn', id),
       id: getId('acc_panel', id),
       style: { display: isOpen ? 'block' : 'none' },
       className: 'acc_panel',

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PrimaryBtn } from '../shared_styled_components';
+import { UniqueBtn } from '../../styles/sharedComponents';
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   text-align: left;
 `;
 
-export const StyledBtn = styled(PrimaryBtn)`
+export const StyledBtn = styled(UniqueBtn)`
   border-radius: 0;
   padding: 11px 15px;
   width: 100%;

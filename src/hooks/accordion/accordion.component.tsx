@@ -1,17 +1,18 @@
 import React from 'react';
-import { useAriaNavigation, AccordionProps } from '.';
+import { useAriaAccordion } from '.';
 import { items } from './data';
 
 import { Container, StyledBtn, StyledPanel } from './accordion.styles';
+import { AccordionProps, AccordionReturnProps } from './types';
 
 export const Accordion: React.FC<AccordionProps> = () => {
-  const { accordionProps, buttonProps, panelProps } = useAriaNavigation({
+  const { accordionProps, buttonProps, panelProps } = useAriaAccordion({
     id: 'Accordion1',
   });
 
   return (
     <Container {...accordionProps}>
-      {items.map((item, idx) => (
+      {items.map((item) => (
         <React.Fragment key={item.id}>
           <StyledBtn
             className="acc_button"
@@ -41,3 +42,7 @@ export default {
   title: 'Aria Component/Accordion',
   component: Accordion,
 };
+
+export const AccordionHookProps: React.FC<AccordionProps> = () => null;
+export const AccordionHookReturnProps: React.FC<AccordionReturnProps> = () =>
+  null;

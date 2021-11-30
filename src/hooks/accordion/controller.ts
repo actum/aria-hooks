@@ -96,18 +96,22 @@ export class AccordionController {
   handleKeyPress = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowDown': {
+        e.preventDefault();
         this.changeFocusToItem('next');
         break;
       }
       case 'ArrowUp': {
+        e.preventDefault();
         this.changeFocusToItem('prev');
         break;
       }
       case 'Home': {
+        e.preventDefault();
         this.changeFocusToItem('first');
         break;
       }
       case 'End': {
+        e.preventDefault();
         this.changeFocusToItem('last');
         break;
       }
