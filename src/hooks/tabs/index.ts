@@ -1,10 +1,6 @@
 import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { TabsController } from './controller';
-
-export interface TabsProps {
-  tablistLabel?: string;
-  tabsId?: string;
-}
+import { TabsProps } from './types';
 
 export const useAriaTabs = ({ tablistLabel, tabsId }: TabsProps) => {
   const getId = (prefix: 'tab' | 'tabpanel' | 'tabs', id: string) => {
