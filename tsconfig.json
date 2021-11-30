@@ -18,7 +18,8 @@
     "src/**/*.test.ts", 
     "src/**/*.test.tsx", 
     "src/**/*.stories.tsx",
-    "src/shared_styled_components",
-     "src/**/*.styles.ts"
+    "src/**/*.styles.ts",
+    "src/**/*.component.tsx",
+    "src/styles"
   ]
 }

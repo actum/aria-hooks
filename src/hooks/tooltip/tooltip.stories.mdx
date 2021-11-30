@@ -1,0 +1,59 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import {
+  Tooltip,
+  TooltipComponentProps,
+  TooltipComponentButtonProps,
+  TooltipComponentTipProps,
+} from './tooltip.component';
+
+<Meta title="Aria Component/Tooltip" />
+
+## Example
+
+<Canvas>
+  <Tooltip />
+</Canvas>
+
+## Setup
+
+The `useAriaTooltip` hook expects the following parameters:
+
+<ArgsTable of={TooltipComponentProps} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+### buttonProps
+
+<ArgsTable of={TooltipComponentButtonProps} />
+
+### toolTipProps
+
+<ArgsTable of={TooltipComponentTipProps} />
+
+## Component
+
+In order to create a fully accessible implementation of a tooltip, your component should look like the following:
+
+```jsx
+import { useAriaToolTip } from '@actum-digital/aria-hooks';
+
+export const Tooltip = () => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  const { buttonProps, toolTipProps } = useAriaToolTip({
+    id: 'tooltip',
+    isShowing,
+    onRelease: () => setIsShowing(true),
+    onDismiss: () => setIsShowing(false),
+  });
+
+  return (
+    <div>
+      <button variation="primary" {...buttonProps}>
+        See tooltip
+      </button>
+      <div {...toolTipProps}>I am the tool tip </div>
+    </div>
+  );
+};
+```

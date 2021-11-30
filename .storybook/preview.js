@@ -1,4 +1,4 @@
-import { theme } from '../src/shared_styled_components/theme';
+import { theme } from '../src/styles/sharedComponents/theme';
 import { ThemeProvider } from 'styled-components';
 
 export const parameters = {
@@ -9,7 +9,13 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  previewTabs: {
+    'storybook/docs/panel': {
+      hidden: true,
+    },
+  },
 };
+
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>

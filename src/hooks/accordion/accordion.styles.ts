@@ -1,0 +1,43 @@
+import styled from 'styled-components';
+import { UniqueBtn } from '../../styles/sharedComponents';
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+`;
+
+export const StyledBtn = styled(UniqueBtn)`
+  border-radius: 0;
+  padding: 11px 15px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  .btn__icon {
+    transform: rotate(-90deg);
+  }
+
+  &:hover,
+  &:focus {
+    .btn__icon {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &:not([aria-expanded='true']) {
+    margin-bottom: 11px;
+    .btn__icon {
+      transform: rotate(90deg);
+    }
+  }
+`;
+
+export const StyledPanel = styled.div`
+  width: 100%;
+  max-width: 500px;
+  font-size: 16px;
+  padding: 11px 16px;
+  font-family: Roboto, sans-serif;
+`;
