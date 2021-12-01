@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { borders, colors, fontSizes, spacers } from '../../styles/variables';
+import { colorTheme } from '../../styles/themes';
+import { borders, fontSizes, spacers } from '../../styles/variables';
 
 const drawerStyleVariables = {
   width: '40%',
@@ -18,7 +19,9 @@ export const StyledDrawer = styled.div`
   min-width: ${drawerStyleVariables.minWidth};
   padding: ${spacers['spacer-5']};
 
-  background: ${colors.white};
+  background: ${(props: { theme: colorTheme }) =>
+    props.theme.primaryBackground};
+  color: ${(props: { theme: colorTheme }) => props.theme.textColor};
 
   .wrapper {
     position: relative;
@@ -50,5 +53,8 @@ export const StyledContainer = styled.div`
     cursor: pointer;
     background-color: transparent;
     border: none;
+    svg {
+      fill: ${(props: { theme: colorTheme }) => props.theme.textColor};
+    }
   }
 `;

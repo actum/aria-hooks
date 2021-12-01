@@ -10,6 +10,9 @@ export const colors = {
 
   backdropMaskColor: '#0009',
   transparent: 'transparent',
+
+  primaryDark: '#2f2f2f',
+  secondaryDark: '#212121',
 };
 
 export const transitions = {

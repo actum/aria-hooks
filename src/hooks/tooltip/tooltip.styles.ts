@@ -1,17 +1,12 @@
 import styled from 'styled-components';
-import {
-  borders,
-  colors,
-  fontSizes,
-  fontWeights,
-  spacers,
-  transitions,
-} from '../../styles/variables';
+import { colorTheme } from '../../styles/themes';
+import { spacers } from '../../styles/variables';
 
 const tooltipStyleVariables = {
   arrowSize: spacers['spacer-2'],
-  backgroundColor: colors.gray,
-  color: colors.black,
+  backgroundColor: (props: { theme: colorTheme }) =>
+    props.theme.secondaryBackground,
+  color: (props: { theme: colorTheme }) => props.theme.textColor,
 };
 
 export const StyledTooltip = styled.div`

@@ -28,7 +28,7 @@ export const Modal: React.FC<ModalProps> = () => {
         <StyledModal {...modalProps}>
           <HiddenInfo {...descriptionTextProps}>A cool modal.</HiddenInfo>
           <ModalPanel>
-            <button {...closeButtonProps} className="icon_btn">
+            <button {...closeButtonProps} className="modal__close-btn">
               <svg
                 width="24px"
                 height="24px"

@@ -9,12 +9,13 @@ import {
   spacers,
   transitions,
 } from '../../styles/variables';
+import { colorTheme } from '../../styles/themes';
 
 const listboxStyleVariables = {
-  wrapperHeight: '400px',
+  wrapperHeight: '290px',
   wrapperWidth: 'max-content',
   textTransform: 'capitalize',
-  hoverItemBackgroundColor: colors.black + '77',
+  hoverItemBackgroundColor: colors.red + '22',
   focusItemBackgroundColor: colors.red,
 };
 
@@ -31,7 +32,9 @@ export const Wrapper = styled.div`
     align-items: center;
     padding: ${spacers.defaultButtonPadding};
 
-    background-color: ${colors.white};
+    background-color: ${(props: { theme: colorTheme }) =>
+      props.theme.secondaryBackground};
+    color: ${(props: { theme: colorTheme }) => props.theme.textColor};
     font-weight: ${fontWeights.bold};
     font-size: ${fontSizes.m};
     text-transform: ${listboxStyleVariables.textTransform};
@@ -72,7 +75,9 @@ export const Wrapper = styled.div`
     margin: 0;
 
     list-style: none;
-    background-color: ${colors.white};
+    background-color: ${(props: { theme: colorTheme }) =>
+      props.theme.primaryBackground};
+    color: ${(props: { theme: colorTheme }) => props.theme.textColor};
     border: ${borders.defaultWidth} solid ${colors.black};
     border-radius: 0;
 
@@ -98,7 +103,6 @@ export const Wrapper = styled.div`
         background-color: ${listboxStyleVariables.focusItemBackgroundColor};
       }
 
-      &:hover,
       &.${SELECTED_CLASS_NAME} {
         color: ${colors.white};
       }

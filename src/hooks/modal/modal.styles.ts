@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { borders, colors, fontSizes, spacers } from '../../styles/variables';
+import { colorTheme } from '../../styles/themes';
+import { borders, fontSizes, spacers } from '../../styles/variables';
 
 const modalStyleVariables = {
   width: '500px',
@@ -17,7 +18,9 @@ export const StyledModal = styled.div`
   max-width: ${modalStyleVariables.maxWidth};
   padding: ${spacers['spacer-5']};
 
-  background: ${colors.white};
+  background: ${(props: { theme: colorTheme }) =>
+    props.theme.primaryBackground};
+  color: ${(props: { theme: colorTheme }) => props.theme.textColor};
 
   .sample_text {
     position: absolute;
@@ -41,5 +44,8 @@ export const ModalPanel = styled.div`
     background-color: transparent;
     cursor: pointer;
     border: none;
+    svg {
+      fill: ${(props: { theme: colorTheme }) => props.theme.textColor};
+    }
   }
 `;

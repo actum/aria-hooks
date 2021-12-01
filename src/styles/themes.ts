@@ -23,3 +23,20 @@ export const btnThemes = {
     borderColor: colors.transparent,
   },
 };
+
+export interface colorTheme {
+  textColor: string;
+  primaryBackground: string;
+  secondaryBackground: string;
+}
+
+export const lightTheme: colorTheme = {
+  textColor: colors.black,
+  primaryBackground: colors.white,
+  secondaryBackground: colors.gray,
+};
+export const darkTheme: colorTheme = {
+  textColor: colors.white,
+  primaryBackground: colors.primaryDark,
+  secondaryBackground: colors.secondaryDark,
+};
