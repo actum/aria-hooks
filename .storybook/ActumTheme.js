@@ -19,7 +19,7 @@ export default create({
 
   // Text colors
   textColor: '#2e2d2c',
-  textInverseColor: 'red',
+  textInverseColor: 'white',
 
   // Toolbar default and active colors
   barTextColor: '#2e2d2c',

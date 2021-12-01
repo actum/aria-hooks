@@ -1,6 +1,8 @@
 import ActumTheme from './ActumTheme';
+import ActumThemeDark from './ActumThemeDark';
 import { DocsContainer } from './components/DocContainer';
-import LogoActumRed from './.public/logo-actum-red.svg';
+import LogoActumWhite from './.public/logo-actum-white.svg';
+import { themes } from '@storybook/theming';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -20,19 +22,7 @@ export const parameters = {
   },
   darkMode: {
     stylePreview: true,
-    dark: {
-      ...ActumTheme,
-      appBg: '#424242',
-      appContentBg: '#121212',
-      textColor: '#ccc',
-      barTextColor: '#fff',
-      barSelectedColor: 'red',
-      barBg: '#212121',
-      inputBg: '#757575',
-      inputBorder: '#111',
-      inputTextColor: '#ccc',
-      brandImage: LogoActumRed,
-    },
+    dark: ActumThemeDark,
     light: ActumTheme,
   },
 };
