@@ -16,10 +16,10 @@ export const Tooltip = () => {
 
   return (
     <TooltipContainer>
-      <Button variation="primary" {...buttonProps}>
+      <Button variation="unique" {...buttonProps}>
         See tooltip
       </Button>
-      <StyledTooltip {...toolTipProps}>I am the tool tip </StyledTooltip>
+      <StyledTooltip {...toolTipProps}>I am the tooltip </StyledTooltip>
     </TooltipContainer>
   );
 };

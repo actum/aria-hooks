@@ -17,7 +17,7 @@ export const Drawer: React.FC<DrawerProps> = () => {
   });
   return (
     <>
-      <Button variation="primary" onClick={() => setDrawerOpen(true)}>
+      <Button onClick={() => setDrawerOpen(true)} variation="unique">
         Open Drawer
       </Button>
 
@@ -40,7 +40,7 @@ export const Drawer: React.FC<DrawerProps> = () => {
                 </svg>
               </button>
             </StyledContainer>
-            <span className="ghost_text">Drawer</span>
+            <span className="sample_text">Drawer</span>
           </div>
         </StyledDrawer>
       </Backdrop>

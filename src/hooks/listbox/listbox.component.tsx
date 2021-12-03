@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useAriaListbox } from '.';
 import { ListboxProps, ListboxReturnProps } from './types';
 import { Wrapper } from './listbox.styles';
+import { fontSizes } from '../../styles/variables';
 
 export const Listbox: React.FC = () => {
   const entries = React.useMemo(
@@ -33,6 +34,15 @@ export const Listbox: React.FC = () => {
         <button {...triggerProps}>
           {entries.find((e) => e.id === selectedValue)?.label ||
             'Select option'}
+          <svg
+            width={fontSizes.xl}
+            height={fontSizes.xl}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon btn__icon"
+          >
+            <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+          </svg>
         </button>
 
         <ul className="listbox" {...listboxProps}>
