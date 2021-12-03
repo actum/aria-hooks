@@ -6,8 +6,17 @@ module.exports = {
   ],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
     '@storybook/addon-docs',
+    'storybook-dark-mode',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false,
+        viewport: false,
+        measure: false,
+        outline: false,
+      },
+    },
   ],
   typescript: {
     check: false,

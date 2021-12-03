@@ -1,5 +1,8 @@
-import { theme } from '../src/styles/sharedComponents/theme';
-import { ThemeProvider } from 'styled-components';
+import ActumTheme from './ActumTheme';
+import ActumThemeDark from './ActumThemeDark';
+import { DocsContainer } from './components/DocContainer';
+import LogoActumWhite from './.public/logo-actum-white.svg';
+import { themes } from '@storybook/theming';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -14,12 +17,14 @@ export const parameters = {
       hidden: true,
     },
   },
+  docs: {
+    container: DocsContainer,
+  },
+  darkMode: {
+    stylePreview: true,
+    dark: ActumThemeDark,
+    light: ActumTheme,
+  },
 };
 
-export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme}>
-      <Story />
-    </ThemeProvider>
-  ),
-];
+export const decorators = [(Story) => <Story />];

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAriaAccordion } from '.';
 import { items } from './data';
 
-import { Container, StyledBtn, StyledPanel } from './accordion.styles';
+import { Container, StyledTabBtn, StyledPanel } from './accordion.styles';
 import { AccordionProps, AccordionReturnProps } from './types';
 
 export const Accordion: React.FC<AccordionProps> = () => {
@@ -14,7 +14,7 @@ export const Accordion: React.FC<AccordionProps> = () => {
     <Container {...accordionProps}>
       {items.map((item) => (
         <React.Fragment key={item.id}>
-          <StyledBtn
+          <StyledTabBtn
             className="acc_button"
             {...buttonProps(item.id, item.isOpen)}
           >
@@ -28,7 +28,7 @@ export const Accordion: React.FC<AccordionProps> = () => {
             >
               <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
             </svg>
-          </StyledBtn>
+          </StyledTabBtn>
           <StyledPanel {...panelProps(item.id, item.isOpen)}>
             {item.content}
           </StyledPanel>
