@@ -1,0 +1,75 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import Tabs, { TabsHookProps, TabsHookReturnProps } from './tabs.component';
+
+<Meta title="Aria Component/Tabs" />
+
+# Tabs
+
+Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy.
+
+## Example
+
+<Canvas>
+  <Tabs />
+</Canvas>
+
+## Setup
+
+The `useAriaTabs` hook expects the following parameters:
+
+<ArgsTable of={TabsHookProps} sort="requiredFirst" />
+
+The hook returns an object with the following values:
+
+<ArgsTable of={TabsHookReturnProps} />
+
+## Component
+
+In order to create a fully accessible implementation of tabs, your component should look like the following:
+
+```jsx
+import { useAriaTabs } from '@actum-digital/aria-hooks';
+
+const tabs = [
+  {
+    label: 'Tab 1',
+    id: '1',
+    content:
+      'Eveniet, aut iste qui eum a maiores veniam laborum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, aut iste qui eum a maiores veniam laborum provident ipsam vitae?',
+  },
+  {
+    label: 'Tab 2',
+    id: '2',
+    content:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, aut iste qui eum a maiores veniam laborum provident ipsam vitae?',
+  },
+  {
+    label: 'Tab 3',
+    id: '3',
+    content:
+      'Upsum dolor sit amet consectetur adipisicing elit. Voluptate, vitae dolore laudantium aliquam natus iste obcaecati autem. Quam, nisi laboriosam!',
+  },
+];
+
+const Tabs = () => {
+  const { tablistProps, tabProps, tabpanelProps, tabsProps } = useAriaTabs({});
+
+  return (
+    <div {...tabsProps}>
+      <div {...tablistProps}>
+        {tabs.map(({ label, id }, idx) => (
+          <button {...tabProps(id, idx)} key={id}>
+            {label}
+          </button>
+        ))}
+      </div>
+      {tabs.map(({ label, content, id }, idx) => (
+        <div {...tabpanelProps(id, idx)} key={id}>
+          <h2>{label}</h2>
+          <p>{content}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+```
