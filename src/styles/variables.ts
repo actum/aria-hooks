@@ -22,8 +22,8 @@ export const transitions = {
 };
 
 export const fontSizes = {
-  xs: '0.6rem',
-  s: '0.8rem',
+  xs: '0.8rem',
+  s: '0.9rem',
   m: '1rem',
   l: '1.2rem',
   xl: '1.4rem',
@@ -41,7 +41,7 @@ export const borders = {
   focusOutlineLightMode: `0 0 0 0.15rem ${colors.blue}`,
   focusOutlineDarkMode: `0 0 0 0.15rem ${colors.white}`,
 
-  defaultWidth: '1px',
+  defaultWidth: '2px',
 
   roundedFull: '1000px',
 };

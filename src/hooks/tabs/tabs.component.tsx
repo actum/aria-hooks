@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAriaTabs } from '.';
 
-import { StyledTabs } from './tabs.styles';
+import { StyledTabList, StyledTabPanel, StyledTabs } from './tabs.styles';
 import { TabsProps, TabsReturnProps } from './types';
 import { tabs } from './data';
 
@@ -10,18 +10,22 @@ export const Tabs: React.FC<TabsProps> = () => {
 
   return (
     <StyledTabs {...tabsProps}>
-      <div {...tablistProps} className="tablist">
+      <StyledTabList {...tablistProps} className="tablist">
         {tabs.map(({ label, id }, idx) => (
           <button {...tabProps(id, idx)} key={id}>
             {label}
           </button>
         ))}
-      </div>
+      </StyledTabList>
       {tabs.map(({ label, content, id }, idx) => (
-        <div {...tabpanelProps(id, idx)} key={id} className="tabpanel">
+        <StyledTabPanel
+          {...tabpanelProps(id, idx)}
+          key={id}
+          className="tabpanel"
+        >
           <h2>{label}</h2>
           <p>{content}</p>
-        </div>
+        </StyledTabPanel>
       ))}
     </StyledTabs>
   );
