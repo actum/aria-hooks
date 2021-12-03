@@ -16,7 +16,7 @@ const Button: React.FC<Props> = ({
 }) => {
   return (
     <StyledBtn
-      theme={{ ...btnThemes[variation], isDark: useDarkMode() }}
+      theme={{ ...btnThemes[variation], isDarkMode: useDarkMode() }}
       {...rest}
     >
       {children}
