@@ -9,7 +9,7 @@ export const DocsContainer = ({ children, context }) => {
   const dark = useDarkMode();
 
   return (
-    <ThemeProvider theme={useDarkMode() ? darkTheme : lightTheme}>
+    <ThemeProvider theme={dark ? darkTheme : lightTheme}>
       <BaseContainer
         context={{
           ...context,

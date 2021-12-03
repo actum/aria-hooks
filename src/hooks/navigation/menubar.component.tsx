@@ -8,11 +8,11 @@ export const Menubar: React.FC = () => {
     { title: 'Home' },
     {
       title: 'Contact',
-      items: [{ title: 'Submenu Item 1' }, { title: 'Submenu Item 1' }],
+      items: [{ title: 'Submenu Item 1' }, { title: 'Submenu Item 2' }],
     },
     {
       title: 'About',
-      items: [{ title: 'Submenu Item 2' }, { title: 'Submenu Item 2' }],
+      items: [{ title: 'Submenu Item 1' }, { title: 'Submenu Item 2' }],
     },
   ];
 
