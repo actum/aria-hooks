@@ -71,7 +71,12 @@ export const StyledBtn = styled.button`
   }
 
   &:focus {
-    box-shadow: ${borders.focusOutline};
+    box-shadow: ${(props) =>
+      props.theme.isDarkMode
+        ? borders.focusOutlineDarkMode
+        : borders.focusOutlineLightMode};
+
+    /* If focusBorderColor exist, asign it */
     ${(props) =>
       props.theme.focusBorderColor
         ? 'border-color:' + props.theme.focusBorderColor

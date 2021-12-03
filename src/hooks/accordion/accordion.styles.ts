@@ -46,7 +46,10 @@ export const StyledTabBtn = styled.button`
   }
 
   &:focus {
-    box-shadow: ${borders.focusOutline};
+    box-shadow: ${(props: { theme: colorTheme }) =>
+      props.theme.isDarkTheme
+        ? borders.focusOutlineDarkMode
+        : borders.focusOutlineLightMode};
   }
 
   &[aria-expanded='true'] {

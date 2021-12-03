@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDarkMode } from 'storybook-dark-mode';
 
 import { StyledBtn } from '../sharedComponents';
 import { btnThemes } from '../themes';
@@ -14,7 +15,10 @@ const Button: React.FC<Props> = ({
   ...rest
 }) => {
   return (
-    <StyledBtn theme={btnThemes[variation]} {...rest}>
+    <StyledBtn
+      theme={{ ...btnThemes[variation], isDark: useDarkMode() }}
+      {...rest}
+    >
       {children}
 
       <svg

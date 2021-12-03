@@ -25,17 +25,20 @@ export const btnThemes = {
 };
 
 export interface colorTheme {
+  isDarkTheme: boolean;
   textColor: string;
   primaryBackground: string;
   secondaryBackground: string;
 }
 
 export const lightTheme: colorTheme = {
+  isDarkTheme: false,
   textColor: colors.black,
   primaryBackground: colors.white,
   secondaryBackground: colors.gray,
 };
 export const darkTheme: colorTheme = {
+  isDarkTheme: true,
   textColor: colors.white,
   primaryBackground: colors.primaryDark,
   secondaryBackground: colors.secondaryDark,

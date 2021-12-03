@@ -44,6 +44,15 @@ export const ModalPanel = styled.div`
     background-color: transparent;
     cursor: pointer;
     border: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: ${(props: { theme: colorTheme }) =>
+        props.theme.isDarkTheme
+          ? borders.focusOutlineDarkMode
+          : borders.focusOutlineLightMode};
+    }
+
     svg {
       fill: ${(props: { theme: colorTheme }) => props.theme.textColor};
     }

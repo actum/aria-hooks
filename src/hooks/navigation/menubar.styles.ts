@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTheme } from '../../styles/themes';
 import { borders, colors, spacers } from '../../styles/variables';
 
 export const StyledNav = styled.nav`
@@ -28,13 +29,17 @@ export const StyledMenu = styled.ul`
 
   [role='menuitem'] {
     padding: ${spacers['spacer-1']};
-    color: ${(props) => props.theme.textColor};
+    color: ${(props: { theme: colorTheme }) => props.theme.textColor};
     text-decoration: none;
     outline: none;
     cursor: pointer;
+    box-shadow: 0;
 
     &:focus {
-      box-shadow: ${borders.focusOutline};
+      box-shadow: ${(props: { theme: colorTheme }) =>
+        props.theme.isDarkTheme
+          ? borders.focusOutlineDarkMode
+          : borders.focusOutlineLightMode};
     }
 
     &:hover {

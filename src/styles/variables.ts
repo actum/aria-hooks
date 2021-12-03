@@ -38,7 +38,8 @@ export const fontWeights = {
 
 export const borders = {
   lightBorder: '1px solid #dbdbdb',
-  focusOutline: `0 0 0 0.15rem ${colors.blue}`,
+  focusOutlineLightMode: `0 0 0 0.15rem ${colors.blue}`,
+  focusOutlineDarkMode: `0 0 0 0.15rem ${colors.white}`,
 
   defaultWidth: '1px',
 

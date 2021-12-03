@@ -53,6 +53,15 @@ export const StyledContainer = styled.div`
     cursor: pointer;
     background-color: transparent;
     border: none;
+
+    &:focus {
+      box-shadow: ${(props: { theme: colorTheme }) =>
+        props.theme.isDarkTheme
+          ? borders.focusOutlineDarkMode
+          : borders.focusOutlineLightMode};
+      outline: none;
+    }
+
     svg {
       fill: ${(props: { theme: colorTheme }) => props.theme.textColor};
     }

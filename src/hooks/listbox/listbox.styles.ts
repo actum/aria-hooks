@@ -52,7 +52,10 @@ export const Wrapper = styled.div`
     }
 
     &:focus {
-      box-shadow: ${borders.focusOutline};
+      box-shadow: ${(props: { theme: colorTheme }) =>
+        props.theme.isDarkTheme
+          ? borders.focusOutlineDarkMode
+          : borders.focusOutlineLightMode};
     }
 
     .btn__icon {
