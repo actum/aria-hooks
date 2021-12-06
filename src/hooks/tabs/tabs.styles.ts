@@ -29,7 +29,7 @@ export const StyledTabList = styled.div`
     background-color: ${colors.transparent};
     color: ${(props: { theme: colorTheme }) => props.theme.textColor};
     border: 0;
-    border-bottom: ${borders.defaultWidth} solid ${colors.transparent};
+    border-bottom: ${borders.wide} solid ${colors.transparent};
     cursor: pointer;
     outline: none;
 

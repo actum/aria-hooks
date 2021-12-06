@@ -41,7 +41,8 @@ export const borders = {
   focusOutlineLightMode: `0 0 0 0.15rem ${colors.blue}`,
   focusOutlineDarkMode: `0 0 0 0.15rem ${colors.white}`,
 
-  defaultWidth: '2px',
+  defaultWidth: '1px',
+  wide: '2px',
 
   roundedFull: '1000px',
 };
