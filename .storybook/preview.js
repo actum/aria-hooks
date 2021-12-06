@@ -1,8 +1,6 @@
 import ActumTheme from './ActumTheme';
 import ActumThemeDark from './ActumThemeDark';
 import { DocsContainer } from './components/DocContainer';
-import LogoActumWhite from './.public/logo-actum-white.svg';
-import { themes } from '@storybook/theming';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
