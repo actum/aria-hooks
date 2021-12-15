@@ -43,7 +43,9 @@ const Modal = () => {
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Open Modal</button>
+      <button className="button--open" onClick={() => setOpen(true)}>
+        Open Modal
+      </button>
 
       <div className={`backdrop ${isOpen ? '' : 'backdrop--hidden'}`}>
         <div className="modal" {...modalProps}>
@@ -80,7 +82,23 @@ const Modal = () => {
 .modal {
   width: 50%;
   height: 50%;
+  padding: 10px;
 
   background: white;
+}
+
+button {
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  background: none;
+  cursor: pointer;
+}
+
+.button--open {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 ```
