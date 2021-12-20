@@ -4,9 +4,8 @@ import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../../constants';
 export const SELECTED_CLASS_NAME = 'selected';
 
 const changeFocusToElement = function (
-  element: 'next' | 'prev' | 'first' | 'last' | 'custom',
-  baseElement: HTMLElement,
-  optIndex?: number
+  element: 'next' | 'prev' | 'first' | 'last' | number,
+  baseElement: HTMLElement
 ) {
   if (!document.activeElement) return;
 
@@ -20,8 +19,8 @@ const changeFocusToElement = function (
     selectedElement = focussable.shift() as HTMLElement;
   } else if (element === 'last') {
     selectedElement = focussable.pop() as HTMLElement;
-  } else if (element === 'custom') {
-    selectedElement = focussable[optIndex] as HTMLElement;
+  } else if (typeof element === 'number') {
+    selectedElement = focussable[element] as HTMLElement;
   } else {
     const el = baseElement.querySelector(`.${SELECTED_CLASS_NAME}`);
     const index = focussable.findIndex((e) => el.isSameNode(e));
@@ -193,7 +192,7 @@ export class ListboxController {
           const index = this.getItemIndex(item);
 
           ev.preventDefault();
-          changeFocusToElement('custom', this.contentElement, index);
+          changeFocusToElement(index, this.contentElement);
           break;
         }
       }

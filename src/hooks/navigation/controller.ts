@@ -76,9 +76,8 @@ export class NavigationContoller {
   };
 
   changeFocusToItem = (
-    item?: 'next' | 'prev' | 'first' | 'last' | 'custom',
-    submenuItems?: HTMLAnchorElement[],
-    optIndex?: number
+    item?: 'next' | 'prev' | 'first' | 'last' | number,
+    submenuItems?: HTMLAnchorElement[]
   ) => {
     const items = submenuItems
       ? submenuItems
@@ -101,8 +100,8 @@ export class NavigationContoller {
       index = index === items.length - 1 ? 0 : index + 1;
     } else if (item === 'prev') {
       index = index <= 0 ? items.length - 1 : index - 1;
-    } else if (item === 'custom') {
-      index = optIndex;
+    } else {
+      index = item;
     }
 
     items.forEach((item, i) => {
@@ -260,7 +259,7 @@ export class NavigationContoller {
           const index = this.getItemIndex(item);
 
           e.preventDefault();
-          this.changeFocusToItem('custom', null, index);
+          this.changeFocusToItem(index);
           this.hideSubmenus();
           break;
         }
