@@ -16,7 +16,7 @@ export const useAriaNavigation = ({
   };
 
   useEffect(() => {
-    controller.current.regiterMouseListeners();
+    controller.current.regiterEvents();
     document.addEventListener('focusin', setActivity);
     return () => {
       document.removeEventListener('focusin', setActivity);

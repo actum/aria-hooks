@@ -4,7 +4,7 @@ import { ARIA_EXPANDED, ARIA_HIDDEN, ARIA_SELECTED } from '../../constants';
 export const SELECTED_CLASS_NAME = 'selected';
 
 const changeFocusToElement = function (
-  element: 'next' | 'prev' | 'first' | 'last',
+  element: 'next' | 'prev' | 'first' | 'last' | number,
   baseElement: HTMLElement
 ) {
   if (!document.activeElement) return;
@@ -19,6 +19,8 @@ const changeFocusToElement = function (
     selectedElement = focussable.shift() as HTMLElement;
   } else if (element === 'last') {
     selectedElement = focussable.pop() as HTMLElement;
+  } else if (typeof element === 'number') {
+    selectedElement = focussable[element] as HTMLElement;
   } else {
     const el = baseElement.querySelector(`.${SELECTED_CLASS_NAME}`);
     const index = focussable.findIndex((e) => el.isSameNode(e));
@@ -54,12 +56,37 @@ export class ListboxController {
 
   id: string;
 
+  private firstLetters: { item: HTMLElement; firstLetter: string }[];
+
   constructor(id: string) {
     this.id = id;
   }
 
   setContentElement = (el: HTMLUListElement) => (this.contentElement = el);
   setTriggerElement = (el: HTMLButtonElement) => (this.triggerElement = el);
+
+  setFirstLetters = () => {
+    const optionElements = Array.from(
+      this.contentElement.querySelectorAll('[role="option"]')
+    ) as HTMLElement[];
+
+    this.firstLetters = optionElements.map((option) => ({
+      item: option,
+      firstLetter: option.innerText[0].toLowerCase(),
+    }));
+  };
+
+  getItemIndex = (testedItem: HTMLElement) => {
+    if (this.contentElement === undefined) return -1;
+
+    const optionElements = Array.from(
+      this.contentElement.querySelectorAll('[role="option"]')
+    ) as HTMLElement[];
+
+    return optionElements
+      ? optionElements.findIndex((option) => option.isSameNode(testedItem))
+      : -1;
+  };
 
   open = () => {
     const options = Array.from(
@@ -146,7 +173,7 @@ export class ListboxController {
           break;
 
         case 'Enter':
-        case ' ':
+        case ' ': {
           ev.preventDefault();
           Array.from(
             this.contentElement.querySelectorAll('[role="option"]')
@@ -157,6 +184,17 @@ export class ListboxController {
           );
 
           break;
+        }
+      }
+      // "Custom switch" for letters
+      for (const { firstLetter, item } of this.firstLetters) {
+        if (ev.key === firstLetter) {
+          const index = this.getItemIndex(item);
+
+          ev.preventDefault();
+          changeFocusToElement(index, this.contentElement);
+          break;
+        }
       }
     };
 
@@ -189,6 +227,8 @@ export class ListboxController {
     window.addEventListener('keydown', this.handleButtonKeyDown);
     window.addEventListener('touchstart', this.handleClick);
     window.addEventListener('mousedown', this.handleClick);
+
+    this.setFirstLetters();
   };
 
   cleanupListeners = () => {

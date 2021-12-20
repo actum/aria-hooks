@@ -3,6 +3,7 @@ export class NavigationContoller {
   private id: string;
   private isSubmenuLink: boolean;
   private indexMainMenu: number;
+  private firstLetters: { item: HTMLAnchorElement; firstLetter: string }[];
 
   constructor(id: string, isSubmenuLink?: boolean) {
     this.id = id;
@@ -11,6 +12,17 @@ export class NavigationContoller {
 
   setMenuRef = (menu: HTMLElement) => {
     this.menuRef = menu || document.getElementById(this.id);
+  };
+
+  setFirstLetters = () => {
+    const items = Array.from(
+      this.menuRef.querySelectorAll('ul[role="menubar"]>li> [role="menuitem"]')
+    ) as HTMLAnchorElement[];
+
+    this.firstLetters = items.map((menuItem) => ({
+      item: menuItem,
+      firstLetter: menuItem.innerText[0].toLowerCase(),
+    }));
   };
 
   setActivity = (
@@ -53,8 +65,18 @@ export class NavigationContoller {
       : -1;
   };
 
+  getItemIndex = (testedItem: HTMLAnchorElement) => {
+    if (this.menuRef === undefined) return -1;
+
+    const items = Array.from(
+      this.menuRef.querySelectorAll('ul[role="menubar"]>li> [role="menuitem"]')
+    ) as HTMLAnchorElement[];
+
+    return items ? items.findIndex((item) => item.isSameNode(testedItem)) : -1;
+  };
+
   changeFocusToItem = (
-    item?: 'next' | 'prev' | 'first' | 'last',
+    item?: 'next' | 'prev' | 'first' | 'last' | number,
     submenuItems?: HTMLAnchorElement[]
   ) => {
     const items = submenuItems
@@ -78,6 +100,8 @@ export class NavigationContoller {
       index = index === items.length - 1 ? 0 : index + 1;
     } else if (item === 'prev') {
       index = index <= 0 ? items.length - 1 : index - 1;
+    } else {
+      index = item;
     }
 
     items.forEach((item, i) => {
@@ -142,94 +166,108 @@ export class NavigationContoller {
   };
 
   handleKeyDown = (e: KeyboardEvent) => {
-    const { hasSubmenu, isSubmenu, submenu, items, isSubmenuVisible } =
-      this.getSubmenuStates(e.target as HTMLElement);
+    if ((e.target as HTMLElement).getAttribute('role') === 'menuitem') {
+      const { hasSubmenu, isSubmenu, submenu, items, isSubmenuVisible } =
+        this.getSubmenuStates(e.target as HTMLElement);
 
-    switch (e.key) {
-      case 'ArrowRight': {
-        e.preventDefault();
-        this.changeFocusToItem('next');
-        this.hideSubmenus();
-
-        break;
-      }
-      case 'ArrowLeft': {
-        e.preventDefault();
-        this.changeFocusToItem('prev');
-        this.hideSubmenus();
-        break;
-      }
-      case 'Home': {
-        e.preventDefault();
-        if (isSubmenu) {
-          this.changeFocusToItem('first', items);
-        } else {
-          this.changeFocusToItem('first');
-          this.hideSubmenus();
-        }
-        break;
-      }
-      case 'End': {
-        e.preventDefault();
-        if (isSubmenu) {
-          this.changeFocusToItem('last', items);
-        } else {
-          this.changeFocusToItem('last');
-          this.hideSubmenus();
-        }
-
-        break;
-      }
-      case 'ArrowDown': {
-        e.preventDefault();
-        if (hasSubmenu || isSubmenu) {
-          if (isSubmenuVisible) {
-            this.changeFocusToItem('next', items);
-          } else {
-            submenu.style.display = 'initial';
-            this.changeFocusToItem('first', items);
-          }
-        }
-
-        break;
-      }
-      case 'ArrowUp': {
-        e.preventDefault();
-        if (isSubmenu) {
-          if (isSubmenuVisible) {
-            this.changeFocusToItem('next', items);
-          } else {
-            submenu.style.display = 'initial';
-            this.changeFocusToItem('first', items);
-          }
-        }
-
-        break;
-      }
-      case 'Escape': {
-        e.preventDefault();
-        this.changeFocusToItem();
-        this.hideSubmenus();
-
-        break;
-      }
-      case 'Enter':
-      case ' ': {
-        if (hasSubmenu && !isSubmenuVisible && !this.isSubmenuLink) {
+      switch (e.key) {
+        case 'ArrowRight': {
           e.preventDefault();
-          submenu.style.display = 'initial';
-          this.changeFocusToItem('first', items);
-        }
+          this.changeFocusToItem('next');
+          this.hideSubmenus();
 
-        break;
+          break;
+        }
+        case 'ArrowLeft': {
+          e.preventDefault();
+          this.changeFocusToItem('prev');
+          this.hideSubmenus();
+          break;
+        }
+        case 'Home': {
+          e.preventDefault();
+          if (isSubmenu) {
+            this.changeFocusToItem('first', items);
+          } else {
+            this.changeFocusToItem('first');
+            this.hideSubmenus();
+          }
+          break;
+        }
+        case 'End': {
+          e.preventDefault();
+          if (isSubmenu) {
+            this.changeFocusToItem('last', items);
+          } else {
+            this.changeFocusToItem('last');
+            this.hideSubmenus();
+          }
+
+          break;
+        }
+        case 'ArrowDown': {
+          e.preventDefault();
+          if (hasSubmenu || isSubmenu) {
+            if (isSubmenuVisible) {
+              this.changeFocusToItem('next', items);
+            } else {
+              submenu.style.display = 'initial';
+              this.changeFocusToItem('first', items);
+            }
+          }
+
+          break;
+        }
+        case 'ArrowUp': {
+          e.preventDefault();
+          if (isSubmenu) {
+            if (isSubmenuVisible) {
+              this.changeFocusToItem('next', items);
+            } else {
+              submenu.style.display = 'initial';
+              this.changeFocusToItem('first', items);
+            }
+          }
+
+          break;
+        }
+        case 'Escape': {
+          e.preventDefault();
+          this.changeFocusToItem();
+          this.hideSubmenus();
+
+          break;
+        }
+        case 'Enter':
+        case ' ': {
+          if (hasSubmenu && !isSubmenuVisible && !this.isSubmenuLink) {
+            e.preventDefault();
+            submenu.style.display = 'initial';
+            this.changeFocusToItem('first', items);
+          }
+
+          break;
+        }
+        default: {
+          break;
+        }
       }
-      default: {
-        break;
+
+      // "Custom switch" for letters
+      for (const { firstLetter, item } of this.firstLetters) {
+        if (e.key === firstLetter) {
+          const index = this.getItemIndex(item);
+
+          e.preventDefault();
+          this.changeFocusToItem(index);
+          this.hideSubmenus();
+          break;
+        }
       }
     }
   };
 
-  regiterMouseListeners = () => {
+  regiterEvents = () => {
     const topItemsWithSubmenu = Array.from(
       document.querySelectorAll('ul[role="menubar"]>li')
     ).filter((item) => item.querySelector('[role="menu"]')) as HTMLElement[];
@@ -260,6 +298,8 @@ export class NavigationContoller {
         submenu.style.display = 'none';
       });
     });
+
+    this.setFirstLetters();
   };
 
   onActive = () => {

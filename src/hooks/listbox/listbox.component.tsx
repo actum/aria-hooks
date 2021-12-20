@@ -7,11 +7,11 @@ import { fontSizes } from '../../styles/variables';
 export const Listbox: React.FC = () => {
   const entries = React.useMemo(
     () => [
-      { id: 'entry-1', label: 'Entry 1' },
-      { id: 'entry-2', label: 'Entry 2' },
-      { id: 'entry-3', label: 'Entry 3' },
-      { id: 'entry-4', label: 'Entry 4' },
-      { id: 'entry-5', label: 'Entry 5' },
+      { id: 'entry-1', label: 'Dog' },
+      { id: 'entry-2', label: 'Cat' },
+      { id: 'entry-3', label: 'Parrot' },
+      { id: 'entry-4', label: 'Goldfish' },
+      { id: 'entry-5', label: 'Hamster' },
     ],
     []
   );
