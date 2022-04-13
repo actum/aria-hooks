@@ -1,34 +1,29 @@
 import React from 'react';
-import { useAriaDrawer } from '.';
-import { DrawerProps, DrawerReturnProps } from './types';
 import Button from '../../styles/components/Button';
-import { Backdrop } from '../../styles/sharedComponents';
+import { Backdrop, HiddenInfo } from '../../styles/sharedComponents';
 import { StyledContainer, StyledDrawer } from './drawer.styles';
+import { ModalProps, useAriaModal } from '../modal';
+import { ModalReturnProps } from '../modal/types';
 
-export const Drawer: React.FC<DrawerProps> = () => {
-  const [isDrawerOpen, setDrawerOpen] = React.useState(false);
-  const { drawerProps, closeButtonProps, contentProps } = useAriaDrawer({
-    isOpen: isDrawerOpen,
-    onDismiss: () => {
-      setDrawerOpen(false);
-    },
-    id: 'drawer',
-    closeLabel: 'Close',
+export const Drawer: React.FC<ModalProps> = () => {
+  const [isModalOpen, setModalOpen] = React.useState(false);
+
+  const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
+    isOpen: isModalOpen,
+    onDismiss: () => setModalOpen(false),
+    id: 'modal-test-storybook',
   });
   return (
     <>
-      <Button onClick={() => setDrawerOpen(true)} variation="unique">
+      <Button onClick={() => setModalOpen(true)} variation="unique">
         Open Drawer
       </Button>
 
-      <Backdrop
-        hidden={!isDrawerOpen ? true : false}
-        className="backdrop"
-        {...drawerProps}
-      >
-        <StyledDrawer {...contentProps}>
+      <Backdrop hidden={!isModalOpen ? true : false} className="backdrop">
+        <StyledDrawer {...modalProps}>
           <div className="wrapper">
             <StyledContainer>
+              <HiddenInfo {...descriptionTextProps}>A cool drawer.</HiddenInfo>
               <button {...closeButtonProps} className="icon_btn">
                 <svg
                   width="24px"
@@ -48,5 +43,5 @@ export const Drawer: React.FC<DrawerProps> = () => {
   );
 };
 
-export const DrawerHookProps: React.FC<DrawerProps> = () => null;
-export const DrawerHookReturnProps: React.FC<DrawerReturnProps> = () => null;
+export const DrawerHookProps: React.FC<ModalProps> = () => null;
+export const DrawerHookReturnProps: React.FC<ModalReturnProps> = () => null;
