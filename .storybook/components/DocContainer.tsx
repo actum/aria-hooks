@@ -5,11 +5,9 @@ import { ThemeProvider } from 'styled-components';
 import React from 'react';
 import { darkTheme, lightTheme } from '../../src/styles/themes';
 
-export const DocsContainer = ({ children, context }) => {
-  const dark = useDarkMode();
-
+export const DocsContainer = ({ children, context, isDarkTheme }) => {
   return (
-    <ThemeProvider theme={dark ? darkTheme : lightTheme}>
+    <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <BaseContainer
         context={{
           ...context,
@@ -17,7 +15,7 @@ export const DocsContainer = ({ children, context }) => {
             ...context.parameters,
             docs: {
               ...context.parameters.docs,
-              theme: dark ? themes.dark : themes.light,
+              theme: isDarkTheme ? themes.dark : themes.light,
             },
           },
         }}
