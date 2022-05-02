@@ -4,7 +4,7 @@ export interface ModalProps {
   /**
    * Whether or not modal is open
    */
-  isOpen?: boolean;
+  isOpen: boolean;
   /**
    * Modal ID
    */
@@ -20,7 +20,7 @@ export interface ModalProps {
   /**
    * Callback for closing
    */
-  onClose: () => void;
+  onDismiss: () => void;
 }
 
 export interface ModalReturnProps {

@@ -1,4 +1,3 @@
-export { useAriaDrawer } from './hooks/drawer';
 export { useAriaModal } from './hooks/modal';
 export { useAriaNavigation } from './hooks/navigation';
 export { useAriaToolTip } from './hooks/tooltip';

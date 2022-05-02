@@ -26,11 +26,11 @@ export interface DrawerReturnProps {
     'aria-hidden': boolean;
     ref: (element: HTMLDivElement) => void;
   };
-  contentProps: {
-    ref: (element: HTMLDivElement) => void;
-  };
   closeButtonProps: {
     'aria-label': string;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  };
+  contentProps: {
+    ref: (element: HTMLDivElement) => void;
   };
 }

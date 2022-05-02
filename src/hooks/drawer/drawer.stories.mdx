@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgsTable, Meta, Canvas } from '@storybook/addon-docs';
 import {
   Drawer,
   DrawerHookProps,
@@ -21,7 +21,9 @@ Most commonly it contains some sort of navigation or filters, which helps with o
 
 ## Setup
 
-The `useAriaDrawer` hook expects the following parameters:
+Note: Even though there are visual differences between modal and drawer components, they are the same from an accessibility point of view. We can use the `useAriaModal` hook to make our drawer accessible.
+
+The `useAriaModal` hook expects the following parameters:
 
 <ArgsTable of={DrawerHookProps} sort="requiredFirst" />
 
@@ -34,22 +36,23 @@ The hook returns an object with the following values:
 In order to create a fully accessible implementation of a drawer, your component should look like the following:
 
 ```jsx
-import { useAriaDrawer } from '@actum-digital/aria-hooks';
+import { useAriaModal } from '@actum-digital/aria-hooks';
 
 const Drawer = () => {
   const [isOpen, setOpen] = React.useState(false);
-  const { drawerProps, contentProps, closeButtonProps } = useAriaDrawer({
-    onDismiss: () => setOpen(false),
+  const { modalProps, closeButtonProps, descriptionTextProps } = useAriaModal({
     isOpen,
-    closeLabel: 'Close drawer',
+    onDismiss: () => setOpen(false),
+    id: 'modal-test',
   });
 
   return (
     <>
       <button onClick={() => setOpen(true)}>Open Drawer</button>
 
-      <div className="drawer-backdrop" {...drawerProps}>
-        <div className="drawer" {...contentProps}>
+      <div className="drawer-backdrop">
+        <div className="drawer" {...modalProps}>
+          <h1 {...descriptionTextProps}>Drawer</h1>
           <button {...closeButtonProps}>Close</button>
         </div>
       </div>

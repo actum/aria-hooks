@@ -29,13 +29,9 @@ $ yarn add @actum-digital/aria-hooks
 - [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-modal--page) for `useAriaModal` hook.
 - [Modal Dialog Example](https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html) by W3C.
 
-### `useAriaDrawer`
+### `useAriaListbox`
 
-- [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-drawer--page) for `useAriaDrawer` hook.
-
-### `useAriaLisbox`
-
-- [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-listbox--page) for `useAriaLisbox` hook.
+- [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-listbox--page) for `useAriaListbox` hook.
 - [Collapsible Dropdown Listbox Example](https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html) by W3C.
 
 ### `useAriaNavigation`
@@ -48,3 +44,11 @@ $ yarn add @actum-digital/aria-hooks
 - [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-tooltip--page) for `useAriaTooltip` hook.
 
 - [Content on Hover or Focus](https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html) by W3C.
+
+### `useAriaAccordion`
+
+- [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-accordion--page) for `useAriaAccordion` hook.
+
+### `useAriaTabs`
+
+- [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-tabs--page) for `useAriaTabs` hook.
