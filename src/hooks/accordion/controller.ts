@@ -12,7 +12,7 @@ export class AccordionController {
   ) => {
     const accordion = this.accordionRef || document.querySelector(this.id);
     const items = Array.from(
-      accordion.querySelectorAll('.acc_btn')
+      accordion.querySelectorAll('[data-class="acc_btn"]')
     ) as HTMLElement[];
 
     if (
@@ -41,7 +41,7 @@ export class AccordionController {
     if (!this.accordionRef) return -1;
 
     const items = Array.from(
-      this.accordionRef.querySelectorAll('.acc_btn')
+      this.accordionRef.querySelectorAll('[data-class="acc_btn"]')
     ) as HTMLElement[];
 
     return items
@@ -52,7 +52,7 @@ export class AccordionController {
   changeFocusToItem = (item?: 'next' | 'prev' | 'first' | 'last') => {
     const accordion = this.accordionRef || document.querySelector(this.id);
     const items = Array.from(
-      accordion.querySelectorAll('.acc_btn')
+      accordion.querySelectorAll('[data-class="acc_btn"]')
     ) as HTMLElement[];
 
     let index = this.getFocusedIndex();
@@ -74,7 +74,7 @@ export class AccordionController {
     const accordion = this.accordionRef || document.querySelector(this.id);
     const accBtn = e.target as HTMLElement;
     const accBtns = Array.from(
-      accordion.querySelectorAll('.acc_btn')
+      accordion.querySelectorAll('[data-class="acc_btn"]')
     ) as HTMLElement[];
 
     if (accBtns.includes(accBtn)) {
