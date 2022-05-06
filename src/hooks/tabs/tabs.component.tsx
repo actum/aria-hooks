@@ -34,4 +34,13 @@ export const Tabs: React.FC<TabsProps> = () => {
 export default Tabs;
 
 export const TabsHookProps: React.FC<TabsProps> = () => null;
-export const TabsHookReturnProps: React.FC<TabsReturnProps> = () => null;
+export const TabsHookReturnProps: React.FC<TabsReturnProps['tabsProps']> = () =>
+  null;
+export const TabListReturnProps: React.FC<TabsReturnProps['tablistProps']> =
+  () => null;
+export const TabPropsReturnProps: React.FC<
+  ReturnType<TabsReturnProps['tabProps']>
+> = () => null;
+export const TabPanelReturnProps: React.FC<
+  ReturnType<TabsReturnProps['tabpanelProps']>
+> = () => null;
