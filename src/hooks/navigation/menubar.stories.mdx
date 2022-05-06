@@ -24,6 +24,8 @@ A component that contains important links or buttons, which helps with navigatin
 
 ## Setup
 
+### Example usage
+
 ```js
 const { menubarProps, menuItemProps, itemProps, submenuProps } =
   useAriaNavigation({
@@ -33,19 +35,23 @@ const { menubarProps, menuItemProps, itemProps, submenuProps } =
   });
 ```
 
+### Expected properties
+
 The `useAriaNavigation` hook expects object with the following parameters:
 
 <ArgsTable of={NavigationPropsComponent} sort="requiredFirst" />
 
 The hook returns an object with the following values:
 
-### itemProps
+### Returned properties
+
+#### itemProps
 
 It is an object with following properties:
 
 <ArgsTable of={NavigationReturnPropsItemProps} />
 
-### menuItemProps
+#### menuItemProps
 
 It is a function that accepts two parameters: `menuItemProps(index: number, hasSubmenu?: boolean)`.
 
@@ -53,13 +59,13 @@ The function returns object with the following values:
 
 <ArgsTable of={NavigationReturnPropsMenuItemProps} />
 
-### menubarProps
+#### menubarProps
 
 It is an object with following properties:
 
 <ArgsTable of={NavigationReturnPropsMenubarProps} />
 
-### submenuProps
+#### submenuProps
 
 It is a function that accepts one parameter: `submenuProps(label: string)`.
 
