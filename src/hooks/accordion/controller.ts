@@ -78,8 +78,8 @@ export class AccordionController {
     ) as HTMLElement[];
 
     if (accBtns.includes(accBtn)) {
-      const accPanel = document.querySelector(
-        `#${accBtn.getAttribute('aria-controls')}`
+      const accPanel = document.getElementById(
+        accBtn.getAttribute('aria-controls')
       ) as HTMLElement;
       const isVisible = accPanel.style.display === 'none' ? false : true;
 
