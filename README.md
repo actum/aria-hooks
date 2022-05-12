@@ -30,7 +30,7 @@ $ yarn add @actum-digital/aria-hooks
 
 ## Documentation
 
-You can find the aria-hooks documentation [here](https://actum.github.io/aria-hooks).
+See [aria-hooks on GitHub pages](https://actum.github.io/aria-hooks).
 
 In the documentation, you can find all available hooks, how to use them, and examples of implementation.
 
