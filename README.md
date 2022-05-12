@@ -4,7 +4,7 @@
 
 Aria-hooks is a javascript library for [React](https://reactjs.org/) components.
 
-It provides a collection of hooks to help spread accessibility on the web, without having to master all aria attributes and specifications.
+It provides a collection of React hooks to help speed up the development of accessible components on the web, without having to master all aria attributes and specifications.
 
 All provided features meet the [WCAG 2.1](https://www.w3.org/TR/WCAG21/) requirements determined by the [World Wide Web Consortium](https://www.w3.org/) (W3C).
 
