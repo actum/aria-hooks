@@ -14,6 +14,8 @@ import {
 
 A component that contains important links or buttons, which helps with navigating through the website. It may contain dropdown menus for better clarity. It's usually located on the top of the website.
 
+> _Note: We currently support only one level of nested menus._
+
 ## Example
 
 <Canvas>
@@ -22,29 +24,56 @@ A component that contains important links or buttons, which helps with navigatin
 
 ## Setup
 
-The `useAriaNavigation` hook expects the following parameters:
+### Example usage
+
+```js
+const { menubarProps, menuItemProps, itemProps, submenuProps } =
+  useAriaNavigation({
+    id: 'navigation',
+    isSubmenuLink: false,
+    menubarLabel: 'Main navigation menu',
+  });
+```
+
+### Expected properties
+
+The `useAriaNavigation` hook expects object with the following parameters:
 
 <ArgsTable of={NavigationPropsComponent} sort="requiredFirst" />
 
 The hook returns an object with the following values:
 
-### itemProps
+### Returned properties
+
+#### itemProps
+
+It is an object with following properties:
 
 <ArgsTable of={NavigationReturnPropsItemProps} />
 
-### menuItemProps
+#### menuItemProps
+
+It is a function that accepts two parameters: `menuItemProps(index: number, hasSubmenu?: boolean)`.
+
+The function returns object with the following values:
 
 <ArgsTable of={NavigationReturnPropsMenuItemProps} />
 
-### menubarProps
+#### menubarProps
+
+It is an object with following properties:
 
 <ArgsTable of={NavigationReturnPropsMenubarProps} />
 
-### submenuProps
+#### submenuProps
+
+It is a function that accepts one parameter: `submenuProps(label: string)`.
+
+The function returns object with the following values:
 
 <ArgsTable of={NavigationReturnPropsSubmenuProps} />
 
-## Component
+## Example component
 
 In order to create a fully accessible implementation of a modal, your component should look like the following:
 
@@ -56,11 +85,11 @@ const Navigation = () => {
     { title: 'Home' },
     {
       title: 'Contact',
-      items: [{ title: 'Submenu Item 1' }, { title: 'Submenu Item 2' }],
+      items: [{ title: 'Contact 1' }, { title: 'Contact 2' }],
     },
     {
       title: 'About',
-      items: [{ title: 'Submenu Item 1' }, { title: 'Submenu Item 2' }],
+      items: [{ title: 'About 1' }, { title: 'About 2' }],
     },
   ];
 
@@ -84,23 +113,20 @@ const Navigation = () => {
                     height="19px"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon btn__icon"
                   >
                     <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
                   </svg>
                 </span>
+                <ul {...submenuProps(`${item.title} options`)}>
+                  {item.items.map((childItem) => (
+                    <li key={childItem.title} {...itemProps}>
+                      <a {...menuItemProps(-1)}>{childItem.title}</a>
+                    </li>
+                  ))}
+                </ul>
               </>
             ) : (
               <a {...menuItemProps(idx, false)}>{item.title}</a>
-            )}
-            {item.items && item.items.length > 0 && (
-              <ul {...submenuProps('submenu')} className="submenu">
-                {item.items.map((childItem) => (
-                  <li key={childItem.title} {...itemProps}>
-                    <a {...menuItemProps(-1)}>{childItem.title}</a>
-                  </li>
-                ))}
-              </ul>
             )}
           </li>
         ))}

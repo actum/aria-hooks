@@ -5,33 +5,30 @@ export interface AccordionProps {
 }
 
 export interface AccordionReturnProps {
-  accordionProps: {
-    /**
-     * Unique identifier to the accordion instance
-     */
-    id: string;
+  id: string;
+  ref: (accordion: HTMLElement) => void;
+}
+
+export interface ButtonReturnProps {
+  id: string;
+  /**
+   * Selector for internal manipulation
+   */
+  'data-class': string;
+  [ARIA_EXPANDED]: boolean;
+  [ARIA_CONTROLS]: string;
+}
+
+export interface PanelReturnProps {
+  id: string;
+  [ARIA_LABELLEDBY]: string;
+  style: {
+    display: 'block' | 'none';
   };
-  buttonProps: (
-    id: string,
-    /**
-     * Whether or not button is expanded(panel opened) by default.
-     */
-    expandedByDefault?: boolean
-  ) => {
-    id: string;
-    className: string;
-    [ARIA_EXPANDED]: boolean;
-    [ARIA_CONTROLS]: string;
-  };
-  panelProps: (
-    id: string,
-    isOpenByDefault: boolean
-  ) => {
-    id: string;
-    className: string;
-    [ARIA_LABELLEDBY]: string;
-    style: {
-      display: string;
-    };
-  };
+}
+
+export interface AccordionHookReturnProps {
+  accordionProps: AccordionReturnProps;
+  buttonProps: (id: string, expandedByDefault?: boolean) => ButtonReturnProps;
+  panelProps: (id: string, isOpenByDefault: boolean) => PanelReturnProps;
 }
