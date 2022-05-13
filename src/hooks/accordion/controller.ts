@@ -1,5 +1,5 @@
 export class AccordionController {
-  private accordionRef: HTMLElement;
+  private accordionRef: Element | null;
   private id: string;
 
   constructor(id: string) {
@@ -33,7 +33,7 @@ export class AccordionController {
     window.removeEventListener('keydown', this.handleKeyPress as any);
   };
 
-  setAccRef = (accordion: HTMLElement) => {
+  setAccRef = (accordion: Element | null) => {
     this.accordionRef = accordion;
   };
 
