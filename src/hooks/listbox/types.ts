@@ -41,7 +41,7 @@ export interface ListboxProps {
 export interface ListboxReturnProps {
   triggerProps: {
     'aria-label': string;
-    'aria-haspopup': HTMLProps<HTMLButtonElement>['aria-haspopup'];
+    'aria-haspopup': 'listbox';
     'aria-expanded': boolean;
     ref: (element: HTMLButtonElement) => void;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;

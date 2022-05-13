@@ -1,5 +1,11 @@
 import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
-import Tabs, { TabsHookProps, TabsHookReturnProps } from './tabs.component';
+import Tabs, {
+  TabsHookProps,
+  TabsHookReturnProps,
+  TabListReturnProps,
+  TabPropsReturnProps,
+  TabPanelReturnProps,
+} from './tabs.component';
 
 <Meta title="Aria Component/Tabs" />
 
@@ -15,15 +21,47 @@ Tabs organize and allow navigation between groups of content that are related an
 
 ## Setup
 
+### Example usage
+
+```js
+const { tablistProps, tabProps, tabpanelProps, tabsProps } = useAriaTabs({});
+```
+
+### Expected properties
+
 The `useAriaTabs` hook expects the following parameters:
 
 <ArgsTable of={TabsHookProps} sort="requiredFirst" />
 
+### Returned properties
+
 The hook returns an object with the following values:
+
+#### tabsProps
 
 <ArgsTable of={TabsHookReturnProps} />
 
-## Component
+#### tablistProps
+
+<ArgsTable of={TabListReturnProps} />
+
+#### tabProps
+
+It is a function that accepts two parameters: `tabProps(id: string, index: number)`.
+
+The function returns object with the following values:
+
+<ArgsTable of={TabPropsReturnProps} />
+
+#### tabpanelProps
+
+It is a function that accepts two parameters: `tabpanelProps(id: string, index: number)`.
+
+The function returns object with the following values:
+
+<ArgsTable of={TabPanelReturnProps} />
+
+## Example component
 
 In order to create a fully accessible implementation of tabs, your component should look like the following:
 

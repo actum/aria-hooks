@@ -3,9 +3,14 @@ import { useAriaAccordion } from '.';
 import { items } from './data';
 
 import { Container, StyledTabBtn, StyledPanel } from './accordion.styles';
-import { AccordionProps, AccordionReturnProps } from './types';
+import {
+  AccordionProps,
+  AccordionReturnProps,
+  ButtonReturnProps,
+  PanelReturnProps,
+} from './types';
 
-export const Accordion: React.FC<AccordionProps> = () => {
+export const Accordion: React.FC = () => {
   const { accordionProps, buttonProps, panelProps } = useAriaAccordion({
     id: 'Accordion1',
   });
@@ -14,10 +19,7 @@ export const Accordion: React.FC<AccordionProps> = () => {
     <Container {...accordionProps}>
       {items.map((item) => (
         <React.Fragment key={item.id}>
-          <StyledTabBtn
-            className="acc_button"
-            {...buttonProps(item.id, item.isOpen)}
-          >
+          <StyledTabBtn {...buttonProps(item.id, item.isOpen)}>
             {item.title}
             <svg
               width="20px"
@@ -44,5 +46,9 @@ export default {
 };
 
 export const AccordionHookProps: React.FC<AccordionProps> = () => null;
-export const AccordionHookReturnProps: React.FC<AccordionReturnProps> = () =>
+export const AccordionReturnPropsAccordionProps: React.FC<AccordionReturnProps> =
+  () => null;
+export const AccordionReturnPropsButtonProps: React.FC<ButtonReturnProps> =
+  () => null;
+export const AccordionReturnPropsPanelProps: React.FC<PanelReturnProps> = () =>
   null;

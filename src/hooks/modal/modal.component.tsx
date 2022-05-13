@@ -47,4 +47,11 @@ export const Modal: React.FC<ModalProps> = () => {
 };
 
 export const ModalHookProps: React.FC<ModalProps> = () => null;
-export const ModalHookReturnProps: React.FC<ModalReturnProps> = () => null;
+export const ModalHookReturnProps: React.FC<ModalReturnProps['modalProps']> =
+  () => null;
+export const CloseButtonReturnProps: React.FC<
+  ModalReturnProps['closeButtonProps']
+> = () => null;
+export const DescriptionTextReturnProps: React.FC<
+  ModalReturnProps['descriptionTextProps']
+> = () => null;
