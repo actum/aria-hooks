@@ -30,7 +30,7 @@ export interface NavigationReturnProps {
     id: string;
     role: 'menubar';
     'aria-label': string;
-    ref: (element: HTMLElement) => void;
+    ref: (element: HTMLElement | null) => void;
     style: any;
   };
   submenuProps: (label: string) => {

@@ -6,7 +6,7 @@ export interface AccordionProps {
 
 export interface AccordionReturnProps {
   id: string;
-  ref: (accordion: HTMLElement) => void;
+  ref: (accordion: HTMLElement | null) => void;
 }
 
 export interface ButtonReturnProps {

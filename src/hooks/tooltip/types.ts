@@ -22,7 +22,7 @@ export interface ToolTipProps {
 
 export interface TooltipButtonProps {
   id: string;
-  ref: (element: HTMLElement) => void;
+  ref: (element: HTMLElement | null) => void;
   role: 'button';
   tabIndex: 0;
   [ARIA_EXPANDED]: boolean;
@@ -31,7 +31,7 @@ export interface TooltipButtonProps {
 
 export interface TooltipTipProps {
   id: string;
-  ref: (element: HTMLElement) => void;
+  ref: (element: HTMLElement | null) => void;
   role: 'tooltip';
   style: CSSProperties;
 }

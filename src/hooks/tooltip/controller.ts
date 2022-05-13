@@ -21,7 +21,7 @@ export class ToolTipController {
     this.buttonRef = buttonRef;
   };
 
-  setTooltipRef = (tooltipRef: HTMLElement) => {
+  setTooltipRef = (tooltipRef: HTMLElement | null) => {
     this.tooltipRef = tooltipRef;
   };
 
