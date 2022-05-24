@@ -17,7 +17,7 @@
     "build-storybook": "build-storybook -o docs-build",
     "reset": "npx shx rm -rf node_modules/ packages/*/node_modules/ && yarn install --frozen-lockfile",
     "release:bump-version": "lerna version",
-    "release:publish": "lerna publish from-git",
+    "release:publish": "lerna publish from-git"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
