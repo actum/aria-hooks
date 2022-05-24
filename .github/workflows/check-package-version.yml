@@ -1,0 +1,68 @@
+name: Check package version
+
+# Outputs the package version number to a comment on each pull request to the main branch
+# Useful for verifying the version is correct before merging the PR
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  check_version_package:
+    name: Check version Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Prepare repository
+        run: |
+          git remote update
+          git fetch
+          git checkout ${{ github.head_ref }}
+
+      - name: Version
+        id: version
+        run: |
+          echo "n" | yarn run release:bump-version --conventional-commits --conventional-graduate > output.txt
+          echo ::set-output name=lerna::$(cat output.txt)
+
+      - name: Comment
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const hasChanges = `${{ steps.version.outputs.lerna }}`.includes('Changes:')
+            const tidiedOutput = hasChanges
+              ? `${{ steps.version.outputs.lerna }}`.split('Changes:')[1].split('?')[0]
+              : `${{ steps.version.outputs.lerna }}`
+            const suffix = hasChanges
+              ? 'Merging to `develop` will publish those versions. If it doesn\'t look correct then fix before merging.'
+              : 'Lerna did not identify any changes. Merging to `develop` won\'t do anything.'
+            const body = `The output of \`lerna version\` was:
+
+              \`\`\`bash
+              ${tidiedOutput}
+              \`\`\`
+
+              -------------------
+
+              ${suffix}
+            `
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
