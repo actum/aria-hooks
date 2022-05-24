@@ -54,7 +54,7 @@ Aria-hooks are licensed under [MIT License](https://github.com/actum/aria-hooks/
 ### `useAriaListbox`
 
 - [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-listbox--page)
-- [Collapsible Dropdown Listbox Example](https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html) by W3C.
+- [Collapsible Dropdown Listbox Example](https://web.archive.org/web/20220504041843/https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-collapsible.html) by W3C.
 
 ### `useAriaNavigation`
 
