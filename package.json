@@ -14,7 +14,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o docs-build"
+    "build-storybook": "build-storybook -o docs-build",
+    "reset": "npx shx rm -rf node_modules/ packages/*/node_modules/ && yarn install --frozen-lockfile",
+    "release:bump-version": "lerna version",
+    "release:publish": "lerna publish from-git",
   },
   "peerDependencies": {
     "react": ">=16.8.0"
@@ -57,7 +60,10 @@
     "@types/react": "^17.0.5"
   },
   "dependencies": {
-    "focus-trap": "^6.4.0"
+    "focus-trap": "^6.4.0",
+    "conventional-changelog-conventionalcommits": "^4.6.0",
+    "lerna": "^4.0.0",
+    "shx": "^0.3.3"
   },
   "husky": {
     "hooks": {
