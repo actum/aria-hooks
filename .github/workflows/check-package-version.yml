@@ -4,9 +4,12 @@ name: Check package version
 # Useful for verifying the version is correct before merging the PR
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
-      - develop
+      - master
 
 jobs:
   check_version_package:
