@@ -1,5 +1,5 @@
 {
-  "packages": ["aria-hooks"],
+  "packages": ["docs-build"],
   "npmClient": "npm",
   "useWorkspaces": true,
   "version": "5.0.0",

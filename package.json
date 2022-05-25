@@ -8,6 +8,9 @@
   "private": false,
   "repository": "https://github.com/actum/aria-hooks",
   "homepage": "https://actum.github.io/aria-hooks/",
+  "workspaces": [
+    "docs-build"
+  ],
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "tsc -w",
