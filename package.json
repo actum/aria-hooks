@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "repository": "https://github.com/actum/aria-hooks",
-  "homepage": "https://actum.github.io/aria-hooks/",
+  "homepage": "https://actum.github.io/aria-hooks",
   "scripts": {
     "build": "rm -rf dist && tsc",
     "start": "tsc -w",
