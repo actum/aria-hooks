@@ -1,0 +1,57 @@
+{
+  "packages": ["aria-hooks"],
+  "npmClient": "npm",
+  "useWorkspaces": true,
+  "version": "5.0.0",
+  "command": {
+    "publish": {
+      "registry": "https://npm.pkg.github.com"
+    },
+    "version": {
+      "message": "chore(release): %s",
+      "conventionalCommits": true,
+      "changelogPreset": {
+        "name": "conventionalcommits",
+        "types": [
+          {
+            "type": "feat",
+            "section": "✨ Features"
+          },
+          {
+            "type": "fix",
+            "section": "🐞 Bug Fixes"
+          },
+          {
+            "type": "perf",
+            "section": "🔥 Performance Improvements"
+          },
+          {
+            "type": "revert",
+            "section": "🔙 Reverts"
+          },
+          {
+            "type": "docs",
+            "section": "📚 Documentation"
+          },
+          {
+            "type": "chore",
+            "section": "🧹 Miscellaneous Chores"
+          },
+          {
+            "type": "refactor",
+            "section": "🌈 Code Refactoring"
+          },
+          {
+            "type": "ci",
+            "section": "🤖 Continuous Integration"
+          }
+        ],
+        "issuePrefixes": ["#"],
+        "issueUrlFormat": "{{host}}/{{owner}}/{{repository}}/issues/{{id}}",
+        "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
+        "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
+        "userUrlFormat": "{{host}}/{{user}}"
+      }
+    }
+  }
+}
