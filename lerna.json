@@ -1,7 +1,7 @@
 {
   "packages": ["docs-build"],
   "npmClient": "npm",
-  "useWorkspaces": true,
+  "useWorkspaces": false,
   "version": "5.0.0",
   "command": {
     "publish": {
