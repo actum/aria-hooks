@@ -62,7 +62,6 @@
   "dependencies": {
     "focus-trap": "^6.4.0",
     "conventional-changelog-conventionalcommits": "^4.6.0",
-    "lerna": "^4.0.0",
     "shx": "^0.3.3"
   },
   "husky": {
