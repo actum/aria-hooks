@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/actum/aria-hooks/compare/v1.5.0...v1.5.1) (2022-05-30)
+
+
+### Bug Fixes
+
+* Fix rest of vulnerabilities ([4c00c69](https://github.com/actum/aria-hooks/commit/4c00c699b75e346e4fc3e65f39e855fa25a23c65))
+
 # [1.5.0](https://github.com/actum/aria-hooks/compare/v1.4.0...v1.5.0) (2022-05-30)
 
 
