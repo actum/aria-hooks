@@ -43,7 +43,7 @@ When creating new hook, please follow the file structure and naming conventions 
 
 ## Testing
 
-For testing our hooks we use jest & react-testing-library.
+For testing our hooks we use jest & react-testing-library. Tests files are located directly in particular hook folder.
 
 <!-- TODO: Mention following lines in comment section of GH issue -->
 
@@ -53,4 +53,8 @@ All hooks should be widlely tested to ensure we deliver quality product.
 
 ## Styling
 
-Components are styled using styled-components library.
+Components are styled using styled-components library. Styles files are located on two places:
+
+- Styles for particular hook components - directly in particular hook folder.
+
+- Global styles(variables, themes, shared styles, etc.) - under `src/styles` directory.
