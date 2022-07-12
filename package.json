@@ -1,6 +1,6 @@
 {
   "name": "@actum-digital/aria-hooks",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Collection of hooks with props to assist with creation of accessible components",
   "main": "dist/index.js",
   "author": {
