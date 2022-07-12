@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDarkMode } from 'storybook-dark-mode';
 
-import { StyledBtn } from '../sharedComponents';
+import { StyledBtn } from '../shared';
 import { btnThemes } from '../themes';
 import { fontSizes } from '../variables';
 

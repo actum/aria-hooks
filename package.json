@@ -3,21 +3,22 @@
   "version": "1.5.0",
   "description": "Collection of hooks with props to assist with creation of accessible components",
   "main": "dist/index.js",
-  "author": "Nic Reichert",
+  "author": {
+    "name": "ACTUM Digital",
+    "email": "info@actumdigital.com",
+    "url": "https://www.actumdigital.com/"
+  },
   "license": "MIT",
   "private": false,
   "repository": "https://github.com/actum/aria-hooks",
   "homepage": "https://actum.github.io/aria-hooks",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "start": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs-build",
-    "reset": "npx shx rm -rf node_modules/ packages/*/node_modules/ && yarn install --frozen-lockfile",
-    "release:bump-version": "lerna version",
-    "release:publish": "lerna publish from-git"
+    "reset": "npx shx rm -rf node_modules/ && yarn install --frozen-lockfile"
   },
   "peerDependencies": {
     "react": ">=16.8.0"

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../../styles/components/Button';
-import { Backdrop, HiddenInfo } from '../../styles/sharedComponents';
+import { Backdrop, HiddenInfo } from '../../styles/shared';
 import { StyledContainer, StyledDrawer } from './drawer.styles';
 import { ModalProps, useAriaModal } from '../modal';
 import { ModalReturnProps } from '../modal/types';

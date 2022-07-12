@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAriaModal } from '.';
 import { ModalProps, ModalReturnProps } from './types';
-import { HiddenInfo, Backdrop } from '../../styles/sharedComponents';
+import { HiddenInfo, Backdrop } from '../../styles/shared';
 import Button from '../../styles/components/Button';
 import { ModalPanel, StyledModal } from './modal.styles';
 
@@ -47,8 +47,9 @@ export const Modal: React.FC<ModalProps> = () => {
 };
 
 export const ModalHookProps: React.FC<ModalProps> = () => null;
-export const ModalHookReturnProps: React.FC<ModalReturnProps['modalProps']> =
-  () => null;
+export const ModalHookReturnProps: React.FC<
+  ModalReturnProps['modalProps']
+> = () => null;
 export const CloseButtonReturnProps: React.FC<
   ModalReturnProps['closeButtonProps']
 > = () => null;

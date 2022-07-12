@@ -17,7 +17,7 @@ You can install this package by running one of the following commands at the roo
 ### via npm:
 
 ```console
-$ npm i @actum-digital/aria-hooks
+npm i @actum-digital/aria-hooks
 ```
 
 **OR**
@@ -25,7 +25,7 @@ $ npm i @actum-digital/aria-hooks
 ### via yarn:
 
 ```console
-$ yarn add @actum-digital/aria-hooks
+yarn add @actum-digital/aria-hooks
 ```
 
 ## Documentation
@@ -36,9 +36,13 @@ In the documentation, you can find all available hooks, how to use them, and exa
 
 We are using [Storybook](https://storybook.js.org/) for documenting our hooks.
 
+We are also working on short video series about aria-hooks for you. You can find it [here](https://www.youtube.com/watch?v=nUnItYJtgH8&list=PL1zzT6yaZeQCRlWS7On0YkLyPqt_UFVV2&index=1).
+
 ## Contributing
 
 The main purpose of this repository is to help spread web accessibility. So, if you are missing anything in aria-hooks or noticed a bug feel free to [create a new issue](https://github.com/actum/aria-hooks/issues/new) or [new pull request](https://github.com/actum/aria-hooks/compare). We are grateful for any contribution to bugfixes and improvements.
+
+To get started with contribution please check our [Docs for Developers](./docs-dev/README.md).
 
 ## License
 
@@ -48,6 +52,7 @@ Aria-hooks are licensed under [MIT License](https://github.com/actum/aria-hooks/
 
 ### `useAriaModal`
 
+- [Video](https://www.youtube.com/watch?v=VBdXiQZzK9I&list=PL1zzT6yaZeQCRlWS7On0YkLyPqt_UFVV2&index=2)
 - [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-modal--page)
 - [Modal Dialog Example](https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html) by W3C.
 
@@ -75,3 +80,7 @@ Aria-hooks are licensed under [MIT License](https://github.com/actum/aria-hooks/
 
 - [Documentation](https://actum.github.io/aria-hooks/?path=/docs/aria-component-tabs--page)
 - [Tabs Example](https://www.w3.org/TR/wai-aria-practices/examples/tabs/tabs-1/tabs.html) by W3C.
+
+---
+
+Brought to you by [ACTUM Digital](https://www.actumdigital.com/)
