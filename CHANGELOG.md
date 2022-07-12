@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/actum/aria-hooks/compare/v1.6.0...v1.7.0) (2022-07-12)
+
+
+### Features
+
+* extend styles section in dev docs. ([366914d](https://github.com/actum/aria-hooks/commit/366914d8d3ffa977f7a431e858e47f2882f5427e))
+
 # [1.6.0](https://github.com/actum/aria-hooks/compare/v1.5.1...v1.6.0) (2022-07-12)
 
 
